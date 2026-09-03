@@ -97,8 +97,8 @@ export function Footer() {
         <div className="footer-links">
           <span className="meta">Fokus Ekosistem</span>
           <Link to="/produk">Ikan dan budidaya</Link>
-          <Link to="/produk">Azolla dan nutrisi</Link>
-          <Link to="/produk">Tanaman dan sorgum</Link>
+          <Link to="/produk">Azolla</Link>
+          <Link to="/produk">Tanaman</Link>
           <Link to="/dokumentasi">Dokumentasi lapangan</Link>
         </div>
         <nav className="footer-links" aria-label="Media sosial JagoFarm">
