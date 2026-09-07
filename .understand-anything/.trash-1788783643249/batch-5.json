@@ -1,0 +1,561 @@
+{
+  "nodes": [
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "lineRange": [
+        1,
+        31
+      ],
+      "summary": "Controls analysis exclusions; starter suggestions remain commented out.",
+      "tags": [
+        "frontend",
+        "unknown",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8751.HEIC",
+      "type": "file",
+      "name": "IMG_8751.HEIC",
+      "filePath": "assets/IMG_8751.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8752.HEIC",
+      "type": "file",
+      "name": "IMG_8752.HEIC",
+      "filePath": "assets/IMG_8752.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8758.HEIC",
+      "type": "file",
+      "name": "IMG_8758.HEIC",
+      "filePath": "assets/IMG_8758.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8765.HEIC",
+      "type": "file",
+      "name": "IMG_8765.HEIC",
+      "filePath": "assets/IMG_8765.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8812.HEIC",
+      "type": "file",
+      "name": "IMG_8812.HEIC",
+      "filePath": "assets/IMG_8812.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8915.HEIC",
+      "type": "file",
+      "name": "IMG_8915.HEIC",
+      "filePath": "assets/IMG_8915.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8970.HEIC",
+      "type": "file",
+      "name": "IMG_8970.HEIC",
+      "filePath": "assets/IMG_8970.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8973.HEIC",
+      "type": "file",
+      "name": "IMG_8973.HEIC",
+      "filePath": "assets/IMG_8973.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8974.HEIC",
+      "type": "file",
+      "name": "IMG_8974.HEIC",
+      "filePath": "assets/IMG_8974.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/branch-left.webp",
+      "type": "file",
+      "name": "branch-left.webp",
+      "filePath": "public/assets/ecosystem-botanical/branch-left.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/branch-right.webp",
+      "type": "file",
+      "name": "branch-right.webp",
+      "filePath": "public/assets/ecosystem-botanical/branch-right.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/foreground.webp",
+      "type": "file",
+      "name": "foreground.webp",
+      "filePath": "public/assets/ecosystem-botanical/foreground.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-01.webp",
+      "type": "file",
+      "name": "leaf-01.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-01.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-02.webp",
+      "type": "file",
+      "name": "leaf-02.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-02.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-03.webp",
+      "type": "file",
+      "name": "leaf-03.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-03.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-04.webp",
+      "type": "file",
+      "name": "leaf-04.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-04.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-05.webp",
+      "type": "file",
+      "name": "leaf-05.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-05.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-06.webp",
+      "type": "file",
+      "name": "leaf-06.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-06.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-07.webp",
+      "type": "file",
+      "name": "leaf-07.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-07.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-08.webp",
+      "type": "file",
+      "name": "leaf-08.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-08.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/team/team.webp",
+      "type": "file",
+      "name": "team.webp",
+      "filePath": "public/assets/team/team.webp",
+      "summary": "Composite WebP team photograph referenced by the about-page scene.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/Layout.jsx",
+      "type": "file",
+      "name": "Layout.jsx",
+      "filePath": "src/components/Layout.jsx",
+      "lineRange": [
+        1,
+        143
+      ],
+      "summary": "Provides global header navigation, mobile details menu, theme toggle and footer links.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/components/Layout.jsx:Header",
+      "type": "function",
+      "name": "Header",
+      "filePath": "src/components/Layout.jsx",
+      "lineRange": [
+        4,
+        63
+      ],
+      "summary": "Renders desktop and native-details mobile hash navigation, brand and accessible theme toggle.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/components/Layout.jsx:Footer",
+      "type": "function",
+      "name": "Footer",
+      "filePath": "src/components/Layout.jsx",
+      "lineRange": [
+        65,
+        143
+      ],
+      "summary": "Renders documentation call to action, route navigation, social links and current year.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/navigation.jsx",
+      "type": "file",
+      "name": "navigation.jsx",
+      "filePath": "src/components/navigation.jsx",
+      "lineRange": [
+        1,
+        11
+      ],
+      "summary": "Provides hash anchors, decorative arrow and styled button-link composition without a router dependency.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/navigation.jsx:Link",
+      "type": "function",
+      "name": "Link",
+      "filePath": "src/components/navigation.jsx",
+      "lineRange": [
+        1,
+        3
+      ],
+      "summary": "Renders an anchor whose href encodes an application hash route.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/navigation.jsx:Arrow",
+      "type": "function",
+      "name": "Arrow",
+      "filePath": "src/components/navigation.jsx",
+      "lineRange": [
+        5,
+        7
+      ],
+      "summary": "Renders an assistive-technology-hidden diagonal arrow.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/navigation.jsx:ButtonLink",
+      "type": "function",
+      "name": "ButtonLink",
+      "filePath": "src/components/navigation.jsx",
+      "lineRange": [
+        9,
+        11
+      ],
+      "summary": "Combines Link and Arrow into a primary or secondary styled navigation action.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/PageIntro.jsx",
+      "type": "file",
+      "name": "PageIntro.jsx",
+      "filePath": "src/components/PageIntro.jsx",
+      "lineRange": [
+        1,
+        10
+      ],
+      "summary": "Reusable heading, eyebrow and lead-text section; currently not imported by application pages.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/PageIntro.jsx:PageIntro",
+      "type": "function",
+      "name": "PageIntro",
+      "filePath": "src/components/PageIntro.jsx",
+      "lineRange": [
+        1,
+        10
+      ],
+      "summary": "Reusable heading, eyebrow and lead-text section; currently not imported by application pages.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "function:src/components/Layout.jsx:Header",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares Header"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "function:src/components/Layout.jsx:Header",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports Header"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "function:src/components/Layout.jsx:Footer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares Footer"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "function:src/components/Layout.jsx:Footer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports Footer"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "file:src/components/navigation.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "file:src/data/content.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:Link",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares Link"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:Link",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports Link"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:Arrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares Arrow"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:Arrow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports Arrow"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:ButtonLink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares ButtonLink"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:ButtonLink",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports ButtonLink"
+    },
+    {
+      "source": "file:src/components/PageIntro.jsx",
+      "target": "function:src/components/PageIntro.jsx:PageIntro",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares PageIntro"
+    },
+    {
+      "source": "file:src/components/PageIntro.jsx",
+      "target": "function:src/components/PageIntro.jsx:PageIntro",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports PageIntro"
+    }
+  ]
+}

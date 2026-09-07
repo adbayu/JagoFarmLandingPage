@@ -1,0 +1,155 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/components/EcosystemStory.jsx",
+      "type": "file",
+      "name": "EcosystemStory.jsx",
+      "filePath": "src/components/EcosystemStory.jsx",
+      "lineRange": [
+        1,
+        114
+      ],
+      "summary": "Maps scroll progress to five ecosystem stages and decorative leaf motion; uses mobile card observation and a reduced-motion fallback.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/components/EcosystemStory.jsx:EcosystemStory",
+      "type": "function",
+      "name": "EcosystemStory",
+      "filePath": "src/components/EcosystemStory.jsx",
+      "lineRange": [
+        17,
+        114
+      ],
+      "summary": "Maps scroll progress to five ecosystem stages and decorative leaf motion; uses mobile card observation and a reduced-motion fallback.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/story-progress.js",
+      "type": "file",
+      "name": "story-progress.js",
+      "filePath": "src/story-progress.js",
+      "lineRange": [
+        1,
+        13
+      ],
+      "summary": "Clamps scroll progress and derives a bounded stage index from section and viewport geometry.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/story-progress.js:getStoryState",
+      "type": "function",
+      "name": "getStoryState",
+      "filePath": "src/story-progress.js",
+      "lineRange": [
+        1,
+        13
+      ],
+      "summary": "Clamps scroll progress and derives a bounded stage index from section and viewport geometry.",
+      "tags": [
+        "javascript",
+        "function",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/story-progress.test.js",
+      "type": "file",
+      "name": "story-progress.test.js",
+      "filePath": "src/story-progress.test.js",
+      "lineRange": [
+        1,
+        8
+      ],
+      "summary": "Checks story start, midpoint and endpoint using Node strict assertions.",
+      "tags": [
+        "test",
+        "node-assert",
+        "regression"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "function:src/components/EcosystemStory.jsx:EcosystemStory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares EcosystemStory"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "function:src/components/EcosystemStory.jsx:EcosystemStory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports EcosystemStory"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:src/components/media.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:src/data/content.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:src/story-progress.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/story-progress.js",
+      "target": "function:src/story-progress.js:getStoryState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares getStoryState"
+    },
+    {
+      "source": "file:src/story-progress.js",
+      "target": "function:src/story-progress.js:getStoryState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports getStoryState"
+    },
+    {
+      "source": "file:src/story-progress.test.js",
+      "target": "file:src/story-progress.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    }
+  ]
+}

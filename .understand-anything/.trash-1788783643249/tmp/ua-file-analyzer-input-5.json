@@ -1,0 +1,185 @@
+{
+  "projectRoot": "C:/Users/Andi bayu hanggoro/Desktop/Internship/Web JagoFarm V2",
+  "batchFiles": [
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "assets/IMG_8751.HEIC",
+      "language": "heic",
+      "sizeLines": 8512,
+      "fileCategory": "code"
+    },
+    {
+      "path": "assets/IMG_8752.HEIC",
+      "language": "heic",
+      "sizeLines": 9715,
+      "fileCategory": "code"
+    },
+    {
+      "path": "assets/IMG_8758.HEIC",
+      "language": "heic",
+      "sizeLines": 5973,
+      "fileCategory": "code"
+    },
+    {
+      "path": "assets/IMG_8765.HEIC",
+      "language": "heic",
+      "sizeLines": 9913,
+      "fileCategory": "code"
+    },
+    {
+      "path": "assets/IMG_8812.HEIC",
+      "language": "heic",
+      "sizeLines": 17380,
+      "fileCategory": "code"
+    },
+    {
+      "path": "assets/IMG_8915.HEIC",
+      "language": "heic",
+      "sizeLines": 6299,
+      "fileCategory": "code"
+    },
+    {
+      "path": "assets/IMG_8970.HEIC",
+      "language": "heic",
+      "sizeLines": 13520,
+      "fileCategory": "code"
+    },
+    {
+      "path": "assets/IMG_8973.HEIC",
+      "language": "heic",
+      "sizeLines": 11236,
+      "fileCategory": "code"
+    },
+    {
+      "path": "assets/IMG_8974.HEIC",
+      "language": "heic",
+      "sizeLines": 21073,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/branch-left.webp",
+      "language": "webp",
+      "sizeLines": 125,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/branch-right.webp",
+      "language": "webp",
+      "sizeLines": 131,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/foreground.webp",
+      "language": "webp",
+      "sizeLines": 299,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-01.webp",
+      "language": "webp",
+      "sizeLines": 107,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-02.webp",
+      "language": "webp",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-03.webp",
+      "language": "webp",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-04.webp",
+      "language": "webp",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-05.webp",
+      "language": "webp",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-06.webp",
+      "language": "webp",
+      "sizeLines": 122,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-07.webp",
+      "language": "webp",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-08.webp",
+      "language": "webp",
+      "sizeLines": 104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/assets/team/team.webp",
+      "language": "webp",
+      "sizeLines": 1683,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/components/Layout.jsx",
+      "language": "javascript",
+      "sizeLines": 143,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/components/navigation.jsx",
+      "language": "javascript",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/components/PageIntro.jsx",
+      "language": "javascript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    ".understand-anything/.understandignore": [],
+    "assets/IMG_8751.HEIC": [],
+    "assets/IMG_8752.HEIC": [],
+    "assets/IMG_8758.HEIC": [],
+    "assets/IMG_8765.HEIC": [],
+    "assets/IMG_8812.HEIC": [],
+    "assets/IMG_8915.HEIC": [],
+    "assets/IMG_8970.HEIC": [],
+    "assets/IMG_8973.HEIC": [],
+    "assets/IMG_8974.HEIC": [],
+    "public/assets/ecosystem-botanical/branch-left.webp": [],
+    "public/assets/ecosystem-botanical/branch-right.webp": [],
+    "public/assets/ecosystem-botanical/foreground.webp": [],
+    "public/assets/ecosystem-botanical/leaf-01.webp": [],
+    "public/assets/ecosystem-botanical/leaf-02.webp": [],
+    "public/assets/ecosystem-botanical/leaf-03.webp": [],
+    "public/assets/ecosystem-botanical/leaf-04.webp": [],
+    "public/assets/ecosystem-botanical/leaf-05.webp": [],
+    "public/assets/ecosystem-botanical/leaf-06.webp": [],
+    "public/assets/ecosystem-botanical/leaf-07.webp": [],
+    "public/assets/ecosystem-botanical/leaf-08.webp": [],
+    "public/assets/team/team.webp": [],
+    "src/components/Layout.jsx": [
+      "src/components/navigation.jsx",
+      "src/data/content.js"
+    ],
+    "src/components/navigation.jsx": [],
+    "src/components/PageIntro.jsx": []
+  }
+}

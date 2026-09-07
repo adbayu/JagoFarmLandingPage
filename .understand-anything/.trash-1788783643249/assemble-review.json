@@ -1,0 +1,13 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 0,
+  "crossBatchEdgesAdded": 42,
+  "notes": [
+    "Subagent dispatch failed twice because inherited Codex_Fallback is unavailable; analysis and review performed locally.",
+    "Binary assets have inventory-level summaries, not visual content analysis.",
+    "Bundled scanner omits some image formats by default; its code counts include WebP and HEIC assets.",
+    "Graph includes current uncommitted source changes.",
+    "PAGE_CONTENT.md lists routes that are absent from App."
+  ]
+}

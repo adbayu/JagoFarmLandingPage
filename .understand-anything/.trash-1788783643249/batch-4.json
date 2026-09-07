@@ -1,0 +1,73 @@
+{
+  "nodes": [
+    {
+      "id": "document:PAGE_CONTENT.md",
+      "type": "document",
+      "name": "PAGE_CONTENT.md",
+      "filePath": "PAGE_CONTENT.md",
+      "lineRange": [
+        1,
+        268
+      ],
+      "summary": "Editorial inventory describing intended website sections; several listed routes are absent from the current four-route application.",
+      "tags": [
+        "documentation",
+        "project-context",
+        "reference"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "lineRange": [
+        1,
+        2
+      ],
+      "summary": "Minimal project title only; does not document setup or architecture.",
+      "tags": [
+        "documentation",
+        "project-context",
+        "reference"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "index.html",
+      "lineRange": [
+        1,
+        18
+      ],
+      "summary": "Bootstraps the React mount point, Indonesian metadata, web fonts, and stored theme before rendering.",
+      "tags": [
+        "frontend",
+        "html",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "lineRange": [
+        1,
+        20
+      ],
+      "summary": "Defines React, React DOM, Lenis and Vite dependencies plus development, build, preview and story-check commands.",
+      "tags": [
+        "configuration",
+        "build-system",
+        "dependencies"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

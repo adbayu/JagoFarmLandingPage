@@ -1,0 +1,291 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/components/EcosystemStory.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 114,
+      "nonEmptyLines": 103,
+      "functions": [
+        {
+          "name": "EcosystemStory",
+          "startLine": 17,
+          "endLine": 114,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "EcosystemStory",
+          "line": 17,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "EcosystemStory",
+          "callee": "useRef",
+          "lineNumber": 18
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "useEffect",
+          "lineNumber": 21
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "window.matchMedia",
+          "lineNumber": 25
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "window.matchMedia",
+          "lineNumber": 26
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "section.querySelectorAll",
+          "lineNumber": 27
+        },
+        {
+          "caller": "update",
+          "callee": "section.getBoundingClientRect",
+          "lineNumber": 32
+        },
+        {
+          "caller": "update",
+          "callee": "getStoryState",
+          "lineNumber": 33
+        },
+        {
+          "caller": "update",
+          "callee": "section.style.setProperty",
+          "lineNumber": 34
+        },
+        {
+          "caller": "update",
+          "callee": "setActiveStage",
+          "lineNumber": 36
+        },
+        {
+          "caller": "update",
+          "callee": "leafElements.forEach",
+          "lineNumber": 39
+        },
+        {
+          "caller": "update",
+          "callee": "Math.min",
+          "lineNumber": 41
+        },
+        {
+          "caller": "update",
+          "callee": "Math.max",
+          "lineNumber": 41
+        },
+        {
+          "caller": "update",
+          "callee": "Math.max",
+          "lineNumber": 41
+        },
+        {
+          "caller": "update",
+          "callee": "Math.sin",
+          "lineNumber": 42
+        },
+        {
+          "caller": "update",
+          "callee": "Math.max",
+          "lineNumber": 44
+        },
+        {
+          "caller": "scheduleUpdate",
+          "callee": "requestAnimationFrame",
+          "lineNumber": 49
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "setActiveStage",
+          "lineNumber": 51
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "section.style.setProperty",
+          "lineNumber": 52
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "update",
+          "lineNumber": 56
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "window.addEventListener",
+          "lineNumber": 57
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "window.addEventListener",
+          "lineNumber": 58
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "window.removeEventListener",
+          "lineNumber": 60
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "window.removeEventListener",
+          "lineNumber": 61
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "cancelAnimationFrame",
+          "lineNumber": 62
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "useEffect",
+          "lineNumber": 66
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "window.matchMedia",
+          "lineNumber": 68
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "section.querySelectorAll",
+          "lineNumber": 70
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "entries.forEach",
+          "lineNumber": 71
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "setActiveStage",
+          "lineNumber": 72
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "cards.indexOf",
+          "lineNumber": 72
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "cards.forEach",
+          "lineNumber": 74
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "observer.observe",
+          "lineNumber": 74
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "observer.disconnect",
+          "lineNumber": 75
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "leaves.map",
+          "lineNumber": 85
+        },
+        {
+          "caller": "EcosystemStory",
+          "callee": "cycleStages.map",
+          "lineNumber": 101
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/story-progress.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "getStoryState",
+          "startLine": 1,
+          "endLine": 13,
+          "params": [
+            "scrollY",
+            "sectionTop",
+            "sectionHeight",
+            "viewportHeight",
+            "stageCount"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getStoryState",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getStoryState",
+          "callee": "Math.max",
+          "lineNumber": 8
+        },
+        {
+          "caller": "getStoryState",
+          "callee": "Math.min",
+          "lineNumber": 9
+        },
+        {
+          "caller": "getStoryState",
+          "callee": "Math.max",
+          "lineNumber": 9
+        },
+        {
+          "caller": "getStoryState",
+          "callee": "Math.min",
+          "lineNumber": 10
+        },
+        {
+          "caller": "getStoryState",
+          "callee": "Math.floor",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/story-progress.test.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

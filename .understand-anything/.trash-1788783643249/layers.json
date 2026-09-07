@@ -1,0 +1,110 @@
+[
+  {
+    "id": "runtime",
+    "name": "Runtime and navigation",
+    "description": "HTML bootstrap, hash routing and the React application lifecycle.",
+    "nodeIds": [
+      "file:src/App.jsx",
+      "function:src/App.jsx:App",
+      "file:src/main.jsx",
+      "file:index.html"
+    ]
+  },
+  {
+    "id": "pages",
+    "name": "Page experiences",
+    "description": "Home, team profiles, product filtering and field-photo documentation.",
+    "nodeIds": [
+      "file:src/pages/HomePage.jsx",
+      "function:src/pages/HomePage.jsx:HomePage",
+      "file:src/pages/ProductsPage.jsx",
+      "function:src/pages/ProductsPage.jsx:ProductsPage",
+      "file:src/pages/AboutPage.jsx",
+      "function:src/pages/AboutPage.jsx:AboutPage",
+      "file:src/pages/DocumentationPage.jsx",
+      "function:src/pages/DocumentationPage.jsx:DocumentationPage"
+    ]
+  },
+  {
+    "id": "ui",
+    "name": "Shared UI and styling",
+    "description": "Global layout, navigation primitives, media presentation, catalog components and responsive themes.",
+    "nodeIds": [
+      "file:src/components/ProductCard.jsx",
+      "function:src/components/ProductCard.jsx:ProductCard",
+      "file:src/components/ProductFilters.jsx",
+      "function:src/components/ProductFilters.jsx:ProductFilters",
+      "file:src/components/media.jsx",
+      "function:src/components/media.jsx:PhotoFrame",
+      "function:src/components/media.jsx:ProductMedia",
+      "function:src/components/media.jsx:StageIcon",
+      "file:src/components/Layout.jsx",
+      "function:src/components/Layout.jsx:Header",
+      "function:src/components/Layout.jsx:Footer",
+      "file:src/components/navigation.jsx",
+      "function:src/components/navigation.jsx:Link",
+      "function:src/components/navigation.jsx:Arrow",
+      "function:src/components/navigation.jsx:ButtonLink",
+      "file:src/components/PageIntro.jsx",
+      "function:src/components/PageIntro.jsx:PageIntro",
+      "file:src/styles.css"
+    ]
+  },
+  {
+    "id": "content",
+    "name": "Content and assets",
+    "description": "Static catalog data, documentation and source/public visual assets.",
+    "nodeIds": [
+      "file:assets/herosection/hero_section_dark.webp",
+      "file:assets/herosection/hero_section_light.webp",
+      "file:src/data/content.js",
+      "file:assets/IMG_8751.HEIC",
+      "file:assets/IMG_8752.HEIC",
+      "file:assets/IMG_8758.HEIC",
+      "file:assets/IMG_8765.HEIC",
+      "file:assets/IMG_8812.HEIC",
+      "file:assets/IMG_8915.HEIC",
+      "file:assets/IMG_8970.HEIC",
+      "file:assets/IMG_8973.HEIC",
+      "file:assets/IMG_8974.HEIC",
+      "file:public/assets/ecosystem-botanical/branch-left.webp",
+      "file:public/assets/ecosystem-botanical/branch-right.webp",
+      "file:public/assets/ecosystem-botanical/foreground.webp",
+      "file:public/assets/ecosystem-botanical/leaf-01.webp",
+      "file:public/assets/ecosystem-botanical/leaf-02.webp",
+      "file:public/assets/ecosystem-botanical/leaf-03.webp",
+      "file:public/assets/ecosystem-botanical/leaf-04.webp",
+      "file:public/assets/ecosystem-botanical/leaf-05.webp",
+      "file:public/assets/ecosystem-botanical/leaf-06.webp",
+      "file:public/assets/ecosystem-botanical/leaf-07.webp",
+      "file:public/assets/ecosystem-botanical/leaf-08.webp",
+      "file:public/assets/team/team.webp"
+    ]
+  },
+  {
+    "id": "logic",
+    "name": "Motion and interaction logic",
+    "description": "Ecosystem scroll state, team index navigation and focused assertion checks.",
+    "nodeIds": [
+      "file:src/team-navigation.js",
+      "function:src/team-navigation.js:adjacentTeamIndex",
+      "file:src/team-navigation.test.js",
+      "file:src/components/EcosystemStory.jsx",
+      "function:src/components/EcosystemStory.jsx:EcosystemStory",
+      "file:src/story-progress.js",
+      "function:src/story-progress.js:getStoryState",
+      "file:src/story-progress.test.js"
+    ]
+  },
+  {
+    "id": "project",
+    "name": "Project configuration and docs",
+    "description": "Build dependencies, editorial inventory and analysis exclusions.",
+    "nodeIds": [
+      "document:PAGE_CONTENT.md",
+      "document:README.md",
+      "config:package.json",
+      "file:.understand-anything/.understandignore"
+    ]
+  }
+]

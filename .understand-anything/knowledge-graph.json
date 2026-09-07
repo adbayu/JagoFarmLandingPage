@@ -1,0 +1,2124 @@
+{
+  "nodes": [
+    {
+      "id": "file:assets/herosection/hero_section_dark.webp",
+      "type": "file",
+      "name": "hero_section_dark.webp",
+      "filePath": "assets/herosection/hero_section_dark.webp",
+      "summary": "Theme-specific WebP hero image imported by home and product pages.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/herosection/hero_section_light.webp",
+      "type": "file",
+      "name": "hero_section_light.webp",
+      "filePath": "assets/herosection/hero_section_light.webp",
+      "summary": "Theme-specific WebP hero image imported by home and product pages.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ProductCard.jsx",
+      "type": "file",
+      "name": "ProductCard.jsx",
+      "filePath": "src/components/ProductCard.jsx",
+      "lineRange": [
+        1,
+        35
+      ],
+      "summary": "Displays product image, category and exploration status with disabled marketplace placeholders rather than purchasing links.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ProductCard.jsx:ProductCard",
+      "type": "function",
+      "name": "ProductCard",
+      "filePath": "src/components/ProductCard.jsx",
+      "lineRange": [
+        9,
+        35
+      ],
+      "summary": "Displays product image, category and exploration status with disabled marketplace placeholders rather than purchasing links.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ProductFilters.jsx",
+      "type": "file",
+      "name": "ProductFilters.jsx",
+      "filePath": "src/components/ProductFilters.jsx",
+      "lineRange": [
+        1,
+        19
+      ],
+      "summary": "Renders accessible category toggle buttons with pressed state and category icons.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ProductFilters.jsx:ProductFilters",
+      "type": "function",
+      "name": "ProductFilters",
+      "filePath": "src/components/ProductFilters.jsx",
+      "lineRange": [
+        9,
+        19
+      ],
+      "summary": "Renders accessible category toggle buttons with pressed state and category icons.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/media.jsx",
+      "type": "file",
+      "name": "media.jsx",
+      "filePath": "src/components/media.jsx",
+      "lineRange": [
+        1,
+        58
+      ],
+      "summary": "Provides pointer-responsive photo framing, labeled product media and inline SVG ecosystem icons.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/components/media.jsx:PhotoFrame",
+      "type": "function",
+      "name": "PhotoFrame",
+      "filePath": "src/components/media.jsx",
+      "lineRange": [
+        1,
+        19
+      ],
+      "summary": "Renders a lazy or eager photo and maps pointer position into CSS custom properties.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/media.jsx:ProductMedia",
+      "type": "function",
+      "name": "ProductMedia",
+      "filePath": "src/components/media.jsx",
+      "lineRange": [
+        21,
+        28
+      ],
+      "summary": "Renders a lazy-loaded product image with descriptive alternative text and label.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/media.jsx:StageIcon",
+      "type": "function",
+      "name": "StageIcon",
+      "filePath": "src/components/media.jsx",
+      "lineRange": [
+        30,
+        58
+      ],
+      "summary": "Selects inline decorative SVG artwork for ecosystem stage types.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/data/content.js",
+      "type": "file",
+      "name": "content.js",
+      "filePath": "src/data/content.js",
+      "lineRange": [
+        1,
+        44
+      ],
+      "summary": "Exports static route labels, product catalog and categories, documentation tuples, and five circular-farming stages.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/pages/HomePage.jsx",
+      "type": "file",
+      "name": "HomePage.jsx",
+      "filePath": "src/pages/HomePage.jsx",
+      "lineRange": [
+        1,
+        73
+      ],
+      "summary": "Composes themed hero images, farm overview, ecosystem storytelling, selected documentation, featured products and navigation calls to action.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "page"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/pages/HomePage.jsx:HomePage",
+      "type": "function",
+      "name": "HomePage",
+      "filePath": "src/pages/HomePage.jsx",
+      "lineRange": [
+        16,
+        73
+      ],
+      "summary": "Composes themed hero images, farm overview, ecosystem storytelling, selected documentation, featured products and navigation calls to action.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/pages/ProductsPage.jsx",
+      "type": "file",
+      "name": "ProductsPage.jsx",
+      "filePath": "src/pages/ProductsPage.jsx",
+      "lineRange": [
+        1,
+        41
+      ],
+      "summary": "Filters the static research-stage product catalog by category and renders themed hero, controls and product cards.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "page"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/pages/ProductsPage.jsx:ProductsPage",
+      "type": "function",
+      "name": "ProductsPage",
+      "filePath": "src/pages/ProductsPage.jsx",
+      "lineRange": [
+        8,
+        41
+      ],
+      "summary": "Filters the static research-stage product catalog by category and renders themed hero, controls and product cards.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/App.jsx",
+      "type": "file",
+      "name": "App.jsx",
+      "filePath": "src/App.jsx",
+      "lineRange": [
+        1,
+        86
+      ],
+      "summary": "Coordinates four hash routes, persisted theme, responsive Lenis scrolling, hero header state, and section reveal observers.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/App.jsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "src/App.jsx",
+      "lineRange": [
+        22,
+        86
+      ],
+      "summary": "Coordinates four hash routes, persisted theme, responsive Lenis scrolling, hero header state, and section reveal observers.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main.jsx",
+      "type": "file",
+      "name": "main.jsx",
+      "filePath": "src/main.jsx",
+      "lineRange": [
+        1,
+        5
+      ],
+      "summary": "Mounts App into the HTML root using React DOM createRoot.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/pages/AboutPage.jsx",
+      "type": "file",
+      "name": "AboutPage.jsx",
+      "filePath": "src/pages/AboutPage.jsx",
+      "lineRange": [
+        1,
+        297
+      ],
+      "summary": "Presents four placeholder team profiles using image hotspots, delayed hover selection, native modal navigation, close animation and focus restoration.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "page"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/pages/AboutPage.jsx:AboutPage",
+      "type": "function",
+      "name": "AboutPage",
+      "filePath": "src/pages/AboutPage.jsx",
+      "lineRange": [
+        59,
+        297
+      ],
+      "summary": "Presents four placeholder team profiles using image hotspots, delayed hover selection, native modal navigation, close animation and focus restoration.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/pages/DocumentationPage.jsx",
+      "type": "file",
+      "name": "DocumentationPage.jsx",
+      "filePath": "src/pages/DocumentationPage.jsx",
+      "lineRange": [
+        1,
+        45
+      ],
+      "summary": "Renders field-photo gallery buttons and displays the selected documentation tuple in a native modal dialog.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "page"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/pages/DocumentationPage.jsx:DocumentationPage",
+      "type": "function",
+      "name": "DocumentationPage",
+      "filePath": "src/pages/DocumentationPage.jsx",
+      "lineRange": [
+        4,
+        45
+      ],
+      "summary": "Renders field-photo gallery buttons and displays the selected documentation tuple in a native modal dialog.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/team-navigation.js",
+      "type": "file",
+      "name": "team-navigation.js",
+      "filePath": "src/team-navigation.js",
+      "lineRange": [
+        1,
+        3
+      ],
+      "summary": "Wraps the selected team index forward or backward using modular arithmetic.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/team-navigation.js:adjacentTeamIndex",
+      "type": "function",
+      "name": "adjacentTeamIndex",
+      "filePath": "src/team-navigation.js",
+      "lineRange": [
+        1,
+        3
+      ],
+      "summary": "Wraps the selected team index forward or backward using modular arithmetic.",
+      "tags": [
+        "javascript",
+        "function",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/team-navigation.test.js",
+      "type": "file",
+      "name": "team-navigation.test.js",
+      "filePath": "src/team-navigation.test.js",
+      "lineRange": [
+        1,
+        8
+      ],
+      "summary": "Checks previous, next and ordinary team-index navigation using Node strict assertions.",
+      "tags": [
+        "test",
+        "node-assert",
+        "regression"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/EcosystemStory.jsx",
+      "type": "file",
+      "name": "EcosystemStory.jsx",
+      "filePath": "src/components/EcosystemStory.jsx",
+      "lineRange": [
+        1,
+        114
+      ],
+      "summary": "Maps scroll progress to five ecosystem stages and decorative leaf motion; uses mobile card observation and a reduced-motion fallback.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/components/EcosystemStory.jsx:EcosystemStory",
+      "type": "function",
+      "name": "EcosystemStory",
+      "filePath": "src/components/EcosystemStory.jsx",
+      "lineRange": [
+        17,
+        114
+      ],
+      "summary": "Maps scroll progress to five ecosystem stages and decorative leaf motion; uses mobile card observation and a reduced-motion fallback.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/story-progress.js",
+      "type": "file",
+      "name": "story-progress.js",
+      "filePath": "src/story-progress.js",
+      "lineRange": [
+        1,
+        13
+      ],
+      "summary": "Clamps scroll progress and derives a bounded stage index from section and viewport geometry.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/story-progress.js:getStoryState",
+      "type": "function",
+      "name": "getStoryState",
+      "filePath": "src/story-progress.js",
+      "lineRange": [
+        1,
+        13
+      ],
+      "summary": "Clamps scroll progress and derives a bounded stage index from section and viewport geometry.",
+      "tags": [
+        "javascript",
+        "function",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/story-progress.test.js",
+      "type": "file",
+      "name": "story-progress.test.js",
+      "filePath": "src/story-progress.test.js",
+      "lineRange": [
+        1,
+        8
+      ],
+      "summary": "Checks story start, midpoint and endpoint using Node strict assertions.",
+      "tags": [
+        "test",
+        "node-assert",
+        "regression"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:PAGE_CONTENT.md",
+      "type": "document",
+      "name": "PAGE_CONTENT.md",
+      "filePath": "PAGE_CONTENT.md",
+      "lineRange": [
+        1,
+        268
+      ],
+      "summary": "Editorial inventory describing intended website sections; several listed routes are absent from the current four-route application.",
+      "tags": [
+        "documentation",
+        "project-context",
+        "reference"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "lineRange": [
+        1,
+        2
+      ],
+      "summary": "Minimal project title only; does not document setup or architecture.",
+      "tags": [
+        "documentation",
+        "project-context",
+        "reference"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "index.html",
+      "lineRange": [
+        1,
+        18
+      ],
+      "summary": "Bootstraps the React mount point, Indonesian metadata, web fonts, and stored theme before rendering.",
+      "tags": [
+        "frontend",
+        "html",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "lineRange": [
+        1,
+        20
+      ],
+      "summary": "Defines React, React DOM, Lenis and Vite dependencies plus development, build, preview and story-check commands.",
+      "tags": [
+        "configuration",
+        "build-system",
+        "dependencies"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "lineRange": [
+        1,
+        31
+      ],
+      "summary": "Controls analysis exclusions; starter suggestions remain commented out.",
+      "tags": [
+        "frontend",
+        "unknown",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8751.HEIC",
+      "type": "file",
+      "name": "IMG_8751.HEIC",
+      "filePath": "assets/IMG_8751.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8752.HEIC",
+      "type": "file",
+      "name": "IMG_8752.HEIC",
+      "filePath": "assets/IMG_8752.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8758.HEIC",
+      "type": "file",
+      "name": "IMG_8758.HEIC",
+      "filePath": "assets/IMG_8758.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8765.HEIC",
+      "type": "file",
+      "name": "IMG_8765.HEIC",
+      "filePath": "assets/IMG_8765.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8812.HEIC",
+      "type": "file",
+      "name": "IMG_8812.HEIC",
+      "filePath": "assets/IMG_8812.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8915.HEIC",
+      "type": "file",
+      "name": "IMG_8915.HEIC",
+      "filePath": "assets/IMG_8915.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8970.HEIC",
+      "type": "file",
+      "name": "IMG_8970.HEIC",
+      "filePath": "assets/IMG_8970.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8973.HEIC",
+      "type": "file",
+      "name": "IMG_8973.HEIC",
+      "filePath": "assets/IMG_8973.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/IMG_8974.HEIC",
+      "type": "file",
+      "name": "IMG_8974.HEIC",
+      "filePath": "assets/IMG_8974.HEIC",
+      "summary": "Original HEIC photograph retained in the source asset collection; no resolved JavaScript import.",
+      "tags": [
+        "asset",
+        "heic",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/branch-left.webp",
+      "type": "file",
+      "name": "branch-left.webp",
+      "filePath": "public/assets/ecosystem-botanical/branch-left.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/branch-right.webp",
+      "type": "file",
+      "name": "branch-right.webp",
+      "filePath": "public/assets/ecosystem-botanical/branch-right.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/foreground.webp",
+      "type": "file",
+      "name": "foreground.webp",
+      "filePath": "public/assets/ecosystem-botanical/foreground.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-01.webp",
+      "type": "file",
+      "name": "leaf-01.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-01.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-02.webp",
+      "type": "file",
+      "name": "leaf-02.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-02.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-03.webp",
+      "type": "file",
+      "name": "leaf-03.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-03.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-04.webp",
+      "type": "file",
+      "name": "leaf-04.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-04.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-05.webp",
+      "type": "file",
+      "name": "leaf-05.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-05.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-06.webp",
+      "type": "file",
+      "name": "leaf-06.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-06.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-07.webp",
+      "type": "file",
+      "name": "leaf-07.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-07.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/ecosystem-botanical/leaf-08.webp",
+      "type": "file",
+      "name": "leaf-08.webp",
+      "filePath": "public/assets/ecosystem-botanical/leaf-08.webp",
+      "summary": "Decorative WebP botanical artwork referenced by ecosystem presentation.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/assets/team/team.webp",
+      "type": "file",
+      "name": "team.webp",
+      "filePath": "public/assets/team/team.webp",
+      "summary": "Composite WebP team photograph referenced by the about-page scene.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/Layout.jsx",
+      "type": "file",
+      "name": "Layout.jsx",
+      "filePath": "src/components/Layout.jsx",
+      "lineRange": [
+        1,
+        143
+      ],
+      "summary": "Provides global header navigation, mobile details menu, theme toggle and footer links.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/components/Layout.jsx:Header",
+      "type": "function",
+      "name": "Header",
+      "filePath": "src/components/Layout.jsx",
+      "lineRange": [
+        4,
+        63
+      ],
+      "summary": "Renders desktop and native-details mobile hash navigation, brand and accessible theme toggle.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/components/Layout.jsx:Footer",
+      "type": "function",
+      "name": "Footer",
+      "filePath": "src/components/Layout.jsx",
+      "lineRange": [
+        65,
+        143
+      ],
+      "summary": "Renders documentation call to action, route navigation, social links and current year.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/navigation.jsx",
+      "type": "file",
+      "name": "navigation.jsx",
+      "filePath": "src/components/navigation.jsx",
+      "lineRange": [
+        1,
+        11
+      ],
+      "summary": "Provides hash anchors, decorative arrow and styled button-link composition without a router dependency.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/navigation.jsx:Link",
+      "type": "function",
+      "name": "Link",
+      "filePath": "src/components/navigation.jsx",
+      "lineRange": [
+        1,
+        3
+      ],
+      "summary": "Renders an anchor whose href encodes an application hash route.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/navigation.jsx:Arrow",
+      "type": "function",
+      "name": "Arrow",
+      "filePath": "src/components/navigation.jsx",
+      "lineRange": [
+        5,
+        7
+      ],
+      "summary": "Renders an assistive-technology-hidden diagonal arrow.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/navigation.jsx:ButtonLink",
+      "type": "function",
+      "name": "ButtonLink",
+      "filePath": "src/components/navigation.jsx",
+      "lineRange": [
+        9,
+        11
+      ],
+      "summary": "Combines Link and Arrow into a primary or secondary styled navigation action.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/PageIntro.jsx",
+      "type": "file",
+      "name": "PageIntro.jsx",
+      "filePath": "src/components/PageIntro.jsx",
+      "lineRange": [
+        1,
+        10
+      ],
+      "summary": "Reusable heading, eyebrow and lead-text section; currently not imported by application pages.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/PageIntro.jsx:PageIntro",
+      "type": "function",
+      "name": "PageIntro",
+      "filePath": "src/components/PageIntro.jsx",
+      "lineRange": [
+        1,
+        10
+      ],
+      "summary": "Reusable heading, eyebrow and lead-text section; currently not imported by application pages.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/styles.css",
+      "type": "file",
+      "name": "styles.css",
+      "filePath": "src/styles.css",
+      "lineRange": [
+        1,
+        904
+      ],
+      "summary": "Central responsive stylesheet defining cream/green themes, hero transitions, catalog, ecosystem motion, gallery and team dialogs.",
+      "tags": [
+        "styles",
+        "responsive",
+        "theme"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/components/ProductCard.jsx",
+      "target": "function:src/components/ProductCard.jsx:ProductCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares ProductCard"
+    },
+    {
+      "source": "file:src/components/ProductCard.jsx",
+      "target": "function:src/components/ProductCard.jsx:ProductCard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports ProductCard"
+    },
+    {
+      "source": "file:src/components/ProductCard.jsx",
+      "target": "file:src/components/media.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/ProductFilters.jsx",
+      "target": "function:src/components/ProductFilters.jsx:ProductFilters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares ProductFilters"
+    },
+    {
+      "source": "file:src/components/ProductFilters.jsx",
+      "target": "function:src/components/ProductFilters.jsx:ProductFilters",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports ProductFilters"
+    },
+    {
+      "source": "file:src/components/ProductFilters.jsx",
+      "target": "file:src/components/media.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:PhotoFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares PhotoFrame"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:PhotoFrame",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports PhotoFrame"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:ProductMedia",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares ProductMedia"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:ProductMedia",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports ProductMedia"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:StageIcon",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares StageIcon"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:StageIcon",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports StageIcon"
+    },
+    {
+      "source": "file:src/data/content.js",
+      "target": "file:assets/herosection/hero_section_light.webp",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "function:src/pages/HomePage.jsx:HomePage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares HomePage"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "function:src/pages/HomePage.jsx:HomePage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports HomePage"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:assets/herosection/hero_section_dark.webp",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:assets/herosection/hero_section_light.webp",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:src/components/EcosystemStory.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:src/components/media.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:src/components/navigation.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:src/data/content.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "function:src/pages/ProductsPage.jsx:ProductsPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares ProductsPage"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "function:src/pages/ProductsPage.jsx:ProductsPage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports ProductsPage"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:assets/herosection/hero_section_dark.webp",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:assets/herosection/hero_section_light.webp",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:src/components/ProductCard.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:src/components/ProductFilters.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:src/data/content.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "function:src/App.jsx:App",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares App"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "function:src/App.jsx:App",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports App"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/components/Layout.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/pages/AboutPage.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/pages/DocumentationPage.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/pages/HomePage.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/pages/ProductsPage.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/styles.css",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/App.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/AboutPage.jsx",
+      "target": "function:src/pages/AboutPage.jsx:AboutPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares AboutPage"
+    },
+    {
+      "source": "file:src/pages/AboutPage.jsx",
+      "target": "function:src/pages/AboutPage.jsx:AboutPage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports AboutPage"
+    },
+    {
+      "source": "file:src/pages/AboutPage.jsx",
+      "target": "file:src/team-navigation.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/DocumentationPage.jsx",
+      "target": "function:src/pages/DocumentationPage.jsx:DocumentationPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares DocumentationPage"
+    },
+    {
+      "source": "file:src/pages/DocumentationPage.jsx",
+      "target": "function:src/pages/DocumentationPage.jsx:DocumentationPage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports DocumentationPage"
+    },
+    {
+      "source": "file:src/pages/DocumentationPage.jsx",
+      "target": "file:src/data/content.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/team-navigation.js",
+      "target": "function:src/team-navigation.js:adjacentTeamIndex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares adjacentTeamIndex"
+    },
+    {
+      "source": "file:src/team-navigation.js",
+      "target": "function:src/team-navigation.js:adjacentTeamIndex",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports adjacentTeamIndex"
+    },
+    {
+      "source": "file:src/team-navigation.test.js",
+      "target": "file:src/team-navigation.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "function:src/components/EcosystemStory.jsx:EcosystemStory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares EcosystemStory"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "function:src/components/EcosystemStory.jsx:EcosystemStory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports EcosystemStory"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:src/components/media.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:src/data/content.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:src/story-progress.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/story-progress.js",
+      "target": "function:src/story-progress.js:getStoryState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares getStoryState"
+    },
+    {
+      "source": "file:src/story-progress.js",
+      "target": "function:src/story-progress.js:getStoryState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports getStoryState"
+    },
+    {
+      "source": "file:src/story-progress.test.js",
+      "target": "file:src/story-progress.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "function:src/components/Layout.jsx:Header",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares Header"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "function:src/components/Layout.jsx:Header",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports Header"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "function:src/components/Layout.jsx:Footer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares Footer"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "function:src/components/Layout.jsx:Footer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports Footer"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "file:src/components/navigation.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "file:src/data/content.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:Link",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares Link"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:Link",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports Link"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:Arrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares Arrow"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:Arrow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports Arrow"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:ButtonLink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares ButtonLink"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:ButtonLink",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports ButtonLink"
+    },
+    {
+      "source": "file:src/components/PageIntro.jsx",
+      "target": "function:src/components/PageIntro.jsx:PageIntro",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares PageIntro"
+    },
+    {
+      "source": "file:src/components/PageIntro.jsx",
+      "target": "function:src/components/PageIntro.jsx:PageIntro",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports PageIntro"
+    },
+    {
+      "source": "file:src/team-navigation.js",
+      "target": "file:src/team-navigation.test.js",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Path-based pairing (deterministic)"
+    },
+    {
+      "source": "file:src/story-progress.js",
+      "target": "file:src/story-progress.test.js",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Path-based pairing (deterministic)"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/pages/HomePage.jsx",
+      "type": "routes",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Hash route selects HomePage"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/pages/AboutPage.jsx",
+      "type": "routes",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Hash route selects AboutPage"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/pages/ProductsPage.jsx",
+      "type": "routes",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Hash route selects ProductsPage"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/pages/DocumentationPage.jsx",
+      "type": "routes",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Hash route selects DocumentationPage"
+    },
+    {
+      "source": "file:index.html",
+      "target": "file:src/main.jsx",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Module script starts the React application"
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:index.html",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Vite uses the HTML entry point"
+    },
+    {
+      "source": "document:PAGE_CONTENT.md",
+      "target": "file:src/data/content.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Editorial inventory; not an authoritative runtime route list"
+    },
+    {
+      "source": "document:README.md",
+      "target": "config:package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Identifies the JagoFarm project"
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "function:src/App.jsx:App",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Invokes App"
+    },
+    {
+      "source": "function:src/components/EcosystemStory.jsx:EcosystemStory",
+      "target": "function:src/story-progress.js:getStoryState",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Invokes getStoryState"
+    },
+    {
+      "source": "function:src/pages/AboutPage.jsx:AboutPage",
+      "target": "function:src/team-navigation.js:adjacentTeamIndex",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Invokes adjacentTeamIndex"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "function:src/components/Layout.jsx:Header",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes Header in JSX"
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "function:src/components/Layout.jsx:Footer",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes Footer in JSX"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "function:src/components/EcosystemStory.jsx:EcosystemStory",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes EcosystemStory in JSX"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "function:src/components/media.jsx:StageIcon",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes StageIcon in JSX"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "function:src/components/navigation.jsx:ButtonLink",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes ButtonLink in JSX"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "function:src/components/ProductCard.jsx:ProductCard",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes ProductCard in JSX"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "function:src/components/ProductFilters.jsx:ProductFilters",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes ProductFilters in JSX"
+    },
+    {
+      "source": "file:src/components/ProductCard.jsx",
+      "target": "function:src/components/media.jsx:StageIcon",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes StageIcon in JSX"
+    },
+    {
+      "source": "file:src/components/ProductFilters.jsx",
+      "target": "function:src/components/media.jsx:StageIcon",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes StageIcon in JSX"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "function:src/components/media.jsx:StageIcon",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes StageIcon in JSX"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "function:src/components/navigation.jsx:Link",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes Link in JSX"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "function:src/components/navigation.jsx:Arrow",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes Arrow in JSX"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:Link",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes Link in JSX"
+    },
+    {
+      "source": "file:src/components/navigation.jsx",
+      "target": "function:src/components/navigation.jsx:Arrow",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Composes Arrow in JSX"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:src/data/content.js",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Reads static UI content"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:src/data/content.js",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Reads static UI content"
+    },
+    {
+      "source": "file:src/pages/DocumentationPage.jsx",
+      "target": "file:src/data/content.js",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Reads static UI content"
+    },
+    {
+      "source": "file:src/components/Layout.jsx",
+      "target": "file:src/data/content.js",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Reads static UI content"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:src/data/content.js",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Reads static UI content"
+    },
+    {
+      "source": "file:src/styles.css",
+      "target": "file:public/assets/ecosystem-botanical/branch-left.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/styles.css",
+      "target": "file:public/assets/ecosystem-botanical/branch-right.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/styles.css",
+      "target": "file:public/assets/ecosystem-botanical/foreground.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:public/assets/ecosystem-botanical/leaf-01.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:public/assets/ecosystem-botanical/leaf-02.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:public/assets/ecosystem-botanical/leaf-03.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:public/assets/ecosystem-botanical/leaf-04.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:public/assets/ecosystem-botanical/leaf-05.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:public/assets/ecosystem-botanical/leaf-06.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:public/assets/ecosystem-botanical/leaf-07.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/components/EcosystemStory.jsx",
+      "target": "file:public/assets/ecosystem-botanical/leaf-08.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    },
+    {
+      "source": "file:src/pages/AboutPage.jsx",
+      "target": "file:public/assets/team/team.webp",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "References public image through a URL"
+    }
+  ],
+  "layers": [
+    {
+      "id": "runtime",
+      "name": "Runtime and navigation",
+      "description": "HTML bootstrap, hash routing and the React application lifecycle.",
+      "nodeIds": [
+        "file:src/App.jsx",
+        "function:src/App.jsx:App",
+        "file:src/main.jsx",
+        "file:index.html"
+      ]
+    },
+    {
+      "id": "pages",
+      "name": "Page experiences",
+      "description": "Home, team profiles, product filtering and field-photo documentation.",
+      "nodeIds": [
+        "file:src/pages/HomePage.jsx",
+        "function:src/pages/HomePage.jsx:HomePage",
+        "file:src/pages/ProductsPage.jsx",
+        "function:src/pages/ProductsPage.jsx:ProductsPage",
+        "file:src/pages/AboutPage.jsx",
+        "function:src/pages/AboutPage.jsx:AboutPage",
+        "file:src/pages/DocumentationPage.jsx",
+        "function:src/pages/DocumentationPage.jsx:DocumentationPage"
+      ]
+    },
+    {
+      "id": "ui",
+      "name": "Shared UI and styling",
+      "description": "Global layout, navigation primitives, media presentation, catalog components and responsive themes.",
+      "nodeIds": [
+        "file:src/components/ProductCard.jsx",
+        "function:src/components/ProductCard.jsx:ProductCard",
+        "file:src/components/ProductFilters.jsx",
+        "function:src/components/ProductFilters.jsx:ProductFilters",
+        "file:src/components/media.jsx",
+        "function:src/components/media.jsx:PhotoFrame",
+        "function:src/components/media.jsx:ProductMedia",
+        "function:src/components/media.jsx:StageIcon",
+        "file:src/components/Layout.jsx",
+        "function:src/components/Layout.jsx:Header",
+        "function:src/components/Layout.jsx:Footer",
+        "file:src/components/navigation.jsx",
+        "function:src/components/navigation.jsx:Link",
+        "function:src/components/navigation.jsx:Arrow",
+        "function:src/components/navigation.jsx:ButtonLink",
+        "file:src/components/PageIntro.jsx",
+        "function:src/components/PageIntro.jsx:PageIntro",
+        "file:src/styles.css"
+      ]
+    },
+    {
+      "id": "content",
+      "name": "Content and assets",
+      "description": "Static catalog data, documentation and source/public visual assets.",
+      "nodeIds": [
+        "file:assets/herosection/hero_section_dark.webp",
+        "file:assets/herosection/hero_section_light.webp",
+        "file:src/data/content.js",
+        "file:assets/IMG_8751.HEIC",
+        "file:assets/IMG_8752.HEIC",
+        "file:assets/IMG_8758.HEIC",
+        "file:assets/IMG_8765.HEIC",
+        "file:assets/IMG_8812.HEIC",
+        "file:assets/IMG_8915.HEIC",
+        "file:assets/IMG_8970.HEIC",
+        "file:assets/IMG_8973.HEIC",
+        "file:assets/IMG_8974.HEIC",
+        "file:public/assets/ecosystem-botanical/branch-left.webp",
+        "file:public/assets/ecosystem-botanical/branch-right.webp",
+        "file:public/assets/ecosystem-botanical/foreground.webp",
+        "file:public/assets/ecosystem-botanical/leaf-01.webp",
+        "file:public/assets/ecosystem-botanical/leaf-02.webp",
+        "file:public/assets/ecosystem-botanical/leaf-03.webp",
+        "file:public/assets/ecosystem-botanical/leaf-04.webp",
+        "file:public/assets/ecosystem-botanical/leaf-05.webp",
+        "file:public/assets/ecosystem-botanical/leaf-06.webp",
+        "file:public/assets/ecosystem-botanical/leaf-07.webp",
+        "file:public/assets/ecosystem-botanical/leaf-08.webp",
+        "file:public/assets/team/team.webp"
+      ]
+    },
+    {
+      "id": "logic",
+      "name": "Motion and interaction logic",
+      "description": "Ecosystem scroll state, team index navigation and focused assertion checks.",
+      "nodeIds": [
+        "file:src/team-navigation.js",
+        "function:src/team-navigation.js:adjacentTeamIndex",
+        "file:src/team-navigation.test.js",
+        "file:src/components/EcosystemStory.jsx",
+        "function:src/components/EcosystemStory.jsx:EcosystemStory",
+        "file:src/story-progress.js",
+        "function:src/story-progress.js:getStoryState",
+        "file:src/story-progress.test.js"
+      ]
+    },
+    {
+      "id": "project",
+      "name": "Project configuration and docs",
+      "description": "Build dependencies, editorial inventory and analysis exclusions.",
+      "nodeIds": [
+        "document:PAGE_CONTENT.md",
+        "document:README.md",
+        "config:package.json",
+        "file:.understand-anything/.understandignore"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Start at the browser entry",
+      "description": "index.html restores the saved theme before src/main.jsx mounts App. App owns four hash routes; unknown hashes resolve to home.",
+      "nodeIds": [
+        "file:index.html",
+        "file:src/main.jsx",
+        "file:src/App.jsx"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Follow shared navigation and theme",
+      "description": "Header and Footer consume static route labels. Hash anchors avoid a routing dependency; native details provides the mobile menu.",
+      "nodeIds": [
+        "file:src/components/Layout.jsx",
+        "file:src/components/navigation.jsx",
+        "file:src/styles.css"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Trace static content into pages",
+      "description": "content.js provides catalog objects, documentation tuples and ecosystem stages. Home selects featured material; products filter by category. No backend or checkout flow is implemented here.",
+      "nodeIds": [
+        "file:src/data/content.js",
+        "file:src/pages/HomePage.jsx",
+        "file:src/pages/ProductsPage.jsx",
+        "file:src/components/ProductCard.jsx"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Understand scroll-driven storytelling",
+      "description": "EcosystemStory schedules scroll updates with requestAnimationFrame; getStoryState clamps progress and chooses a stage. Mobile cards use IntersectionObserver.",
+      "nodeIds": [
+        "file:src/components/EcosystemStory.jsx",
+        "file:src/story-progress.js",
+        "file:src/story-progress.test.js"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "Inspect native dialogs and team navigation",
+      "description": "Documentation uses a native image dialog. AboutPage adds team hotspots, profile navigation, close animation and focus restoration; descriptions are placeholders.",
+      "nodeIds": [
+        "file:src/pages/DocumentationPage.jsx",
+        "file:src/pages/AboutPage.jsx",
+        "file:src/team-navigation.js",
+        "file:src/team-navigation.test.js"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "Separate intended content from shipped routes",
+      "description": "package.json contains Vite commands and a story assertion script. PAGE_CONTENT.md lists more sections than App currently routes; README contains only the project title.",
+      "nodeIds": [
+        "config:package.json",
+        "document:PAGE_CONTENT.md",
+        "document:README.md"
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "project": {
+    "name": "jagofarm-website",
+    "description": "JagoFarm React single-page marketing website with hash navigation, product browsing, farm documentation, and scroll-driven ecosystem storytelling.",
+    "languages": [
+      "javascript",
+      "css",
+      "html"
+    ],
+    "frameworks": [
+      "react",
+      "vite"
+    ],
+    "analyzedAt": "2026-09-07T12:19:26.842Z",
+    "gitCommitHash": "405fe9cb6f499a250f5b1136e38e10c01977ffc5"
+  }
+}

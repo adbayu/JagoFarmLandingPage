@@ -1,0 +1,941 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "405fe9cb6f499a250f5b1136e38e10c01977ffc5",
+  "generatedAt": "2026-09-07T12:19:41.506Z",
+  "files": {
+    ".understand-anything/.understandignore": {
+      "filePath": ".understand-anything/.understandignore",
+      "contentHash": "777472b87cf3c3acd816d0792b9aa3bfb45124ecd91885e6e2ed2d349a39f301",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": false
+    },
+    "assets/herosection/hero_section_dark.webp": {
+      "filePath": "assets/herosection/hero_section_dark.webp",
+      "contentHash": "0172af6c4bf89675e0c07fedd156963bacfab87e9e11b7ccb00173ff5cc23895",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 736,
+      "hasStructuralAnalysis": false
+    },
+    "assets/herosection/hero_section_light.webp": {
+      "filePath": "assets/herosection/hero_section_light.webp",
+      "contentHash": "d681959793ea77fc13c7d29e608385c0ab9f4f1e49ade0f1d103a2f51d52f29e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1660,
+      "hasStructuralAnalysis": false
+    },
+    "assets/IMG_8751.HEIC": {
+      "filePath": "assets/IMG_8751.HEIC",
+      "contentHash": "0befdbd3be2242f1952e160af2ae620c34f8f6a8a417924ddf4e9e953024e3b9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8513,
+      "hasStructuralAnalysis": false
+    },
+    "assets/IMG_8752.HEIC": {
+      "filePath": "assets/IMG_8752.HEIC",
+      "contentHash": "5618d55cdab160964ecb593a0fb1ae74864984fb248ceb9782f71511f54350c2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 9716,
+      "hasStructuralAnalysis": false
+    },
+    "assets/IMG_8758.HEIC": {
+      "filePath": "assets/IMG_8758.HEIC",
+      "contentHash": "5cd7c7d0dcd1d9bab71b6c46d144562e980a2d155b602db822d7d7d872f41dcd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5974,
+      "hasStructuralAnalysis": false
+    },
+    "assets/IMG_8765.HEIC": {
+      "filePath": "assets/IMG_8765.HEIC",
+      "contentHash": "f8f4cb4399f119541daea9e4b82425fa97dda3457ec1fa2097d7569faa6586a5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 9914,
+      "hasStructuralAnalysis": false
+    },
+    "assets/IMG_8812.HEIC": {
+      "filePath": "assets/IMG_8812.HEIC",
+      "contentHash": "81947ef3581ce0e980d836812ced8140eaec5f75b6e9b6ff4c7343955ea28fab",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 17381,
+      "hasStructuralAnalysis": false
+    },
+    "assets/IMG_8915.HEIC": {
+      "filePath": "assets/IMG_8915.HEIC",
+      "contentHash": "683a47d53cc197e3afc48b8f489f971bb9fc291a04874864a22179ea87135d23",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6300,
+      "hasStructuralAnalysis": false
+    },
+    "assets/IMG_8970.HEIC": {
+      "filePath": "assets/IMG_8970.HEIC",
+      "contentHash": "ed4e9b1518f6f2da456234c9a05de00464d802f30a06bf32e5c9ec956fa24e2c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13521,
+      "hasStructuralAnalysis": false
+    },
+    "assets/IMG_8973.HEIC": {
+      "filePath": "assets/IMG_8973.HEIC",
+      "contentHash": "b09a577b789f0ab747eac6c616422549740773ee3b73b7d576d6cba8e2fc0059",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11237,
+      "hasStructuralAnalysis": false
+    },
+    "assets/IMG_8974.HEIC": {
+      "filePath": "assets/IMG_8974.HEIC",
+      "contentHash": "5180716cb29c17a1e9a918befea673e08906eedc47a046a798bfa6960488267e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21074,
+      "hasStructuralAnalysis": false
+    },
+    "index.html": {
+      "filePath": "index.html",
+      "contentHash": "4758e1d3255396754ae4b6093c381d449ec6a276f5aaed58d449df1d59099139",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": false
+    },
+    "package.json": {
+      "filePath": "package.json",
+      "contentHash": "f13c7b668b7247786bc4645d280fdd2922963d6a9be57adf2c4e8a4527eab8d2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "PAGE_CONTENT.md": {
+      "filePath": "PAGE_CONTENT.md",
+      "contentHash": "898a29182ab8d14bacc655fd700a610bc88950d5c8200aacdaabb2a3ed105835",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 269,
+      "hasStructuralAnalysis": true
+    },
+    "public/assets/ecosystem-botanical/branch-left.webp": {
+      "filePath": "public/assets/ecosystem-botanical/branch-left.webp",
+      "contentHash": "40bd01b10a7582dc9bd90576143a0c4ecc881ced07ed05aa42b0b66942806cdf",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 126,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/ecosystem-botanical/branch-right.webp": {
+      "filePath": "public/assets/ecosystem-botanical/branch-right.webp",
+      "contentHash": "1914a7aac885ecb6527091d949f647193b9c37eeb3560e141e63fffab81d67f6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 132,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/ecosystem-botanical/foreground.webp": {
+      "filePath": "public/assets/ecosystem-botanical/foreground.webp",
+      "contentHash": "10cde63832690dd9d38edf3a5ef778a8b0caae1a1d3c3e35e7cbcbee6bea2bf8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 300,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/ecosystem-botanical/leaf-01.webp": {
+      "filePath": "public/assets/ecosystem-botanical/leaf-01.webp",
+      "contentHash": "b5cd5166d44a2b8b089fae6053958bcff4c457d8afef83d70417d32088b24a1b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 108,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/ecosystem-botanical/leaf-02.webp": {
+      "filePath": "public/assets/ecosystem-botanical/leaf-02.webp",
+      "contentHash": "5a564777e9b94b0beab45f98758968265fcb5fca5b8101e8f13fa9a9ba9f2937",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 78,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/ecosystem-botanical/leaf-03.webp": {
+      "filePath": "public/assets/ecosystem-botanical/leaf-03.webp",
+      "contentHash": "15599896de53c4cf321e0e108c7ef2ec0f3e250a68960d1dad1eea3c74839f63",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 64,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/ecosystem-botanical/leaf-04.webp": {
+      "filePath": "public/assets/ecosystem-botanical/leaf-04.webp",
+      "contentHash": "9d239633c8c0be8774d7f557427aafdf15e125eb2020811bc8b3d221bae29d19",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 88,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/ecosystem-botanical/leaf-05.webp": {
+      "filePath": "public/assets/ecosystem-botanical/leaf-05.webp",
+      "contentHash": "65acb772d5dce684a028cd48f5202523361684b4653b658878bed43b5a8f8a79",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 90,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/ecosystem-botanical/leaf-06.webp": {
+      "filePath": "public/assets/ecosystem-botanical/leaf-06.webp",
+      "contentHash": "1217a7cf5788bc9f6c91225aa7a02cf96150c1d6e5c8506e83f0f4d4acdb9c0c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 123,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/ecosystem-botanical/leaf-07.webp": {
+      "filePath": "public/assets/ecosystem-botanical/leaf-07.webp",
+      "contentHash": "2e25e1cf8f6fa98d9526442ee9769e656d8099a2716325e2bbba1388aa8d271a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 49,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/ecosystem-botanical/leaf-08.webp": {
+      "filePath": "public/assets/ecosystem-botanical/leaf-08.webp",
+      "contentHash": "78b1d4b8be45dd15318493a74b2f2f9a18182ba9676541c1c8c611f0201bb938",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 105,
+      "hasStructuralAnalysis": false
+    },
+    "public/assets/team/team.webp": {
+      "filePath": "public/assets/team/team.webp",
+      "contentHash": "fe06308488bed6e246f77631f41611852a5424694359cecf98e10d1037998e8e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1684,
+      "hasStructuralAnalysis": false
+    },
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "7a3effec683858054490ad52dc01fcd823fe913c697a746a06f49656bf58098e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": true
+    },
+    "src/App.jsx": {
+      "filePath": "src/App.jsx",
+      "contentHash": "86d1b81e00ea43c94128ac5b1d95a25cc1a547766266920833146305e3496d1b",
+      "functions": [
+        {
+          "name": "routeFromHash",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "routeUsesOverlayHeader",
+          "params": [
+            "path"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "App",
+          "params": [],
+          "exported": true,
+          "lineCount": 65
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useEffect",
+            "useRef",
+            "useState"
+          ]
+        },
+        {
+          "source": "lenis",
+          "specifiers": [
+            "Lenis"
+          ]
+        },
+        {
+          "source": "lenis/dist/lenis.css",
+          "specifiers": []
+        },
+        {
+          "source": "./styles.css",
+          "specifiers": []
+        },
+        {
+          "source": "./components/Layout.jsx",
+          "specifiers": [
+            "Footer",
+            "Header"
+          ]
+        },
+        {
+          "source": "./pages/AboutPage.jsx",
+          "specifiers": [
+            "AboutPage"
+          ]
+        },
+        {
+          "source": "./pages/DocumentationPage.jsx",
+          "specifiers": [
+            "DocumentationPage"
+          ]
+        },
+        {
+          "source": "./pages/HomePage.jsx",
+          "specifiers": [
+            "HomePage"
+          ]
+        },
+        {
+          "source": "./pages/ProductsPage.jsx",
+          "specifiers": [
+            "ProductsPage"
+          ]
+        }
+      ],
+      "exports": [
+        "App"
+      ],
+      "totalLines": 87,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/EcosystemStory.jsx": {
+      "filePath": "src/components/EcosystemStory.jsx",
+      "contentHash": "feeda6ec4c1b42d72d40d58680cd9b8d3615477ced3f079d93fcbe8164f12ca8",
+      "functions": [
+        {
+          "name": "EcosystemStory",
+          "params": [],
+          "exported": true,
+          "lineCount": 98
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useEffect",
+            "useRef",
+            "useState"
+          ]
+        },
+        {
+          "source": "../data/content.js",
+          "specifiers": [
+            "cycleStages"
+          ]
+        },
+        {
+          "source": "../story-progress.js",
+          "specifiers": [
+            "getStoryState"
+          ]
+        },
+        {
+          "source": "./media.jsx",
+          "specifiers": [
+            "StageIcon"
+          ]
+        }
+      ],
+      "exports": [
+        "EcosystemStory"
+      ],
+      "totalLines": 115,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/Layout.jsx": {
+      "filePath": "src/components/Layout.jsx",
+      "contentHash": "ee9002e2c382890a88170d34850644c1082cb995da4648ab7906694fa1e5c3f4",
+      "functions": [
+        {
+          "name": "Header",
+          "params": [],
+          "exported": true,
+          "lineCount": 60
+        },
+        {
+          "name": "Footer",
+          "params": [],
+          "exported": true,
+          "lineCount": 79
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "../data/content.js",
+          "specifiers": [
+            "routes"
+          ]
+        },
+        {
+          "source": "./navigation.jsx",
+          "specifiers": [
+            "Arrow",
+            "Link"
+          ]
+        }
+      ],
+      "exports": [
+        "Header",
+        "Footer"
+      ],
+      "totalLines": 144,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/media.jsx": {
+      "filePath": "src/components/media.jsx",
+      "contentHash": "ec597b7cf3eb57b1e204b274bbb7a18846466f1477ec53fc3919ccd41404a1e2",
+      "functions": [
+        {
+          "name": "PhotoFrame",
+          "params": [],
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "ProductMedia",
+          "params": [],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "StageIcon",
+          "params": [],
+          "exported": true,
+          "lineCount": 29
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "PhotoFrame",
+        "ProductMedia",
+        "StageIcon"
+      ],
+      "totalLines": 59,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/navigation.jsx": {
+      "filePath": "src/components/navigation.jsx",
+      "contentHash": "190ab6ecdfc882eb6b04d4886e8e86b5902dc887bb1d1ceba9315906f6c8ab8c",
+      "functions": [
+        {
+          "name": "Link",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "Arrow",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "ButtonLink",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "Link",
+        "Arrow",
+        "ButtonLink"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/PageIntro.jsx": {
+      "filePath": "src/components/PageIntro.jsx",
+      "contentHash": "f85b0544d7c04449200f84c0c7dbf9c191597e9039b07b9672a31cde009e45e8",
+      "functions": [
+        {
+          "name": "PageIntro",
+          "params": [],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "PageIntro"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ProductCard.jsx": {
+      "filePath": "src/components/ProductCard.jsx",
+      "contentHash": "b03c345bcc2643ad2b93601ad10304657c9ee2cbc6848ada76160a13c3367852",
+      "functions": [
+        {
+          "name": "ProductCard",
+          "params": [],
+          "exported": true,
+          "lineCount": 27
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./media.jsx",
+          "specifiers": [
+            "StageIcon"
+          ]
+        }
+      ],
+      "exports": [
+        "ProductCard"
+      ],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ProductFilters.jsx": {
+      "filePath": "src/components/ProductFilters.jsx",
+      "contentHash": "30211dd705365bff8a1bba5b7034f6bacec12239c3be86c2802731cd32f209d2",
+      "functions": [
+        {
+          "name": "GridIcon",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "ProductFilters",
+          "params": [],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./media.jsx",
+          "specifiers": [
+            "StageIcon"
+          ]
+        }
+      ],
+      "exports": [
+        "ProductFilters"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "src/data/content.js": {
+      "filePath": "src/data/content.js",
+      "contentHash": "f533c265e9148c3e69893388878352c5a6f76fa0ab3224b06d3de59748ef4c49",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "../../assets/herosection/hero_section_light.webp",
+          "specifiers": [
+            "heroLight"
+          ]
+        }
+      ],
+      "exports": [
+        "routes",
+        "products",
+        "productCategories",
+        "documentation",
+        "cycleStages"
+      ],
+      "totalLines": 45,
+      "hasStructuralAnalysis": true
+    },
+    "src/main.jsx": {
+      "filePath": "src/main.jsx",
+      "contentHash": "ab5c8e693184c5f5db9dd9e2bca5c907ec8b237d03fa9c29a7b1241e298481ca",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "StrictMode"
+          ]
+        },
+        {
+          "source": "react-dom/client",
+          "specifiers": [
+            "createRoot"
+          ]
+        },
+        {
+          "source": "./App.jsx",
+          "specifiers": [
+            "App"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "src/pages/AboutPage.jsx": {
+      "filePath": "src/pages/AboutPage.jsx",
+      "contentHash": "56abe09437514c9149c119f4968df863d2f66f76823356b2a59b614f16b090e6",
+      "functions": [
+        {
+          "name": "AboutPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 239
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useEffect",
+            "useRef",
+            "useState"
+          ]
+        },
+        {
+          "source": "../team-navigation.js",
+          "specifiers": [
+            "adjacentTeamIndex"
+          ]
+        }
+      ],
+      "exports": [
+        "AboutPage"
+      ],
+      "totalLines": 298,
+      "hasStructuralAnalysis": true
+    },
+    "src/pages/DocumentationPage.jsx": {
+      "filePath": "src/pages/DocumentationPage.jsx",
+      "contentHash": "ed7b44390a4d77b8421bffd11215ccd1d0ee6060f512aa998f4cbf2bd01417db",
+      "functions": [
+        {
+          "name": "DocumentationPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 42
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useRef",
+            "useState"
+          ]
+        },
+        {
+          "source": "../data/content.js",
+          "specifiers": [
+            "documentation"
+          ]
+        }
+      ],
+      "exports": [
+        "DocumentationPage"
+      ],
+      "totalLines": 46,
+      "hasStructuralAnalysis": true
+    },
+    "src/pages/HomePage.jsx": {
+      "filePath": "src/pages/HomePage.jsx",
+      "contentHash": "464a4077c9483e23268b966e0cfec56a4db5b265c01e39be40ed8caf94c2b09f",
+      "functions": [
+        {
+          "name": "HomePage",
+          "params": [],
+          "exported": true,
+          "lineCount": 58
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "../../assets/herosection/hero_section_dark.webp",
+          "specifiers": [
+            "heroDark"
+          ]
+        },
+        {
+          "source": "../../assets/herosection/hero_section_light.webp",
+          "specifiers": [
+            "heroLight"
+          ]
+        },
+        {
+          "source": "../components/EcosystemStory.jsx",
+          "specifiers": [
+            "EcosystemStory"
+          ]
+        },
+        {
+          "source": "../components/media.jsx",
+          "specifiers": [
+            "StageIcon"
+          ]
+        },
+        {
+          "source": "../components/navigation.jsx",
+          "specifiers": [
+            "Arrow",
+            "ButtonLink",
+            "Link"
+          ]
+        },
+        {
+          "source": "../data/content.js",
+          "specifiers": [
+            "products"
+          ]
+        }
+      ],
+      "exports": [
+        "HomePage"
+      ],
+      "totalLines": 74,
+      "hasStructuralAnalysis": true
+    },
+    "src/pages/ProductsPage.jsx": {
+      "filePath": "src/pages/ProductsPage.jsx",
+      "contentHash": "852e00fa623281d2aca072de495fdd77b1ee7ec74afc2eb24fcf443bd9c30358",
+      "functions": [
+        {
+          "name": "ProductsPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 34
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "../../assets/herosection/hero_section_dark.webp",
+          "specifiers": [
+            "heroDark"
+          ]
+        },
+        {
+          "source": "../../assets/herosection/hero_section_light.webp",
+          "specifiers": [
+            "heroLight"
+          ]
+        },
+        {
+          "source": "../components/ProductCard.jsx",
+          "specifiers": [
+            "ProductCard"
+          ]
+        },
+        {
+          "source": "../components/ProductFilters.jsx",
+          "specifiers": [
+            "ProductFilters"
+          ]
+        },
+        {
+          "source": "../data/content.js",
+          "specifiers": [
+            "productCategories",
+            "products"
+          ]
+        }
+      ],
+      "exports": [
+        "ProductsPage"
+      ],
+      "totalLines": 42,
+      "hasStructuralAnalysis": true
+    },
+    "src/story-progress.js": {
+      "filePath": "src/story-progress.js",
+      "contentHash": "384355b5f41ae4c1c8e70b8809ca76da4f2ec5604c7885f3b1813ef460af3479",
+      "functions": [
+        {
+          "name": "getStoryState",
+          "params": [
+            "scrollY",
+            "sectionTop",
+            "sectionHeight",
+            "viewportHeight",
+            "stageCount"
+          ],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "getStoryState"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "src/story-progress.test.js": {
+      "filePath": "src/story-progress.test.js",
+      "contentHash": "b3c27a989ffecdbed750d2240f5ddb5d4f0d3ff704c96f6107c38c9aa15f9844",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:assert/strict",
+          "specifiers": [
+            "assert"
+          ]
+        },
+        {
+          "source": "./story-progress.js",
+          "specifiers": [
+            "getStoryState"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "src/styles.css": {
+      "filePath": "src/styles.css",
+      "contentHash": "80ea091c74c947c78247c4e1cf957407e5d81a265f5078582cb11030d81cd01f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 905,
+      "hasStructuralAnalysis": false
+    },
+    "src/team-navigation.js": {
+      "filePath": "src/team-navigation.js",
+      "contentHash": "f7252aa74ac01bce340f30a9006e7dbd8f52c44ba5a7fc8353326c25bad8973d",
+      "functions": [
+        {
+          "name": "adjacentTeamIndex",
+          "params": [
+            "index",
+            "direction",
+            "length"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "adjacentTeamIndex"
+      ],
+      "totalLines": 4,
+      "hasStructuralAnalysis": true
+    },
+    "src/team-navigation.test.js": {
+      "filePath": "src/team-navigation.test.js",
+      "contentHash": "ef1b1fae98eec819dfc6f41ce2023b401e20cfe9aa85a8eb83c0728d171f43be",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:assert/strict",
+          "specifiers": [
+            "assert"
+          ]
+        },
+        {
+          "source": "./team-navigation.js",
+          "specifiers": [
+            "adjacentTeamIndex"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

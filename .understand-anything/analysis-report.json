@@ -1,0 +1,72 @@
+{
+  "issues": [],
+  "warnings": [
+    "Node 'file:.understand-anything/.understandignore' has no edges (orphan)",
+    "Node 'file:assets/IMG_8751.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8752.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8758.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8765.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8812.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8915.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8970.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8973.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8974.HEIC' has no edges (orphan)"
+  ],
+  "stats": {
+    "totalNodes": 66,
+    "totalEdges": 112,
+    "totalLayers": 6,
+    "tourSteps": 6,
+    "nodeTypes": {
+      "file": 44,
+      "function": 19,
+      "document": 2,
+      "config": 1
+    },
+    "edgeTypes": {
+      "contains": 19,
+      "exports": 19,
+      "imports": 30,
+      "tested_by": 2,
+      "routes": 4,
+      "depends_on": 27,
+      "configures": 1,
+      "documents": 2,
+      "calls": 3,
+      "reads_from": 5
+    }
+  },
+  "inventory": {
+    "filesScanned": 47,
+    "byCategory": {
+      "code": 42,
+      "markup": 2,
+      "config": 1,
+      "docs": 2
+    },
+    "byLanguage": {
+      "unknown": 1,
+      "webp": 14,
+      "heic": 9,
+      "html": 1,
+      "json": 1,
+      "markdown": 2,
+      "javascript": 18,
+      "css": 1
+    }
+  },
+  "notes": [
+    "Subagent dispatch failed twice because inherited Codex_Fallback is unavailable; analysis and review performed locally.",
+    "Binary assets have inventory-level summaries, not visual content analysis.",
+    "Bundled scanner omits some image formats by default; its code counts include WebP and HEIC assets.",
+    "Graph includes current uncommitted source changes.",
+    "PAGE_CONTENT.md lists routes that are absent from App."
+  ],
+  "checks": [
+    "All inventory files represented",
+    "All resolved import edges represented",
+    "story-progress.test.js passed",
+    "team-navigation.test.js passed"
+  ],
+  "workingTree": " M src/pages/AboutPage.jsx\n M src/styles.css\n?? .understand-anything/\n?? src/team-navigation.js\n?? src/team-navigation.test.js\n"
+}

@@ -1,0 +1,306 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "assets/herosection/hero_section_dark.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 736,
+      "nonEmptyLines": 733,
+      "metrics": {}
+    },
+    {
+      "path": "assets/herosection/hero_section_light.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 1660,
+      "nonEmptyLines": 1657,
+      "metrics": {}
+    },
+    {
+      "path": "src/components/ProductCard.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "ProductCard",
+          "startLine": 9,
+          "endLine": 35,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProductCard",
+          "line": 9,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProductCard",
+          "callee": "marketplaces.map",
+          "lineNumber": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/components/ProductFilters.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 16,
+      "functions": [
+        {
+          "name": "GridIcon",
+          "startLine": 3,
+          "endLine": 5,
+          "params": []
+        },
+        {
+          "name": "ProductFilters",
+          "startLine": 9,
+          "endLine": 19,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProductFilters",
+          "line": 9,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProductFilters",
+          "callee": "categories.map",
+          "lineNumber": 12
+        },
+        {
+          "caller": "ProductFilters",
+          "callee": "onChange",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/components/media.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 58,
+      "nonEmptyLines": 54,
+      "functions": [
+        {
+          "name": "PhotoFrame",
+          "startLine": 1,
+          "endLine": 19,
+          "params": []
+        },
+        {
+          "name": "ProductMedia",
+          "startLine": 21,
+          "endLine": 28,
+          "params": []
+        },
+        {
+          "name": "StageIcon",
+          "startLine": 30,
+          "endLine": 58,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PhotoFrame",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "ProductMedia",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "StageIcon",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "handlePointerMove",
+          "callee": "event.currentTarget.getBoundingClientRect",
+          "lineNumber": 3
+        },
+        {
+          "caller": "handlePointerMove",
+          "callee": "event.currentTarget.style.setProperty",
+          "lineNumber": 4
+        },
+        {
+          "caller": "handlePointerMove",
+          "callee": "event.currentTarget.style.setProperty",
+          "lineNumber": 5
+        },
+        {
+          "caller": "resetPointer",
+          "callee": "event.currentTarget.style.setProperty",
+          "lineNumber": 9
+        },
+        {
+          "caller": "resetPointer",
+          "callee": "event.currentTarget.style.setProperty",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/data/content.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 39,
+      "exports": [
+        {
+          "name": "routes",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "products",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "productCategories",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "documentation",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "cycleStages",
+          "line": 38,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/pages/HomePage.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 73,
+      "nonEmptyLines": 70,
+      "functions": [
+        {
+          "name": "HomePage",
+          "startLine": 16,
+          "endLine": 73,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "HomePage",
+          "line": 16,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "HomePage",
+          "callee": "documentation.map",
+          "lineNumber": 53
+        },
+        {
+          "caller": "HomePage",
+          "callee": "featuredProducts.map",
+          "lineNumber": 64
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/pages/ProductsPage.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "ProductsPage",
+          "startLine": 8,
+          "endLine": 41,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProductsPage",
+          "line": 8,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "products.filter",
+          "lineNumber": 10
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "filteredProducts.map",
+          "lineNumber": 35
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

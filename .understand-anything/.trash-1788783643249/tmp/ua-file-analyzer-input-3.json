@@ -1,0 +1,34 @@
+{
+  "projectRoot": "C:/Users/Andi bayu hanggoro/Desktop/Internship/Web JagoFarm V2",
+  "batchFiles": [
+    {
+      "path": "src/components/EcosystemStory.jsx",
+      "language": "javascript",
+      "sizeLines": 114,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/story-progress.js",
+      "language": "javascript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/story-progress.test.js",
+      "language": "javascript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "src/components/EcosystemStory.jsx": [
+      "src/components/media.jsx",
+      "src/data/content.js",
+      "src/story-progress.js"
+    ],
+    "src/story-progress.js": [],
+    "src/story-progress.test.js": [
+      "src/story-progress.js"
+    ]
+  }
+}

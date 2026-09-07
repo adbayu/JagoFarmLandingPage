@@ -1,0 +1,64 @@
+{
+  "projectRoot": "C:/Users/Andi bayu hanggoro/Desktop/Internship/Web JagoFarm V2",
+  "batchFiles": [
+    {
+      "path": "src/App.jsx",
+      "language": "javascript",
+      "sizeLines": 86,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main.jsx",
+      "language": "javascript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/pages/AboutPage.jsx",
+      "language": "javascript",
+      "sizeLines": 297,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/pages/DocumentationPage.jsx",
+      "language": "javascript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/team-navigation.js",
+      "language": "javascript",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/team-navigation.test.js",
+      "language": "javascript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "src/App.jsx": [
+      "src/components/Layout.jsx",
+      "src/pages/AboutPage.jsx",
+      "src/pages/DocumentationPage.jsx",
+      "src/pages/HomePage.jsx",
+      "src/pages/ProductsPage.jsx",
+      "src/styles.css"
+    ],
+    "src/main.jsx": [
+      "src/App.jsx"
+    ],
+    "src/pages/AboutPage.jsx": [
+      "src/team-navigation.js"
+    ],
+    "src/pages/DocumentationPage.jsx": [
+      "src/data/content.js"
+    ],
+    "src/team-navigation.js": [],
+    "src/team-navigation.test.js": [
+      "src/team-navigation.js"
+    ]
+  }
+}

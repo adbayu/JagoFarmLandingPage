@@ -1,0 +1,322 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 27,
+      "metrics": {}
+    },
+    {
+      "path": "assets/IMG_8751.HEIC",
+      "language": "heic",
+      "fileCategory": "code",
+      "totalLines": 8513,
+      "nonEmptyLines": 8480,
+      "metrics": {}
+    },
+    {
+      "path": "assets/IMG_8752.HEIC",
+      "language": "heic",
+      "fileCategory": "code",
+      "totalLines": 9716,
+      "nonEmptyLines": 9673,
+      "metrics": {}
+    },
+    {
+      "path": "assets/IMG_8758.HEIC",
+      "language": "heic",
+      "fileCategory": "code",
+      "totalLines": 5974,
+      "nonEmptyLines": 5953,
+      "metrics": {}
+    },
+    {
+      "path": "assets/IMG_8765.HEIC",
+      "language": "heic",
+      "fileCategory": "code",
+      "totalLines": 9914,
+      "nonEmptyLines": 9877,
+      "metrics": {}
+    },
+    {
+      "path": "assets/IMG_8812.HEIC",
+      "language": "heic",
+      "fileCategory": "code",
+      "totalLines": 17381,
+      "nonEmptyLines": 17327,
+      "metrics": {}
+    },
+    {
+      "path": "assets/IMG_8915.HEIC",
+      "language": "heic",
+      "fileCategory": "code",
+      "totalLines": 6300,
+      "nonEmptyLines": 6281,
+      "metrics": {}
+    },
+    {
+      "path": "assets/IMG_8970.HEIC",
+      "language": "heic",
+      "fileCategory": "code",
+      "totalLines": 13521,
+      "nonEmptyLines": 13459,
+      "metrics": {}
+    },
+    {
+      "path": "assets/IMG_8973.HEIC",
+      "language": "heic",
+      "fileCategory": "code",
+      "totalLines": 11237,
+      "nonEmptyLines": 11199,
+      "metrics": {}
+    },
+    {
+      "path": "assets/IMG_8974.HEIC",
+      "language": "heic",
+      "fileCategory": "code",
+      "totalLines": 21074,
+      "nonEmptyLines": 20980,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/branch-left.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 126,
+      "nonEmptyLines": 126,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/branch-right.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 132,
+      "nonEmptyLines": 132,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/foreground.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 300,
+      "nonEmptyLines": 299,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-01.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 108,
+      "nonEmptyLines": 108,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-02.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 78,
+      "nonEmptyLines": 77,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-03.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 64,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-04.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 88,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-05.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 90,
+      "nonEmptyLines": 88,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-06.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 123,
+      "nonEmptyLines": 123,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-07.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 49,
+      "nonEmptyLines": 49,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/ecosystem-botanical/leaf-08.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 105,
+      "nonEmptyLines": 105,
+      "metrics": {}
+    },
+    {
+      "path": "public/assets/team/team.webp",
+      "language": "webp",
+      "fileCategory": "code",
+      "totalLines": 1684,
+      "nonEmptyLines": 1673,
+      "metrics": {}
+    },
+    {
+      "path": "src/components/Layout.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 143,
+      "nonEmptyLines": 141,
+      "functions": [
+        {
+          "name": "Header",
+          "startLine": 4,
+          "endLine": 63,
+          "params": []
+        },
+        {
+          "name": "Footer",
+          "startLine": 65,
+          "endLine": 143,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Header",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "Footer",
+          "line": 65,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Header",
+          "callee": "routes.map",
+          "lineNumber": 13
+        },
+        {
+          "caller": "Header",
+          "callee": "routes.map",
+          "lineNumber": 26
+        },
+        {
+          "caller": "Footer",
+          "callee": "new Date().getFullYear",
+          "lineNumber": 66
+        },
+        {
+          "caller": "Footer",
+          "callee": "routes.map",
+          "lineNumber": 91
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/components/navigation.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "Link",
+          "startLine": 1,
+          "endLine": 3,
+          "params": []
+        },
+        {
+          "name": "Arrow",
+          "startLine": 5,
+          "endLine": 7,
+          "params": []
+        },
+        {
+          "name": "ButtonLink",
+          "startLine": 9,
+          "endLine": 11,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Link",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "Arrow",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "ButtonLink",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/components/PageIntro.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "PageIntro",
+          "startLine": 1,
+          "endLine": 10,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PageIntro",
+          "line": 1,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

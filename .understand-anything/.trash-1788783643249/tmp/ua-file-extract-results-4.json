@@ -1,0 +1,281 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "PAGE_CONTENT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 268,
+      "nonEmptyLines": 182,
+      "sections": [
+        {
+          "heading": "Inventaris Isi Website JagoFarm",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Elemen Global",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1. Beranda",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "Hero",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "Penjelasan Startup",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "Alur Ekosistem",
+          "level": 3,
+          "line": 36
+        },
+        {
+          "heading": "Dokumentasi Pilihan",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "Calon Produk",
+          "level": 3,
+          "line": 61
+        },
+        {
+          "heading": "CTA",
+          "level": 3,
+          "line": 70
+        },
+        {
+          "heading": "2. Tentang",
+          "level": 2,
+          "line": 76
+        },
+        {
+          "heading": "Intro",
+          "level": 3,
+          "line": 80
+        },
+        {
+          "heading": "Latar Belakang",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "Visi, Misi, dan Tujuan",
+          "level": 3,
+          "line": 92
+        },
+        {
+          "heading": "Tim dan Kegiatan",
+          "level": 3,
+          "line": 98
+        },
+        {
+          "heading": "3. Ekosistem",
+          "level": 2,
+          "line": 104
+        },
+        {
+          "heading": "Intro",
+          "level": 3,
+          "line": 108
+        },
+        {
+          "heading": "Diagram Ekosistem",
+          "level": 3,
+          "line": 113
+        },
+        {
+          "heading": "Tahapan",
+          "level": 3,
+          "line": 119
+        },
+        {
+          "heading": "Ringkasan Sistem",
+          "level": 3,
+          "line": 126
+        },
+        {
+          "heading": "4. Produk",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "Intro",
+          "level": 3,
+          "line": 136
+        },
+        {
+          "heading": "Daftar Produk",
+          "level": 3,
+          "line": 141
+        },
+        {
+          "heading": "Status Informasi",
+          "level": 3,
+          "line": 156
+        },
+        {
+          "heading": "5. Roadmap",
+          "level": 2,
+          "line": 163
+        },
+        {
+          "heading": "Intro",
+          "level": 3,
+          "line": 167
+        },
+        {
+          "heading": "Tahapan Roadmap",
+          "level": 3,
+          "line": 172
+        },
+        {
+          "heading": "Catatan Roadmap",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "6. Dokumentasi",
+          "level": 2,
+          "line": 189
+        },
+        {
+          "heading": "Intro",
+          "level": 3,
+          "line": 193
+        },
+        {
+          "heading": "Galeri",
+          "level": 3,
+          "line": 198
+        },
+        {
+          "heading": "Interaksi",
+          "level": 3,
+          "line": 214
+        },
+        {
+          "heading": "7. Kontak",
+          "level": 2,
+          "line": 219
+        },
+        {
+          "heading": "Intro",
+          "level": 3,
+          "line": 223
+        },
+        {
+          "heading": "Topik Diskusi",
+          "level": 3,
+          "line": 228
+        },
+        {
+          "heading": "Formulir",
+          "level": 3,
+          "line": 234
+        },
+        {
+          "heading": "Status Submit",
+          "level": 3,
+          "line": 255
+        },
+        {
+          "heading": "Data yang Belum Tersedia",
+          "level": 2,
+          "line": 261
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 37
+      }
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 3,
+      "nonEmptyLines": 3,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "index.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 18,
+      "nonEmptyLines": 18,
+      "metrics": {}
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 20,
+      "nonEmptyLines": 20,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 12
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 17
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    }
+  ]
+}

@@ -1,0 +1,477 @@
+{
+  "nodes": [
+    {
+      "id": "file:assets/herosection/hero_section_dark.webp",
+      "type": "file",
+      "name": "hero_section_dark.webp",
+      "filePath": "assets/herosection/hero_section_dark.webp",
+      "summary": "Theme-specific WebP hero image imported by home and product pages.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:assets/herosection/hero_section_light.webp",
+      "type": "file",
+      "name": "hero_section_light.webp",
+      "filePath": "assets/herosection/hero_section_light.webp",
+      "summary": "Theme-specific WebP hero image imported by home and product pages.",
+      "tags": [
+        "asset",
+        "webp",
+        "media"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ProductCard.jsx",
+      "type": "file",
+      "name": "ProductCard.jsx",
+      "filePath": "src/components/ProductCard.jsx",
+      "lineRange": [
+        1,
+        35
+      ],
+      "summary": "Displays product image, category and exploration status with disabled marketplace placeholders rather than purchasing links.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ProductCard.jsx:ProductCard",
+      "type": "function",
+      "name": "ProductCard",
+      "filePath": "src/components/ProductCard.jsx",
+      "lineRange": [
+        9,
+        35
+      ],
+      "summary": "Displays product image, category and exploration status with disabled marketplace placeholders rather than purchasing links.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ProductFilters.jsx",
+      "type": "file",
+      "name": "ProductFilters.jsx",
+      "filePath": "src/components/ProductFilters.jsx",
+      "lineRange": [
+        1,
+        19
+      ],
+      "summary": "Renders accessible category toggle buttons with pressed state and category icons.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ProductFilters.jsx:ProductFilters",
+      "type": "function",
+      "name": "ProductFilters",
+      "filePath": "src/components/ProductFilters.jsx",
+      "lineRange": [
+        9,
+        19
+      ],
+      "summary": "Renders accessible category toggle buttons with pressed state and category icons.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/media.jsx",
+      "type": "file",
+      "name": "media.jsx",
+      "filePath": "src/components/media.jsx",
+      "lineRange": [
+        1,
+        58
+      ],
+      "summary": "Provides pointer-responsive photo framing, labeled product media and inline SVG ecosystem icons.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/components/media.jsx:PhotoFrame",
+      "type": "function",
+      "name": "PhotoFrame",
+      "filePath": "src/components/media.jsx",
+      "lineRange": [
+        1,
+        19
+      ],
+      "summary": "Renders a lazy or eager photo and maps pointer position into CSS custom properties.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/media.jsx:ProductMedia",
+      "type": "function",
+      "name": "ProductMedia",
+      "filePath": "src/components/media.jsx",
+      "lineRange": [
+        21,
+        28
+      ],
+      "summary": "Renders a lazy-loaded product image with descriptive alternative text and label.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/media.jsx:StageIcon",
+      "type": "function",
+      "name": "StageIcon",
+      "filePath": "src/components/media.jsx",
+      "lineRange": [
+        30,
+        58
+      ],
+      "summary": "Selects inline decorative SVG artwork for ecosystem stage types.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/data/content.js",
+      "type": "file",
+      "name": "content.js",
+      "filePath": "src/data/content.js",
+      "lineRange": [
+        1,
+        44
+      ],
+      "summary": "Exports static route labels, product catalog and categories, documentation tuples, and five circular-farming stages.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/pages/HomePage.jsx",
+      "type": "file",
+      "name": "HomePage.jsx",
+      "filePath": "src/pages/HomePage.jsx",
+      "lineRange": [
+        1,
+        73
+      ],
+      "summary": "Composes themed hero images, farm overview, ecosystem storytelling, selected documentation, featured products and navigation calls to action.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "page"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/pages/HomePage.jsx:HomePage",
+      "type": "function",
+      "name": "HomePage",
+      "filePath": "src/pages/HomePage.jsx",
+      "lineRange": [
+        16,
+        73
+      ],
+      "summary": "Composes themed hero images, farm overview, ecosystem storytelling, selected documentation, featured products and navigation calls to action.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/pages/ProductsPage.jsx",
+      "type": "file",
+      "name": "ProductsPage.jsx",
+      "filePath": "src/pages/ProductsPage.jsx",
+      "lineRange": [
+        1,
+        41
+      ],
+      "summary": "Filters the static research-stage product catalog by category and renders themed hero, controls and product cards.",
+      "tags": [
+        "frontend",
+        "javascript",
+        "page"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/pages/ProductsPage.jsx:ProductsPage",
+      "type": "function",
+      "name": "ProductsPage",
+      "filePath": "src/pages/ProductsPage.jsx",
+      "lineRange": [
+        8,
+        41
+      ],
+      "summary": "Filters the static research-stage product catalog by category and renders themed hero, controls and product cards.",
+      "tags": [
+        "javascript",
+        "function",
+        "react-component"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/components/ProductCard.jsx",
+      "target": "function:src/components/ProductCard.jsx:ProductCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares ProductCard"
+    },
+    {
+      "source": "file:src/components/ProductCard.jsx",
+      "target": "function:src/components/ProductCard.jsx:ProductCard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports ProductCard"
+    },
+    {
+      "source": "file:src/components/ProductCard.jsx",
+      "target": "file:src/components/media.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/ProductFilters.jsx",
+      "target": "function:src/components/ProductFilters.jsx:ProductFilters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares ProductFilters"
+    },
+    {
+      "source": "file:src/components/ProductFilters.jsx",
+      "target": "function:src/components/ProductFilters.jsx:ProductFilters",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports ProductFilters"
+    },
+    {
+      "source": "file:src/components/ProductFilters.jsx",
+      "target": "file:src/components/media.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:PhotoFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares PhotoFrame"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:PhotoFrame",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports PhotoFrame"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:ProductMedia",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares ProductMedia"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:ProductMedia",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports ProductMedia"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:StageIcon",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares StageIcon"
+    },
+    {
+      "source": "file:src/components/media.jsx",
+      "target": "function:src/components/media.jsx:StageIcon",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports StageIcon"
+    },
+    {
+      "source": "file:src/data/content.js",
+      "target": "file:assets/herosection/hero_section_light.webp",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "function:src/pages/HomePage.jsx:HomePage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares HomePage"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "function:src/pages/HomePage.jsx:HomePage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports HomePage"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:assets/herosection/hero_section_dark.webp",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:assets/herosection/hero_section_light.webp",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:src/components/EcosystemStory.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:src/components/media.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:src/components/navigation.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/HomePage.jsx",
+      "target": "file:src/data/content.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "function:src/pages/ProductsPage.jsx:ProductsPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1,
+      "description": "Declares ProductsPage"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "function:src/pages/ProductsPage.jsx:ProductsPage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Exports ProductsPage"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:assets/herosection/hero_section_dark.webp",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:assets/herosection/hero_section_light.webp",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:src/components/ProductCard.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:src/components/ProductFilters.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    },
+    {
+      "source": "file:src/pages/ProductsPage.jsx",
+      "target": "file:src/data/content.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Resolved project-internal import"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+[
+  {
+    "order": 1,
+    "title": "Start at the browser entry",
+    "description": "index.html restores the saved theme before src/main.jsx mounts App. App owns four hash routes; unknown hashes resolve to home.",
+    "nodeIds": [
+      "file:index.html",
+      "file:src/main.jsx",
+      "file:src/App.jsx"
+    ]
+  },
+  {
+    "order": 2,
+    "title": "Follow shared navigation and theme",
+    "description": "Header and Footer consume static route labels. Hash anchors avoid a routing dependency; native details provides the mobile menu.",
+    "nodeIds": [
+      "file:src/components/Layout.jsx",
+      "file:src/components/navigation.jsx",
+      "file:src/styles.css"
+    ]
+  },
+  {
+    "order": 3,
+    "title": "Trace static content into pages",
+    "description": "content.js provides catalog objects, documentation tuples and ecosystem stages. Home selects featured material; products filter by category. No backend or checkout flow is implemented here.",
+    "nodeIds": [
+      "file:src/data/content.js",
+      "file:src/pages/HomePage.jsx",
+      "file:src/pages/ProductsPage.jsx",
+      "file:src/components/ProductCard.jsx"
+    ]
+  },
+  {
+    "order": 4,
+    "title": "Understand scroll-driven storytelling",
+    "description": "EcosystemStory schedules scroll updates with requestAnimationFrame; getStoryState clamps progress and chooses a stage. Mobile cards use IntersectionObserver.",
+    "nodeIds": [
+      "file:src/components/EcosystemStory.jsx",
+      "file:src/story-progress.js",
+      "file:src/story-progress.test.js"
+    ]
+  },
+  {
+    "order": 5,
+    "title": "Inspect native dialogs and team navigation",
+    "description": "Documentation uses a native image dialog. AboutPage adds team hotspots, profile navigation, close animation and focus restoration; descriptions are placeholders.",
+    "nodeIds": [
+      "file:src/pages/DocumentationPage.jsx",
+      "file:src/pages/AboutPage.jsx",
+      "file:src/team-navigation.js",
+      "file:src/team-navigation.test.js"
+    ]
+  },
+  {
+    "order": 6,
+    "title": "Separate intended content from shipped routes",
+    "description": "package.json contains Vite commands and a story assertion script. PAGE_CONTENT.md lists more sections than App currently routes; README contains only the project title.",
+    "nodeIds": [
+      "config:package.json",
+      "document:PAGE_CONTENT.md",
+      "document:README.md"
+    ]
+  }
+]

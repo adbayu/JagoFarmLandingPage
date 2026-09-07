@@ -1,0 +1,39 @@
+{
+  "issues": [],
+  "warnings": [
+    "Node 'file:.understand-anything/.understandignore' has no edges (orphan)",
+    "Node 'file:assets/IMG_8751.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8752.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8758.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8765.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8812.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8915.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8970.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8973.HEIC' has no edges (orphan)",
+    "Node 'file:assets/IMG_8974.HEIC' has no edges (orphan)"
+  ],
+  "stats": {
+    "totalNodes": 66,
+    "totalEdges": 112,
+    "totalLayers": 6,
+    "tourSteps": 6,
+    "nodeTypes": {
+      "file": 44,
+      "function": 19,
+      "document": 2,
+      "config": 1
+    },
+    "edgeTypes": {
+      "contains": 19,
+      "exports": 19,
+      "imports": 30,
+      "tested_by": 2,
+      "routes": 4,
+      "depends_on": 27,
+      "configures": 1,
+      "documents": 2,
+      "calls": 3,
+      "reads_from": 5
+    }
+  }
+}

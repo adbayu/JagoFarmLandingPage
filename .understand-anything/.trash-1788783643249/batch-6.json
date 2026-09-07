@@ -1,0 +1,22 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/styles.css",
+      "type": "file",
+      "name": "styles.css",
+      "filePath": "src/styles.css",
+      "lineRange": [
+        1,
+        904
+      ],
+      "summary": "Central responsive stylesheet defining cream/green themes, hero transitions, catalog, ecosystem motion, gallery and team dialogs.",
+      "tags": [
+        "styles",
+        "responsive",
+        "theme"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

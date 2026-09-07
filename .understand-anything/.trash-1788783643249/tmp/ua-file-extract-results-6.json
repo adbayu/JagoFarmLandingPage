@@ -1,0 +1,15 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 1,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/styles.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 904,
+      "nonEmptyLines": 886,
+      "metrics": {}
+    }
+  ]
+}
