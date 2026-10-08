@@ -1,72 +1,89 @@
 import heroDark from "../../assets/herosection/hero_section_dark.webp";
 import heroLight from "../../assets/herosection/hero_section_light.webp";
 import EcosystemStory from "../components/EcosystemStory.jsx";
-import { StageIcon } from "../components/media.jsx";
-import { Arrow, ButtonLink, Link } from "../components/navigation.jsx";
-import { products } from "../data/content.js";
+import { ButtonLink } from "../components/navigation.jsx";
 
-const documentation = [
-  { src: "/assets/startup/startup-04.jpg", alt: "Tim JagoFarm mengamati kolam", label: "Kegiatan lapangan" },
-  { src: "/assets/startup/startup-08.jpg", alt: "Pengukuran kondisi media tanam", label: "Pengukuran media" },
-  { src: "/assets/startup/startup-10.jpg", alt: "Tanaman yang diamati JagoFarm", label: "Pertumbuhan tanaman" },
+const fieldNotes = [
+  { src: "/assets/startup/startup-04.jpg", alt: "Tim JagoFarm mengamati kolam ikan", title: "Pengamatan lapangan" },
+  { src: "/assets/startup/startup-08.jpg", alt: "Pencatatan kondisi media tanam menggunakan sensor", title: "Pengukuran media" },
+  { src: "/assets/startup/startup-10.jpg", alt: "Tanaman yang diamati di area JagoFarm", title: "Pertumbuhan tanaman" },
 ];
 
-const featuredProducts = products.slice(0, 3);
+const decisionSteps = [
+  { number: "01", label: "Ukur", title: "Sensor mengumpulkan kondisi air.", description: "Perangkat berbasis ESP32 membaca pH, TDS, dan suhu air.", status: "Sensor dibangun" },
+  { number: "02", label: "Pantau", title: "Dashboard menyajikan data.", description: "Parameter budidaya dapat dipantau dalam satu tempat.", status: "Dashboard dibangun" },
+  { number: "03", label: "Pahami", title: "Data diarahkan menjadi langkah.", description: "Lapisan Claude sedang dikembangkan untuk membantu menjelaskan tren dan hal yang perlu diperhatikan.", status: "Dalam pengembangan" },
+];
 
 export default function HomePage() {
   return (
     <>
-      <section className="hero section">
+      <section className="hero section decision-hero">
         <div className="hero-media" aria-hidden="true">
           <img className="hero-image hero-image-light" src={heroLight} alt="" loading="eager" fetchPriority="high" />
           <img className="hero-image hero-image-dark" src={heroDark} alt="" loading="eager" />
         </div>
         <div className="hero-shade" />
-        <div className="container hero-content"><div className="hero-copy"><h1 className="hero-title">Smart Farming,<br />Circular Future</h1><p className="hero-description">Riset dan inovasi untuk ekosistem budidaya yang berkelanjutan.</p></div></div>
-      </section>
-      <section className="section ecosystem-overview">
-        <div className="container ecosystem-overview-grid">
-          <div className="ecosystem-overview-heading">
-            <span className="number">Tentang gagasan</span>
-            <h2>Satu ekosistem, lebih banyak nilai dari sumber daya yang sama.</h2>
-            <div className="ecosystem-overview-note"><span><StageIcon type="leaf" /></span><p>Menghubungkan air, nutrisi, dan tanah dalam satu siklus yang saling menguatkan.</p></div>
+        <div className="container hero-content">
+          <div className="hero-copy">
+            <span className="decision-hero-kicker">Platform keputusan budidaya</span>
+            <h1 className="hero-title">Data air.<br /><span>Langkah jelas.</span></h1>
+            <p className="hero-description">JagoFarm mengembangkan platform yang menghubungkan data pH, TDS, dan suhu air dengan langkah budidaya yang lebih mudah dipahami.</p>
+            <div className="buttons">
+              <ButtonLink to="/produk">Kenali platform</ButtonLink>
+              <ButtonLink secondary to="/dokumentasi">Lihat dokumentasi</ButtonLink>
+            </div>
           </div>
-          <div className="ecosystem-overview-copy">
-            <p className="lead">JagoFarm merancang hubungan antara budidaya ikan, pengolahan nutrisi, azolla, dan tanaman dalam satu putaran yang saling mendukung.</p>
-            <p>Tujuannya sederhana: mengurangi sumber daya yang terbuang dan membuka lebih banyak hasil bernilai dari satu lahan.</p>
-            <Link className="text-link" to="/tentang">Pelajari JagoFarm <Arrow /></Link>
-          </div>
-          <figure className="ecosystem-overview-photo">
-            <img src="/assets/startup/startup-01.jpg" alt="Azolla pada kolam JagoFarm" loading="lazy" decoding="async" />
-            <figcaption><span><StageIcon type="leaf" /></span><div><strong>Riset dan inovasi berkelanjutan</strong><small>Setiap temuan dipelajari untuk membuka nilai baru.</small></div></figcaption>
-          </figure>
         </div>
       </section>
+
+      <section className="section decision-intro">
+        <div className="container decision-intro-copy">
+          <h2>Data saja belum memberi tahu petani apa yang perlu dilakukan.</h2>
+          <p className="lead">Di banyak usaha budidaya kecil, perubahan kondisi baru terlihat setelah ikan atau tanaman mulai terdampak.</p>
+          <p>Sensor dapat membantu mengukur kondisi air, tetapi angka tanpa konteks sulit menjawab tindakan apa yang perlu diprioritaskan. JagoFarm sedang membangun jembatan dari pemantauan menuju keputusan.</p>
+        </div>
+      </section>
+
+      <section className="section decision-flow">
+        <div className="container">
+          <header className="decision-section-heading">
+            <h2>Satu alur, dengan tahap produk yang jelas.</h2>
+            <p>Sensor dan dashboard telah dibangun. Lapisan pengambilan keputusan berbasis Claude masih dalam pengembangan.</p>
+          </header>
+          <div className="decision-flow-grid">
+            {decisionSteps.map((step, index) => (
+              <article className={"decision-flow-card" + (index === 2 ? " is-in-development" : "")} key={step.number}>
+                <div className="decision-flow-card-top"><span>{step.number}</span><small>{step.status}</small></div>
+                <div className="decision-flow-card-content">
+                  <span className="meta">{step.label}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="decision-flow-note">Rekomendasi tindakan, peringatan awal, ringkasan berkala, dan tanya jawab tentang data farm adalah arah pengembangan lapisan Claude.</p>
+        </div>
+      </section>
+
       <EcosystemStory />
-      <section className="section editorial-feature home-documentation">
-        <div className="container editorial-feature-shell">
-          <header className="editorial-feature-heading">
-            <div><span className="number">Dokumentasi nyata</span><h2>Proses yang bisa dilihat, bukan sekadar diceritakan.</h2></div>
-            <div><p>Ikuti kegiatan lapangan JagoFarm dari pengamatan, pengukuran, hingga pertumbuhan.</p><ButtonLink secondary to="/dokumentasi">Lihat Dokumentasi</ButtonLink></div>
+
+      <section className="section field-notes">
+        <div className="container">
+          <header className="decision-section-heading">
+            <h2>Budidaya tetap menjadi konteks utama.</h2>
+            <p>Platform dikembangkan dengan memahami kondisi budidaya dan pekerjaan yang berlangsung di lapangan.</p>
           </header>
-          <div className="editorial-gallery" role="list" aria-label="Dokumentasi pilihan JagoFarm">
-            {documentation.map((item, index) => <figure className={`editorial-card editorial-card-${index + 1}`} role="listitem" key={item.src}><img src={item.src} alt={item.alt} loading="lazy" decoding="async" /><figcaption><span>0{index + 1}</span><div><strong>{item.label}</strong><small>Dokumentasi JagoFarm</small></div></figcaption></figure>)}
+          <div className="field-note-grid">
+            {fieldNotes.map((item) => (
+              <figure className="field-note-card" key={item.src}>
+                <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+                <figcaption><strong>{item.title}</strong></figcaption>
+              </figure>
+            ))}
           </div>
         </div>
-      </section>
-      <section className="section editorial-feature home-products">
-        <div className="container editorial-feature-shell">
-          <header className="editorial-feature-heading editorial-feature-heading-mirrored">
-            <div><span className="number">Calon produk</span><h2>Hasil dari setiap sisi ekosistem.</h2></div>
-            <div><p>Temukan hasil dari hubungan budidaya ikan, nutrisi, azolla, dan tanaman.</p><ButtonLink secondary to="/produk">Lihat Produk</ButtonLink></div>
-          </header>
-          <div className="editorial-gallery editorial-gallery-mirrored" role="list" aria-label="Produk pilihan JagoFarm">
-            {featuredProducts.map((product, index) => <figure className={`editorial-card editorial-card-${index + 1}`} role="listitem" key={product.id}><img src={product.image} alt={product.name} loading="lazy" decoding="async" /><figcaption><span>0{index + 1}</span><div><strong>{product.name}</strong><small>{product.categoryLabel}</small></div></figcaption></figure>)}
-          </div>
-        </div>
-      </section>
-      <section className="section home-cta">
-        <div className="container home-cta-inner"><div><span className="number">Ikuti perkembangannya</span><h2>Lihat prosesnya. Tanyakan potensinya.</h2></div><div className="buttons"><ButtonLink to="/dokumentasi">Lihat Dokumentasi</ButtonLink><ButtonLink secondary to="/tentang">Tentang JagoFarm</ButtonLink></div></div>
       </section>
     </>
   );
