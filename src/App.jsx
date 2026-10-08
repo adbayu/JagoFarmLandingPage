@@ -7,8 +7,9 @@ import AboutPage from "./pages/AboutPage.jsx";
 import DocumentationPage from "./pages/DocumentationPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
+import ProjectsPage from "./pages/ProjectsPage.jsx";
 
-const pages = { "/": HomePage, "/tentang": AboutPage, "/produk": ProductsPage, "/dokumentasi": DocumentationPage };
+const pages = { "/": HomePage, "/tentang": AboutPage, "/produk": ProductsPage, "/proyek": ProjectsPage, "/dokumentasi": DocumentationPage };
 
 function routeFromHash() {
   const path = window.location.hash.slice(1) || "/";
@@ -16,7 +17,7 @@ function routeFromHash() {
 }
 
 function routeUsesOverlayHeader(path) {
-  return path === "/" || path === "/produk" || path === "/tentang" || path === "/dokumentasi";
+  return path === "/" || path === "/produk" || path === "/proyek" || path === "/tentang" || path === "/dokumentasi";
 }
 
 export default function App() {
@@ -62,7 +63,7 @@ export default function App() {
   useEffect(() => { const update = () => setCurrentPath(routeFromHash()); window.addEventListener("hashchange", update); return () => window.removeEventListener("hashchange", update); }, []);
 
   useEffect(() => {
-    const hero = document.querySelector(".hero, .product-hero, .team-hero, .documentation-hero");
+    const hero = document.querySelector(".hero, .product-hero, .team-hero, .documentation-hero, .projects-hero");
     if (!hero) { setHeaderSolid(true); return; }
     const observer = new IntersectionObserver(([entry]) => setHeaderSolid(entry.intersectionRatio < 0.08), { threshold: [0, 0.08] });
     observer.observe(hero);
@@ -74,7 +75,7 @@ export default function App() {
     window.scrollTo(0, 0);
     document.querySelector(".mobile-menu")?.removeAttribute("open");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const elements = [...document.querySelectorAll("main .section:not(.hero):not(.product-hero):not(.page-intro):not(.ecosystem-story), main .value-rail")];
+    const elements = [...document.querySelectorAll("main .section:not(.hero):not(.product-hero):not(.projects-hero):not(.page-intro):not(.ecosystem-story), main .value-rail")];
     elements.forEach((element) => element.classList.add("reveal-ready"));
     if (reducedMotion) { elements.forEach((element) => element.classList.add("is-visible")); return; }
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); } }), { threshold: 0.08, rootMargin: "0px 0px -8%" });
