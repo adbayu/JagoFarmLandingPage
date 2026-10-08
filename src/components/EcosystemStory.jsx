@@ -67,7 +67,7 @@ export default function EcosystemStory() {
       <div className="container ecosystem-journey-layout">
         <div className="ecosystem-journey-intro">
           <span className="number">Eksplorasi agrikultur & pangan</span>
-          <h2 id="ecosystem-journey-title">Memahami pertanian dan pangan melalui sistem informasi.</h2>
+          <h2 id="ecosystem-journey-title">JagoFarm mengeksplorasi pertanian dan pangan lewat sistem informasi.</h2>
           <p>JagoFarm mengeksplorasi bagaimana sistem informasi dapat membantu kita membaca hubungan dalam budidaya dan pertanian. Perjalanan ini dimulai dari data kondisi air dan berkembang menuju pemahaman yang lebih luas tentang pangan.</p>
 
           <div className="ecosystem-journey-map" aria-hidden="true">
