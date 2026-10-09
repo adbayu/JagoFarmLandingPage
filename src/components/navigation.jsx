@@ -1,5 +1,5 @@
-export function Link({ to, children, className = "" }) {
-  return <a className={className} href={`#${to}`}>{children}</a>;
+export function Link({ to, children, className = "", ...props }) {
+  return <a {...props} className={className} href={`#${to}`}>{children}</a>;
 }
 
 export function Arrow() {

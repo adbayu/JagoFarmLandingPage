@@ -102,10 +102,6 @@ export default function AboutPage() {
   function closeProfile() {
     const dialog = dialogRef.current;
     if (!dialog?.open || closing) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      dialog.close();
-      return;
-    }
     setClosing(true);
     closeTimer.current = window.setTimeout(() => dialog.close(), 300);
   }

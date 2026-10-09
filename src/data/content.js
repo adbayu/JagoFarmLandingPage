@@ -2,6 +2,7 @@ import heroLight from "../../assets/herosection/hero_section_light.webp";
 
 export const routes = [
   ["/produk", "Produk"],
+  ["/proyek", "Proyek"],
   ["/dokumentasi", "Dokumentasi"],
   ["/tentang", "Tentang"],
 ];

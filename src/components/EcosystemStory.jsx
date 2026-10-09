@@ -23,7 +23,6 @@ export default function EcosystemStory() {
     if (!section) return;
 
     const desktop = window.matchMedia("(min-width: 1100px)");
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const leafElements = [...section.querySelectorAll(".ecosystem-falling-leaf")];
     let frame = 0;
 
@@ -47,12 +46,6 @@ export default function EcosystemStory() {
     };
 
     const scheduleUpdate = () => { if (!frame) frame = requestAnimationFrame(update); };
-    if (reducedMotion.matches) {
-      setActiveStage(cycleStages.length - 1);
-      section.style.setProperty("--cycle-progress", "360deg");
-      return;
-    }
-
     update();
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", scheduleUpdate);

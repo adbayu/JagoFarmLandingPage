@@ -12,7 +12,7 @@ export function Header({ currentPath, theme, solid, onToggleTheme }) {
         <nav className="desktop-nav" aria-label="Navigasi utama">
           {routes.map(([path, label]) => (
             <Link
-              className={currentPath === path ? "active" : ""}
+              className={currentPath === path || (path === "/proyek" && currentPath.startsWith("/proyek/")) ? "active" : ""}
               key={path}
               to={path}
             >
@@ -25,7 +25,7 @@ export function Header({ currentPath, theme, solid, onToggleTheme }) {
           <nav aria-label="Navigasi seluler">
             {routes.map(([path, label]) => (
               <Link
-                className={currentPath === path ? "active" : ""}
+                className={currentPath === path || (path === "/proyek" && currentPath.startsWith("/proyek/")) ? "active" : ""}
                 key={path}
                 to={path}
               >
