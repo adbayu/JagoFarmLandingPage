@@ -2,103 +2,129 @@ import { useEffect, useRef, useState } from "react";
 import { cycleStages } from "../data/content.js";
 import { getStoryState } from "../story-progress.js";
 import { StageIcon } from "./media.jsx";
+import { ecosystemNodes } from "./ecosystem-flow.js";
+import "./EcosystemStory.css";
 
-const leaves = [
-  ["leaf-01.webp", "7%", 0, 112, 300, .84],
-  ["leaf-02.webp", "20%", .03, -128, -350, .74],
-  ["leaf-03.webp", "36%", .08, 142, 430, .68],
-  ["leaf-04.webp", "51%", .12, -104, 340, .78],
-  ["leaf-05.webp", "65%", .05, 118, -410, .7],
-  ["leaf-06.webp", "78%", .15, -148, 470, .76],
-  ["leaf-07.webp", "89%", .1, 96, -330, .66],
-  ["leaf-08.webp", "95%", .18, -88, 380, .62],
-];
+function FlowFallback() {
+  return <div className="eco-flow-fallback" aria-label="Alur: 01 ke 02 dan 03; 02 dan 03 ke 04; 04 ke 05; 05 kembali ke 01">
+    <span>01 Â· Budidaya ikan</span>
+    <div className="eco-flow-branches"><span>â†“<br />02 Â· Sisa budidaya</span><span>â†“<br />03 Â· Azolla dan pupuk</span></div>
+    <span>â†˜ &nbsp; â†™<br />04 Â· Hasil tanaman</span><span>â†“<br />05 Â· Ekosistem sirkular</span>
+    <small>â†© Kembali ke budidaya ikan</small>
+  </div>;
+}
 
 export default function EcosystemStory() {
   const sectionRef = useRef(null);
+  const viewportRef = useRef(null);
+  const canvasRef = useRef(null);
+  const pinsRef = useRef([]);
+  const sceneRef = useRef(null);
+  const activeStageRef = useRef(0);
   const [activeStage, setActiveStage] = useState(0);
+  const [sceneState, setSceneState] = useState("loading");
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    activeStageRef.current = activeStage;
+    sceneRef.current?.setStage(activeStage);
+  }, [activeStage]);
 
-    const desktop = window.matchMedia("(min-width: 1100px)");
-    const leafElements = [...section.querySelectorAll(".ecosystem-falling-leaf")];
+  useEffect(() => {
+    let disposed = false;
+    let starting = false;
+    const observer = new IntersectionObserver(async ([entry]) => {
+      if (!entry.isIntersecting || starting) return;
+      starting = true;
+      observer.disconnect();
+      try {
+        const { createEcosystemScene } = await import("./ecosystem-scene.js");
+        if (disposed) return;
+        sceneRef.current = createEcosystemScene({
+          canvas: canvasRef.current, viewport: viewportRef.current, pins: pinsRef.current,
+          onError: () => setSceneState("fallback"),
+        });
+        sceneRef.current.setStage(activeStageRef.current);
+        setSceneState("ready");
+      } catch {
+        if (!disposed) setSceneState("fallback");
+      }
+    }, { rootMargin: "450px" });
+    observer.observe(viewportRef.current);
+    return () => {
+      disposed = true;
+      observer.disconnect();
+      sceneRef.current?.dispose();
+      sceneRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
     let frame = 0;
-
+    let previousScrollStage = -1;
     const update = () => {
       frame = 0;
-      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-      const { progress, stage } = getStoryState(window.scrollY, sectionTop, section.offsetHeight, window.innerHeight, cycleStages.length);
-      section.style.setProperty("--cycle-progress", `${progress * 360}deg`);
-
-      if (desktop.matches) setActiveStage((current) => current === stage ? current : stage);
-
-      const travel = window.innerHeight * (desktop.matches ? 1.5 : 1.25);
-      leafElements.forEach((leaf, index) => {
-        const [, , delay, drift, spin, scale] = leaves[index];
-        const local = Math.min(1, Math.max(0, (progress - delay) / Math.max(.01, 1 - delay)));
-        const x = Math.sin(local * Math.PI * 2 + index) * drift * local;
-        const opacity = local < .04 ? local / .04 : local > .9 ? (1 - local) / .1 : 1;
-        leaf.style.opacity = `${Math.max(0, opacity)}`;
-        leaf.style.transform = `translate3d(${x}px, ${local * travel}px, 0) rotate(${local * spin}deg) scale(${scale})`;
-      });
+      if (!window.matchMedia("(min-width: 1100px)").matches) return;
+      const section = sectionRef.current;
+      const top = section.getBoundingClientRect().top + window.scrollY;
+      const { stage } = getStoryState(window.scrollY, top, section.offsetHeight, window.innerHeight, cycleStages.length);
+      if (stage !== previousScrollStage) {
+        previousScrollStage = stage;
+        setActiveStage(stage);
+      }
     };
-
-    const scheduleUpdate = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     update();
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
     return () => {
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      cancelAnimationFrame(frame);
     };
   }, []);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const desktop = window.matchMedia("(min-width: 1100px)");
-    if (!section || desktop.matches) return;
-    const cards = [...section.querySelectorAll(".ecosystem-card")];
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (entry.isIntersecting) setActiveStage(cards.indexOf(entry.target));
-    }), { threshold: .55 });
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, []);
-
+  const stage = cycleStages[activeStage];
+  const ready = sceneState === "ready";
   return (
-    <section className="section ecosystem-story" ref={sectionRef} aria-label="Alur ekosistem JagoFarm" style={{ "--cycle-progress": "0deg" }}>
+    <section id="alur-ekosistem" className="section ecosystem-story ecosystem-story-3d" ref={sectionRef} aria-label="Alur ekosistem JagoFarm">
       <span className="ecosystem-branch ecosystem-branch-left" aria-hidden="true" />
       <span className="ecosystem-branch ecosystem-branch-right" aria-hidden="true" />
-      <span className="ecosystem-foreground" aria-hidden="true" />
       <div className="ecosystem-sticky">
-        <div className="ecosystem-falling-leaves" aria-hidden="true">
-          {leaves.map(([asset, left]) => <span className="ecosystem-falling-leaf" style={{ "--leaf-image": `url(/assets/ecosystem-botanical/${asset})`, left }} key={asset} />)}
-        </div>
         <div className="container ecosystem-story-layout">
           <div className="ecosystem-story-copy">
             <span className="number">Alur ekosistem</span>
             <h2>Dari kolam,<br />kembali ke lahan.</h2>
             <span className="ecosystem-copy-divider" aria-hidden="true"><StageIcon type="leaf" /></span>
-            <p>Lima tahap berikut menjelaskan arah sistem. Dokumentasi menunjukkan kondisi nyata; proses akan berkembang mengikuti bukti lapangan.</p>
-            <blockquote>“Kami percaya limbah bukan akhir, melainkan awal dari nilai baru yang berkelanjutan.”</blockquote>
+            <p>Lima tahap dalam satu ekosistem. Air dan sisa budidaya mengalir ke pengolahan serta azolla, lalu kembali menjadi nutrisi bagi tanaman.</p>
+            <blockquote>Kami percaya limbah bukan akhir, melainkan awal dari nilai baru yang berkelanjutan.</blockquote>
           </div>
-          <div className="ecosystem-cycle" aria-label={`Tahap aktif: ${cycleStages[activeStage].label}`}>
-            <span className="ecosystem-orbit" aria-hidden="true"><i /></span>
-            <div className="ecosystem-cycle-center">
-              <img src="/jagofarm-mark-transparent.png" alt="" />
-              <strong>JagoFarm</strong>
+          <div className="eco-explorer">
+            <div className="eco-scene-heading"><span>Jelajahi ekosistem</span><small>Ilustrasi konsep budidaya</small></div>
+            <div className={`eco-viewport ${ready ? "is-ready" : ""}`} ref={viewportRef}>
+              <canvas ref={canvasRef} className="eco-canvas" aria-label="Model ekosistem 3D. Geser horizontal untuk memutar, atau gunakan tombol putar di bawah." />
+              {ready && <span className="eco-drag-hint" aria-hidden="true">â†” Geser untuk memutar</span>}
+              <div className="eco-pins" hidden={!ready}>
+                {cycleStages.map((item, index) => <button key={item.number} ref={(element) => { pinsRef.current[index] = element; }} className={`eco-pin${index === activeStage ? " is-active" : ""}`} type="button" onClick={() => setActiveStage(index)} aria-label={`${item.number} ${item.label}`} aria-pressed={index === activeStage}><b>{item.number}</b><span>{item.label}</span></button>)}
+              </div>
+              {!ready && <div className="eco-scene-placeholder"><p role="status">{sceneState === "loading" ? "Menyiapkan ekosistem 3Dâ€¦" : "Tampilan 3D tidak tersedia di perangkat ini. Jelajahi alurnya di bawah."}</p><FlowFallback /></div>}
             </div>
-            {cycleStages.map((stage, index) => (
-              <article className={`ecosystem-card ecosystem-card-${index + 1}${index === activeStage ? " is-active" : ""}${index < activeStage ? " is-past" : ""}`} aria-current={index === activeStage ? "step" : undefined} key={stage.number}>
-                <header><b>{stage.number}</b><h3>{stage.label}</h3><span><StageIcon type={stage.icon} /></span></header>
-                <img src={stage.image} alt={stage.alt} loading="lazy" decoding="async" />
-                <p>{stage.title}</p>
-              </article>
-            ))}
-            <div className="ecosystem-loop-note"><span><StageIcon type="leaf" /></span>Siklus berputar, nilai bertambah.</div>
+            <div className="eco-scene-tools">
+              <ul className="eco-legend" aria-label="Jenis aliran"><li><i className="water" />Air</li><li><i className="nutrient" />Nutrisi</li><li><i className="biomass" />Biomassa</li></ul>
+              <div className="eco-rotation-controls" role="group" aria-label="Kontrol model 3D">
+                <button type="button" disabled={!ready} onClick={() => sceneRef.current?.rotate(-Math.PI / 6)} aria-label="Putar model ke kiri">â†¶</button>
+                <button type="button" disabled={!ready} onClick={() => sceneRef.current?.reset()}>Reset</button>
+                <button type="button" disabled={!ready} onClick={() => sceneRef.current?.rotate(Math.PI / 6)} aria-label="Putar model ke kanan">â†·</button>
+              </div>
+            </div>
+            <div className="eco-stage-selector" role="group" aria-label="Pilih tahap ekosistem">
+              {cycleStages.map((item, index) => <button type="button" key={item.number} className={index === activeStage ? "is-active" : ""} aria-pressed={index === activeStage} onClick={() => setActiveStage(index)}><b>{item.number}</b><span>{item.label}</span></button>)}
+            </div>
+            <div className="eco-stage-detail" aria-live="polite" aria-atomic="true">
+              <span className="eco-detail-icon" aria-hidden="true"><StageIcon type={stage.icon} /></span>
+              <div><h3>{stage.label}</h3><p>{ecosystemNodes[activeStage].output}</p></div>
+              <span className="eco-detail-number" aria-hidden="true">{stage.number}/05</span>
+            </div>
+            <p className="eco-model-note">Hubungan alur: 01 â†’ 02 &amp; 03; 02 &amp; 03 â†’ 04 â†’ 05 â†’ 01. Konsep akan berkembang mengikuti bukti lapangan.</p>
           </div>
         </div>
       </div>
