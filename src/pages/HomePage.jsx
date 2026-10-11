@@ -1,6 +1,7 @@
 import heroDark from "../../assets/herosection/hero_section_dark.webp";
 import heroLight from "../../assets/herosection/hero_section_light.webp";
 import { useLanguage } from "../i18n.jsx";
+import DecisionPlatformSection from "../components/DecisionPlatformSection.jsx";
 import EcosystemStory from "../components/EcosystemStory.jsx";
 import { StageIcon } from "../components/media.jsx";
 import { Arrow, ButtonLink, Link } from "../components/navigation.jsx";
@@ -45,6 +46,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      <DecisionPlatformSection />
       <section className="section ecosystem-overview">
         <div className="container ecosystem-overview-grid">
           <div className="ecosystem-overview-heading">

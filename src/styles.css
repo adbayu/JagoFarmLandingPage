@@ -174,7 +174,7 @@ html.theme-ready[data-theme-transition] .hero-media::after { transition: opacity
 .hero-copy { max-width: 860px; }
 .hero-title { max-width: 900px; margin: 0 0 20px; color: #fff; font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(4rem, 6.4vw, 7.4rem); font-weight: 500; line-height: .82; letter-spacing: -.055em; text-shadow: 0 3px 30px rgba(0,0,0,.28); }
 .hero-title span { color: var(--lime); }
-.hero-description { max-width: 610px; margin: 0; color: rgba(255,255,255,.86); font-size: clamp(1.05rem, 1.7vw, 1.35rem); line-height: 1.55; text-shadow: 0 2px 18px rgba(0,0,0,.3); }
+.hero-description { max-width: 610px; margin: 0; color: #fff; font-size: clamp(1.15rem, 1.8vw, 1.45rem); font-weight: 650; line-height: 1.55; text-shadow: 0 2px 22px rgba(0,0,0,.62); }
 .product-hero { min-height: 660px; padding: 0; position: relative; overflow: hidden; border: 0; background: #102d20; color: #fff; isolation: isolate; }
 .product-hero-media, .product-hero-shade { position: absolute; inset: 0; }
 .product-hero-media { z-index: -2; }
@@ -811,7 +811,7 @@ html[data-theme="dark"] .ecosystem-falling-leaf { background: var(--leaf); filte
   .hero-shade { background: linear-gradient(180deg, rgba(3,24,16,.58) 0%, rgba(3,24,16,.08) 38%, rgba(3,24,16,.18) 55%, rgba(3,24,16,.86) 100%); }
   .hero-content { min-height: 100svh; padding-top: 120px; padding-bottom: 62px; }
   .hero-title { max-width: 390px; font-size: clamp(3.65rem, 16vw, 5.1rem); line-height: .84; }
-  .hero-description { max-width: 330px; font-size: 1rem; }
+  .hero-description { max-width: 330px; font-size: 1.1rem; }
   .product-hero, .product-hero-content { min-height: 640px; }
   .product-hero-shade { background: linear-gradient(180deg, rgba(3,24,16,.5), rgba(3,24,16,.86)); }
   .product-hero-content { padding-top: 130px; padding-bottom: 60px; grid-template-columns: 1fr; align-content: end; gap: 26px; }

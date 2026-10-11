@@ -254,6 +254,7 @@ const idToEnglish = new Map([
   ["From sensor readings to farmer decisions.", "Dari pembacaan sensor ke keputusan petani."],
   ["The platform is intended to help operators make sense of farm data, while keeping recommendations advisory.", "Platform ini dirancang untuk membantu pengelola memahami data budidaya, dengan rekomendasi yang tetap bersifat sebagai bahan pertimbangan."],
   ["Sensors", "Sensor"],
+  ["Sensor", "Sensor"],
   ["Collect pH, TDS, and water temperature readings.", "Mengumpulkan data pH, TDS, dan suhu air."],
   ["Built", "Sudah dibangun"],
   ["Dashboard", "Dashboard"],
@@ -301,6 +302,20 @@ const idToEnglish = new Map([
   ["Tanaman yang diamati JagoFarm", "Plants monitored by JagoFarm"],
   ["Ega di area saung pada proyek Bestari.", "Ega at the gazebo on the Bestari project site."],
   ["Alur ekosistem JagoFarm", "JagoFarm ecosystem flow"],
+  ["Sensor berbasis ESP32 membaca pH, TDS, dan suhu air. Backend Python dengan FastAPI mengolah data tersebut. Lapisan AI dirancang untuk memberi rekomendasi dalam Bahasa Indonesia dan sedang diintegrasikan dengan Claude API.", "ESP32-based sensors read pH, TDS, and water temperature. A Python backend with FastAPI processes the readings. The AI layer is designed to provide recommendations in Indonesian and is being integrated with the Claude API."],
+  ["Perangkat berbasis ESP32 membaca pH, TDS, dan suhu air.", "An ESP32-based device reads pH, TDS, and water temperature."],
+  ["Backend Python dengan FastAPI mengolah data untuk ditampilkan di dashboard.", "A Python backend with FastAPI processes data for the dashboard."],
+  ["Lapisan AI untuk rekomendasi tindakan sedang diintegrasikan dengan Claude API.", "The AI layer for action recommendations is being integrated with the Claude API."],
+  ["Rekomendasi AI", "AI recommendations"],
+  ["Sudah dibangun", "Built"],
+  ["Sedang diintegrasikan", "Being integrated"],
+  ["Fitur AI yang sedang diintegrasikan", "AI features being integrated"],
+  ["Rekomendasi tindakan beserta alasannya", "Action recommendations with reasons"],
+  ["Peringatan dini dan prioritas", "Early warnings and priorities"],
+  ["Ringkasan harian dan mingguan", "Daily and weekly summaries"],
+  ["Asisten tanya jawab tentang data kebun sendiri", "A question-and-answer assistant about the user’s own farm data"],
+  ["Target pengguna: pelaku akuaponik, hidroponik, dan budidaya ikan skala kecil dan menengah di Indonesia.", "Target users: small and mid-sized aquaponics, hydroponics, and fish-farming operators in Indonesia."],
+  ["Lihat dokumentasi perangkat dan dashboard", "View device and dashboard documentation"],
 ]);
 
 const englishToIndonesian = new Map(
