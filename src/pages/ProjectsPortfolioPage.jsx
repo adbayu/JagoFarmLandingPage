@@ -42,7 +42,7 @@ export default function ProjectsPortfolioPage() {
             <div><span className="number">{t("Album proyek")}</span><h2>{t("Pilih album untuk melihat dokumentasinya.")}</h2></div>
             <p>{t("Album mencakup kolaborasi, pengabdian kepada masyarakat, teknologi sensor dan IoT, serta eksplorasi ekosistem sirkular.")}</p>
           </header>
-          <p className="project-photo-notice">{t("Foto dokumentasi saat ini tersedia untuk Bestari. Album proyek lainnya belum berisi foto.")}</p>
+          <p className="project-photo-notice">{t("Foto dokumentasi tersedia di album Bestari dan IoT untuk Budidaya.")}</p>
           <div className="project-status-filters" role="group" aria-label={t("Filter status proyek")}>
             {statusFilters.map((filter) => (
               <button
