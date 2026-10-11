@@ -3,8 +3,8 @@ import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import "./styles.css";
 import { Footer, Header } from "./components/Layout.jsx";
+import { LanguageProvider } from "./i18n.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
-import DocumentationPage from "./pages/DocumentationPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 import ProjectsPortfolioPage from "./pages/ProjectsPortfolioPage.jsx";
@@ -12,7 +12,7 @@ import ProjectGalleryPage from "./pages/ProjectGalleryPage.jsx";
 import { projectPortfolio } from "./data/projectPortfolio.js";
 
 const projectGalleryPages = Object.fromEntries(projectPortfolio.map(({ slug }) => [`/proyek/${slug}`, ProjectGalleryPage]));
-const pages = { "/": HomePage, "/tentang": AboutPage, "/produk": ProductsPage, "/proyek": ProjectsPortfolioPage, "/dokumentasi": DocumentationPage, ...projectGalleryPages };
+const pages = { "/": HomePage, "/tentang": AboutPage, "/produk": ProductsPage, "/proyek": ProjectsPortfolioPage, ...projectGalleryPages };
 const HERO_THEME_DURATION_MS = 2400;
 
 function routeFromHash() {
@@ -21,12 +21,15 @@ function routeFromHash() {
 }
 
 function routeUsesOverlayHeader(path) {
-  return path === "/" || path === "/produk" || path === "/proyek" || path.startsWith("/proyek/") || path === "/tentang" || path === "/dokumentasi";
+  return path === "/" || path === "/produk" || path === "/proyek" || path.startsWith("/proyek/") || path === "/tentang";
 }
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(routeFromHash);
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+  const [language, setLanguage] = useState(() => {
+    try { return localStorage.getItem("jagofarm-language") === "en" ? "en" : "id"; } catch { return "id"; }
+  });
   const [headerSolid, setHeaderSolid] = useState(() => !routeUsesOverlayHeader(routeFromHash()));
   const lenisRef = useRef(null);
   const themeTransitionRef = useRef(null);
@@ -42,11 +45,20 @@ export default function App() {
     themeTransitionRef.current = window.setTimeout(() => delete root.dataset.themeTransition, HERO_THEME_DURATION_MS);
   }
 
+  function toggleLanguage() {
+    setLanguage((currentLanguage) => currentLanguage === "id" ? "en" : "id");
+  }
+
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.classList.add("theme-ready");
     try { localStorage.setItem("jagofarm-theme", theme); } catch {}
   }, [theme]);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    try { localStorage.setItem("jagofarm-language", language); } catch {}
+  }, [language]);
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 768px) and (hover: hover) and (pointer: fine)");
@@ -85,5 +97,11 @@ export default function App() {
     return () => observer.disconnect();
   }, [currentPath]);
 
-  return <><Header currentPath={currentPath} theme={theme} solid={headerSolid} onToggleTheme={toggleTheme} /><main><Page /></main><Footer /></>;
+  return (
+    <LanguageProvider language={language}>
+      <Header currentPath={currentPath} theme={theme} solid={headerSolid} onToggleTheme={toggleTheme} onToggleLanguage={toggleLanguage} />
+      <main><Page /></main>
+      <Footer />
+    </LanguageProvider>
+  );
 }

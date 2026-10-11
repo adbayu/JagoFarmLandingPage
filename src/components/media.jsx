@@ -28,6 +28,12 @@ export function ProductMedia({ src, label }) {
 }
 
 export function StageIcon({ type }) {
+  if (type === "sensor") return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 20V11M8 20h8M8 8a6 6 0 0 0 0 8M16 8a6 6 0 0 1 0 8M5 5a10 10 0 0 0 0 14M19 5a10 10 0 0 1 0 14" />
+      <circle cx="12" cy="8" r="2" />
+    </svg>
+  );
   if (type === "fish") return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M4 12c3.5-4 8.5-5.2 13-2.7L21 6v12l-4-3.3C12.5 17.2 7.5 16 4 12Z" />

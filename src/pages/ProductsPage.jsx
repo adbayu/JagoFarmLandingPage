@@ -1,41 +1,72 @@
-import { useState } from "react";
-import heroDark from "../../assets/herosection/hero_section_dark.webp";
-import heroLight from "../../assets/herosection/hero_section_light.webp";
+import { useEffect, useRef, useState } from "react";
 import ProductCard from "../components/ProductCard.jsx";
 import ProductFilters from "../components/ProductFilters.jsx";
 import { productCategories, products } from "../data/content.js";
+import { useLanguage } from "../i18n.jsx";
+import "./ProductsPage.css";
 
 export default function ProductsPage() {
+  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const dialogRef = useRef(null);
   const filteredProducts = activeCategory === "all" ? products : products.filter((product) => product.category === activeCategory);
 
+  useEffect(() => {
+    if (selectedProduct) dialogRef.current.showModal();
+    else dialogRef.current.close();
+  }, [selectedProduct]);
+
   return (
-    <>
+    <div className="products-page">
       <section className="product-hero section">
         <div className="product-hero-media" aria-hidden="true">
-          <img className="hero-image hero-image-light" src={heroLight} alt="" loading="eager" fetchPriority="high" />
-          <img className="hero-image hero-image-dark" src={heroDark} alt="" loading="eager" />
+          <img className="hero-image hero-image-light" src="/assets/products/hero-light.webp" alt="" loading="eager" fetchPriority="high" />
+          <img className="hero-image hero-image-dark" src="/assets/products/hero-dark.webp" alt="" loading="eager" />
         </div>
         <div className="product-hero-shade" />
         <div className="container product-hero-content">
-          <div>
-            <span className="product-hero-kicker">Calon hasil ekosistem</span>
-            <h1>Hasil dari setiap sisi ekosistem.</h1>
-          </div>
-          <div className="product-hero-copy">
-            <p>Daftar awal produk yang sedang dikembangkan dari hubungan budidaya ikan, nutrisi, azolla, dan tanaman.</p>
-            <span>Seluruh item masih dalam tahap riset dan eksplorasi.</span>
+          <div className="product-hero-intro">
+            <span className="product-hero-kicker">{t("Hasil dari satu ekosistem")}</span>
+            <h1>{t("Dari ekosistem budidaya menjadi produk bernilai.")}</h1>
+            <p>{t("Ikan, azolla, tanaman, dan teknologi. Kami mengeksplorasi potensi setiap bagian ekosistem untuk menghasilkan pangan dan sumber daya yang bermanfaat.")}</p>
+            <button className="product-hero-link" type="button" onClick={() => document.getElementById("product-catalog").scrollIntoView({ behavior: "smooth" })}>
+              {t("Jelajahi produk")} <span aria-hidden="true">→</span>
+            </button>
           </div>
         </div>
       </section>
-      <section className="section catalog-section">
-        <div className="container">
+      <section className="section catalog-section" id="product-catalog" aria-labelledby="catalog-title">
+        <div className="catalog-backdrop" aria-hidden="true">
+          <img src="/assets/products/catalog-background.webp" alt="" loading="lazy" decoding="async" />
+        </div>
+        <span className="catalog-margin-note catalog-margin-note-left" aria-hidden="true">{t("Riset hari ini untuk pangan yang lebih baik esok nanti.")}</span>
+        <span className="catalog-margin-note catalog-margin-note-right" aria-hidden="true">{t("Bertumbuh bersama alam")}</span>
+        <div className="container catalog-inner">
+          <header className="catalog-heading">
+            <span className="number">{t("Riset ekosistem")}</span>
+            <h2 id="catalog-title">{t("Calon hasil budidaya")}</h2>
+            <p>{t("Daftar awal hasil yang sedang dieksplorasi dari hubungan ikan, nutrisi, azolla, dan tanaman. Seluruh item masih dalam tahap riset.")}</p>
+          </header>
           <ProductFilters categories={productCategories} activeCategory={activeCategory} onChange={setActiveCategory} />
           <div className="catalog-grid" aria-live="polite">
-            {filteredProducts.map((product) => <ProductCard product={product} key={product.id} />)}
+            {filteredProducts.map((product) => <ProductCard product={product} key={product.id} onSelect={setSelectedProduct} />)}
           </div>
+          <p className="catalog-visual-note">{t("Gambar merupakan ilustrasi konsep. Produk masih dieksplorasi dan belum tersedia di marketplace.")}</p>
         </div>
       </section>
-    </>
+      <dialog className="product-detail-dialog" ref={dialogRef} aria-labelledby="product-detail-title" data-lenis-prevent onClose={() => setSelectedProduct(null)} onClick={(event) => { if (event.target === event.currentTarget) setSelectedProduct(null); }}>
+        {selectedProduct && <>
+          <button className="product-detail-close" type="button" onClick={() => setSelectedProduct(null)} aria-label={t("Tutup")}>×</button>
+          <img className="product-detail-image" src={selectedProduct.image} alt={`${t("Ilustrasi konsep")} ${t(selectedProduct.name)}`} />
+          <div className="product-detail-copy">
+            <span className="number">{t(selectedProduct.categoryLabel)} · {t("Dalam eksplorasi")}</span>
+            <h2 id="product-detail-title">{t(selectedProduct.name)}</h2>
+            <p>{t(selectedProduct.description)}</p>
+            <p className="product-detail-note">{t("Gambar merupakan ilustrasi konsep. Produk masih dieksplorasi dan belum tersedia di marketplace.")}</p>
+          </div>
+        </>}
+      </dialog>
+    </div>
   );
 }

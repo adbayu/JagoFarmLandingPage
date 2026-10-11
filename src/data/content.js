@@ -1,18 +1,19 @@
 import heroLight from "../../assets/herosection/hero_section_light.webp";
 
 export const routes = [
+  ["/", "Beranda"],
   ["/produk", "Produk"],
   ["/proyek", "Proyek"],
-  ["/dokumentasi", "Dokumentasi"],
   ["/tentang", "Tentang"],
 ];
 
 export const products = [
-  { id: "ikan-nila", name: "Ikan nila", description: "Hasil budidaya ikan yang sedang diamati dalam ekosistem awal.", image: "/assets/startup/startup-03.jpg", category: "akuakultur", categoryLabel: "Akuakultur", icon: "fish" },
-  { id: "ikan-gurame", name: "Ikan gurame", description: "Komoditas ikan kedua dalam pengamatan budidaya JagoFarm.", image: "/assets/startup/startup-06.jpg", category: "akuakultur", categoryLabel: "Akuakultur", icon: "fish" },
-  { id: "pupuk-azolla", name: "Pupuk azolla", description: "Gagasan pemanfaatan biomassa azolla sebagai bahan bernilai guna.", image: "/assets/startup/startup-01.jpg", category: "nutrisi", categoryLabel: "Nutrisi & Pupuk", icon: "leaf" },
-  { id: "pupuk-limbah-ikan", name: "Pupuk limbah ikan", description: "Konsep pengolahan nutrisi budidaya sebelum digunakan kembali.", image: "/assets/startup/startup-02.jpg", category: "nutrisi", categoryLabel: "Nutrisi & Pupuk", icon: "drop" },
-  { id: "hasil-tanaman", name: "Hasil tanaman", description: "Beragam tanaman yang diamati; sorgum menjadi salah satu contoh saat ini.", image: "/assets/startup/startup-10.jpg", category: "tanaman", categoryLabel: "Tanaman", icon: "plant" },
+  { id: "ikan-nila", name: "Ikan nila", description: "Hasil budidaya ikan yang sedang diamati dalam ekosistem awal.", image: "/assets/products/nila.webp", category: "akuakultur", categoryLabel: "Akuakultur", icon: "fish" },
+  { id: "ikan-gurame", name: "Ikan gurame", description: "Komoditas ikan kedua dalam pengamatan budidaya JagoFarm.", image: "/assets/products/gurame.webp", category: "akuakultur", categoryLabel: "Akuakultur", icon: "fish" },
+  { id: "pupuk-azolla", name: "Pupuk azolla", description: "Gagasan pemanfaatan biomassa azolla sebagai bahan bernilai guna.", image: "/assets/products/azolla.webp", category: "nutrisi", categoryLabel: "Nutrisi & Pupuk", icon: "leaf" },
+  { id: "kangkung", name: "Kangkung", description: "Tanaman cepat panen yang potensial dalam ekosistem budidaya terpadu.", image: "/assets/products/kangkung.webp", category: "tanaman", categoryLabel: "Tanaman", icon: "plant" },
+  { id: "sorgum", name: "Sorgum", description: "Tanaman serbaguna yang dieksplorasi sebagai sumber pangan dan pakan.", image: "/assets/products/sorgum.webp", category: "tanaman", categoryLabel: "Tanaman", icon: "plant" },
+  { id: "iot", name: "IoT", description: "Perangkat sensor dan dashboard untuk mendukung pemantauan kondisi budidaya.", image: "/assets/products/iot.webp", category: "teknologi", categoryLabel: "Teknologi", icon: "sensor" },
 ];
 
 export const productCategories = [
@@ -20,6 +21,7 @@ export const productCategories = [
   ["akuakultur", "Akuakultur"],
   ["nutrisi", "Nutrisi & Pupuk"],
   ["tanaman", "Tanaman"],
+  ["teknologi", "Teknologi"],
 ];
 
 export const documentation = [

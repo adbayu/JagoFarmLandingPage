@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../i18n.jsx";
 import { adjacentTeamIndex } from "../team-navigation.js";
+import AboutAISection from "../components/AboutAISection.jsx";
 
 const team = [
   {
     id: "haikal",
-    name: "Haikal",
+    name: "Haykal",
     role: "CTO",
-    summary: "Placeholder profil untuk arah teknologi dan pengembangan sistem JagoFarm.",
-    focus: ["Teknologi", "Arsitektur Sistem", "Riset"],
-    current: "Detail pekerjaan saat ini akan diperbarui setelah informasi profil tim tersedia.",
+    github: "https://github.com/Haykal-9",
+    email: "haykal@jagofarm.dev",
     position: { "--x": "5.39%", "--y": "19.43%", "--w": "21.06%", "--h": "78.64%" },
     cardPosition: { "--card-x": "26%", "--card-y": "47%", "--card-shift": "0%" },
     portraitPosition: "12% center",
@@ -19,9 +20,8 @@ const team = [
     id: "ega",
     name: "Ega",
     role: "CEO",
-    summary: "Placeholder profil untuk strategi, kemitraan, dan arah pengembangan JagoFarm.",
-    focus: ["Strategi", "Kemitraan", "Arah Produk"],
-    current: "Detail pekerjaan saat ini akan diperbarui setelah informasi profil tim tersedia.",
+    github: "https://github.com/egafiandra",
+    email: "egafiandraapratama@gmail.com",
     position: { "--x": "28.73%", "--y": "21.92%", "--w": "15.12%", "--h": "64.18%" },
     cardPosition: { "--card-x": "44%", "--card-y": "45%", "--card-shift": "0%" },
     portraitPosition: "36% center",
@@ -32,9 +32,8 @@ const team = [
     id: "bayu",
     name: "Bayu",
     role: "Head Dev Ops",
-    summary: "Placeholder profil untuk operasional platform, reliabilitas, dan otomasi sistem.",
-    focus: ["DevOps", "Reliabilitas", "Otomasi"],
-    current: "Detail pekerjaan saat ini akan diperbarui setelah informasi profil tim tersedia.",
+    github: "https://github.com/adbayu",
+    email: "andibayuhanggoro28@jagofarm.dev",
     position: { "--x": "49.38%", "--y": "18.88%", "--w": "16.23%", "--h": "66.11%" },
     cardPosition: { "--card-x": "48%", "--card-y": "45%", "--card-shift": "-100%" },
     portraitPosition: "61% center",
@@ -45,9 +44,8 @@ const team = [
     id: "shafnat",
     name: "Shafnat",
     role: "COO",
-    summary: "Placeholder profil untuk operasional, proses kerja, dan koordinasi tim JagoFarm.",
-    focus: ["Operasional", "Proses", "Koordinasi Tim"],
-    current: "Detail pekerjaan saat ini akan diperbarui setelah informasi profil tim tersedia.",
+    github: "https://github.com/ShafnatFR",
+    email: "shafnatfuainiramadhan@jagofarm.dev",
     position: { "--x": "65.33%", "--y": "19.43%", "--w": "21.89%", "--h": "73.39%" },
     cardPosition: { "--card-x": "67%", "--card-y": "47%", "--card-shift": "-100%" },
     portraitPosition: "87% center",
@@ -56,7 +54,23 @@ const team = [
   },
 ];
 
+function TeamContactLinks({ member, t, compact = false }) {
+  return (
+    <nav className={`team-contact-links${compact ? " is-compact" : ""}`} aria-label={`${t("Kontak")} ${member.name}`}>
+      <a href={member.github} target="_blank" rel="noopener noreferrer" aria-label={`GitHub ${member.name}`} title={`GitHub ${member.name}`}>
+        <img className="team-contact-icon team-contact-icon--github" src="/assets/social/github.svg" alt="" width="24" height="24" />
+        {!compact && <span><small>GitHub</small><strong>@{member.github.split("/").pop()}</strong></span>}
+      </a>
+      <a href={`mailto:${member.email}`} aria-label={`${t("Kirim email ke")} ${member.name}`} title={member.email}>
+        <img className="team-contact-icon" src="/assets/social/gmail.svg" alt="" width="24" height="18" />
+        {!compact && <span><small>Email</small><strong>{member.email}</strong></span>}
+      </a>
+    </nav>
+  );
+}
+
 export default function AboutPage() {
+  const { t } = useLanguage();
   const [activeMemberId, setActiveMemberId] = useState(null);
   const [detailMemberId, setDetailMemberId] = useState(null);
   const [closing, setClosing] = useState(false);
@@ -134,20 +148,21 @@ export default function AboutPage() {
   }, []);
 
   return (
+    <>
     <section className={`team-hero${activeMember ? " is-highlighted" : ""}`} aria-labelledby="team-hero-title">
       <div className="team-hero-copy">
-        <span className="team-kicker">Tim</span>
-        <h1 className="team-hero-title" id="team-hero-title">Tim di balik <span>JagoFarm.</span></h1>
-        <p>Empat perspektif, satu tujuan—membangun sistem pertanian sirkular yang berdampak nyata.</p>
+        <span className="team-kicker">{t("Tim")}</span>
+        <h1 className="team-hero-title" id="team-hero-title">{t("Tim di balik")} <span>JagoFarm.</span></h1>
+        <p>{t("Empat perspektif, satu tujuan—membangun sistem pertanian sirkular yang berdampak nyata.")}</p>
         <div className="team-hint">
           <span className="team-hint-icon" aria-hidden="true" />
-          <span className="team-hint-desktop">Arahkan cursor untuk mengenal tim.</span>
-          <span className="team-hint-touch">Ketuk anggota untuk mengenal tim.</span>
+          <span className="team-hint-desktop">{t("Arahkan cursor untuk mengenal tim.")}</span>
+          <span className="team-hint-touch">{t("Ketuk anggota untuk mengenal tim.")}</span>
         </div>
       </div>
 
       <div className="team-scene">
-        <img className="team-base" src="/assets/team/team.webp" alt="Haikal, Ega, Bayu, dan Shafnat, tim JagoFarm" />
+        <img className="team-base" src="/assets/team/team.webp" alt={t("Haykal, Ega, Bayu, dan Shafnat, tim JagoFarm")} />
         <span className="team-scene-shade" aria-hidden="true" />
         {team.map((member) => (
           <img
@@ -164,7 +179,7 @@ export default function AboutPage() {
             className={`team-hit team-hit-${member.id} team-interactive${activeMemberId === member.id ? " is-active" : ""}`}
             style={member.position}
             type="button"
-            aria-label={`Pilih ${member.name}, ${member.role}`}
+            aria-label={`${t("Pilih")} ${member.name}, ${t(member.role)}`}
             aria-pressed={activeMemberId === member.id}
             onMouseEnter={() => queueMember(member.id)}
             onMouseLeave={queueClear}
@@ -183,14 +198,14 @@ export default function AboutPage() {
             onFocusCapture={clearHoverTimers}
             onBlurCapture={queueClear}
           >
-            <span className="team-preview-status">Profil sementara</span>
+            <span className="team-preview-status">{t("Peran saat ini")}</span>
             <h2>{activeMember.name}</h2>
-            <strong>{activeMember.role}</strong>
-            <p>{activeMember.summary}</p>
+            <strong>{t(activeMember.role)}</strong>
+            <TeamContactLinks member={activeMember} t={t} compact />
             <div>
               <span>{String(detailIndex + 1).padStart(2, "0")} / {String(team.length).padStart(2, "0")}</span>
-              <button type="button" onClick={() => openProfile(activeMember.id)} aria-label={`Lihat profil ${activeMember.name}`}>
-                <span>Lihat profil</span><b aria-hidden="true">→</b>
+              <button type="button" onClick={() => openProfile(activeMember.id)} aria-label={`${t("Lihat peran")} ${activeMember.name}`}>
+                <span>{t("Lihat peran")}</span><b aria-hidden="true">→</b>
               </button>
             </div>
           </article>
@@ -201,7 +216,6 @@ export default function AboutPage() {
         ref={dialogRef}
         className={`team-profile-dialog${closing ? " is-closing" : ""}`}
         aria-labelledby="team-profile-name"
-        aria-describedby="team-profile-summary"
         onClose={finishClose}
         onCancel={(event) => { event.preventDefault(); closeProfile(); }}
         onClick={(event) => { if (event.target === event.currentTarget) closeProfile(); }}
@@ -210,20 +224,20 @@ export default function AboutPage() {
           if (event.key === "ArrowRight") { event.preventDefault(); moveProfile(1); }
         }}
       >
-        <button className="team-dialog-close" type="button" onClick={closeProfile} aria-label="Tutup profil">×</button>
+        <button className="team-dialog-close" type="button" onClick={closeProfile} aria-label={t("Tutup profil")}>×</button>
         <div className="team-profile-shell">
-          <section className="team-profile-context" onClick={closeProfile} aria-label="Tutup profil dan kembali ke foto tim">
+            <section className="team-profile-context" onClick={closeProfile} aria-label={t("Tutup profil dan kembali ke foto tim")}>
             <div className="team-profile-context-copy" aria-hidden="true">
-              <span>Tim</span>
-              <h2>Tim di balik<br />JagoFarm.</h2>
-              <p>Empat perspektif, satu tujuan—membangun sistem pertanian sirkular yang berdampak nyata.</p>
+                <span>{t("Tim")}</span>
+                <h2>{t("Tim di balik")}<br />JagoFarm.</h2>
+                <p>{t("Empat perspektif, satu tujuan—membangun sistem pertanian sirkular yang berdampak nyata.")}</p>
             </div>
-            <nav className="team-profile-index" aria-label="Pilih anggota tim" onClick={(event) => event.stopPropagation()}>
+            <nav className="team-profile-index" aria-label={t("Pilih anggota tim")} onClick={(event) => event.stopPropagation()}>
               {team.map((member, index) => (
                 <button
                   key={member.id}
                   type="button"
-                  aria-label={`Tampilkan profil ${member.name}`}
+                  aria-label={`${t("Tampilkan profil")} ${member.name}`}
                   aria-current={member.id === detailMember.id ? "true" : undefined}
                   onClick={() => { setActiveMemberId(member.id); setDetailMemberId(member.id); }}
                 >
@@ -234,16 +248,16 @@ export default function AboutPage() {
           </section>
 
           <figure className="team-profile-photo" style={{ "--portrait-mobile-x": detailMember.portraitMobilePosition }}>
-            <img src="/assets/team/team.webp" style={{ objectPosition: detailMember.portraitPosition, transformOrigin: detailMember.portraitOrigin }} alt={`${detailMember.name}, ${detailMember.role} JagoFarm`} />
+            <img src="/assets/team/team.webp" style={{ objectPosition: detailMember.portraitPosition, transformOrigin: detailMember.portraitOrigin }} alt={`${detailMember.name}, ${t(detailMember.role)} JagoFarm`} />
           </figure>
 
           <article className="team-profile-content" aria-live="polite">
-            <nav className="team-profile-mobile-index" aria-label="Pilih anggota tim">
+            <nav className="team-profile-mobile-index" aria-label={t("Pilih anggota tim")}>
               {team.map((member, index) => (
                 <button
                   key={member.id}
                   type="button"
-                  aria-label={`Tampilkan profil ${member.name}`}
+                  aria-label={`${t("Tampilkan profil")} ${member.name}`}
                   aria-current={member.id === detailMember.id ? "true" : undefined}
                   onClick={() => { setActiveMemberId(member.id); setDetailMemberId(member.id); }}
                 >
@@ -253,41 +267,20 @@ export default function AboutPage() {
             </nav>
             <span className="team-profile-count">{String(detailIndex + 1).padStart(2, "0")} / {String(team.length).padStart(2, "0")}</span>
             <h2 id="team-profile-name">{detailMember.name}</h2>
-            <strong className="team-profile-role">{detailMember.role}</strong>
-            <p id="team-profile-summary" className="team-profile-summary">{detailMember.summary}</p>
-            <span className="team-profile-draft">Konten sementara</span>
-
-            <div className="team-profile-section">
-              <h3>Fokus sementara</h3>
-              <div className="team-profile-tags">
-                {detailMember.focus.map((item) => <span key={item}>{item}</span>)}
-              </div>
-            </div>
-
-            <div className="team-profile-section">
-              <h3>Saat ini</h3>
-              <p>{detailMember.current}</p>
-            </div>
+            <strong className="team-profile-role">{t(detailMember.role)}</strong>
+            <TeamContactLinks member={detailMember} t={t} />
 
             <div className="team-profile-footer">
-              <div className="team-social-placeholders" aria-label="Tautan sosial segera tersedia">
-                <button type="button" disabled title="LinkedIn segera tersedia">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8.5V18M6.5 5.5v.01M10.5 18v-5.3c0-2.8 4-3 4 0V18M10.5 10v8M3.5 21h17a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-17a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1Z" /></svg>
-                  LinkedIn
-                </button>
-                <button type="button" disabled title="Email segera tersedia">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 9 7 9-7M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" /></svg>
-                  Email
-                </button>
-              </div>
               <div className="team-profile-arrows">
-                <button type="button" onClick={() => moveProfile(-1)} aria-label="Profil sebelumnya">←</button>
-                <button type="button" onClick={() => moveProfile(1)} aria-label="Profil berikutnya">→</button>
+                <button type="button" onClick={() => moveProfile(-1)} aria-label={t("Profil sebelumnya")}>←</button>
+                <button type="button" onClick={() => moveProfile(1)} aria-label={t("Profil berikutnya")}>→</button>
               </div>
             </div>
           </article>
         </div>
       </dialog>
     </section>
+    <AboutAISection />
+    </>
   );
 }

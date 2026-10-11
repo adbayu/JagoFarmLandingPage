@@ -1,0 +1,72 @@
+{
+  "mode": "built-in image_gen",
+  "hero": "Reproduce the second supplied image faithfully, no text or logos. Night variant changes lighting only.",
+  "products_and_background": [
+    [
+      "nila",
+      "Photorealistic close-up of two healthy Indonesian Nile tilapia (Oreochromis niloticus), silvery gray striped scales, dorsal fins, swimming just below fresh pond water, small natural splashes and droplets, blurred lush green aquaponic farm background. Fish occupy horizontal center. Warm morning sunlight."
+    ],
+    [
+      "gurame",
+      "Photorealistic Indonesian giant gourami (Osphronemus goramy), broad deep oval body, subtle gray bronze scales, long threadlike pelvic feelers, swimming underwater in clear teal-green freshwater, lush softly blurred aquatic background, natural side view. Do not depict colorful ornamental gourami."
+    ],
+    [
+      "azolla",
+      "Photorealistic macro of dense tiny fern-like bright green Azolla floating aquatic plants, with some reddish tips, in a rustic bamboo-edged growing tray at an Indonesian aquaponic farm, lush soft-focus garden background, morning dew and warm sunlight. No vegetables, no bags of fertilizer."
+    ],
+    [
+      "kangkung",
+      "Photorealistic lush healthy kangkung water spinach with long pointed green leaves growing through black net pots in clean white hydroponic PVC channels, outdoor Indonesian garden, shallow depth of field, sunlit leaves filling the frame. No lettuce."
+    ],
+    [
+      "sorgum",
+      "Photorealistic close-up of golden brown mature sorghum seed panicles with green leaves in an Indonesian field, multiple distinct seed heads in center, warm sunrise, soft rolling hills behind, fine natural grain detail. No wheat or corn."
+    ],
+    [
+      "iot",
+      "Photorealistic concept of a compact solar-powered aquaponics monitoring station in an Indonesian farm: small white weatherproof sensor enclosure mounted on pole, modest solar panel above, tablet alongside with an abstract dark green graph interface without text or numbers, hydroponic pipes and pond in background. Natural hardware proportions. No logos, no letters, no wireless symbols floating in air."
+    ],
+    [
+      "catalog-background",
+      "Botanical editorial background for a premium sustainable farming product catalog. Wide 16:10 cream ivory parchment canvas. Very large EMPTY CLEAN IVORY CENTER occupying 70% of width for HTML text and cards. Delicate translucent sage green botanical leaves enter only from upper left, lower left, upper right, lower right edges. Soft flowing ivory and pale sage organic ribbons wrap around outer edges; small distant realistic Indonesian terraced farm and rolling hills visible ONLY in a crescent-shaped cutout along the far right outer 12% of canvas. Quiet watercolor paper texture, soft natural light, sophisticated airy aesthetic. No UI, no text, no icons, no cards, no products in the center."
+    ]
+  ],
+  "assets": [
+    {
+      "id": "hero-light",
+      "path": "C:\\Users\\Andi bayu hanggoro\\.codex\\generated_images\\01a11e59-324e-7501-9488-4efca3ea5139\\exec-c9c15bec-aeaf-476c-a864-9c17898b57a9.png"
+    },
+    {
+      "id": "hero-dark",
+      "path": "C:\\Users\\Andi bayu hanggoro\\.codex\\generated_images\\01a11e59-324e-7501-9488-4efca3ea5139\\exec-caa131ab-9a89-4144-a6f7-855eddc636e9.png"
+    },
+    {
+      "id": "nila",
+      "path": "C:\\Users\\Andi bayu hanggoro\\.codex\\generated_images\\01a11e59-324e-7501-9488-4efca3ea5139\\exec-229fa46f-3771-461b-9a82-4d9e611ebc1b.png"
+    },
+    {
+      "id": "gurame",
+      "path": "C:\\Users\\Andi bayu hanggoro\\.codex\\generated_images\\01a11e59-324e-7501-9488-4efca3ea5139\\exec-a583d6e9-37ea-49e3-90d9-996f1f9809c5.png"
+    },
+    {
+      "id": "azolla",
+      "path": "C:\\Users\\Andi bayu hanggoro\\.codex\\generated_images\\01a11e59-324e-7501-9488-4efca3ea5139\\exec-9df213a9-73f6-463f-a93b-05b75f1d1121.png"
+    },
+    {
+      "id": "kangkung",
+      "path": "C:\\Users\\Andi bayu hanggoro\\.codex\\generated_images\\01a11e59-324e-7501-9488-4efca3ea5139\\exec-8a1c5f64-5162-44dc-889d-dcf1590bb4df.png"
+    },
+    {
+      "id": "sorgum",
+      "path": "C:\\Users\\Andi bayu hanggoro\\.codex\\generated_images\\01a11e59-324e-7501-9488-4efca3ea5139\\exec-03ec24a7-b08f-4bb8-9499-4a15974a0890.png"
+    },
+    {
+      "id": "iot",
+      "path": "C:\\Users\\Andi bayu hanggoro\\.codex\\generated_images\\01a11e59-324e-7501-9488-4efca3ea5139\\exec-98e837e0-5e59-4288-a995-0adec551ea54.png"
+    },
+    {
+      "id": "catalog-background",
+      "path": "C:\\Users\\Andi bayu hanggoro\\.codex\\generated_images\\01a11e59-324e-7501-9488-4efca3ea5139\\exec-ba02c6f9-f9e1-4ba0-8a89-85eb64f6e66e.png"
+    }
+  ]
+}
