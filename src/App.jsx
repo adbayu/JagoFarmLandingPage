@@ -3,7 +3,7 @@ import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import "./styles.css";
 import { Footer, Header } from "./components/Layout.jsx";
-import { LanguageProvider } from "./i18n.jsx";
+import { LanguageProvider, translate } from "./i18n.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
@@ -11,6 +11,7 @@ import ProjectsPortfolioPage from "./pages/ProjectsPortfolioPage.jsx";
 import ProjectGalleryPage from "./pages/ProjectGalleryPage.jsx";
 import { projectPortfolio } from "./data/projectPortfolio.js";
 import { localizedHref, parseRoute } from "./routing.js";
+import { applyRouteMetadata } from "./metadata.js";
 
 const projectGalleryPages = Object.fromEntries(projectPortfolio.map(({ slug }) => [`/proyek/${slug}`, ProjectGalleryPage]));
 const pages = { "/": HomePage, "/tentang": AboutPage, "/produk": ProductsPage, "/proyek": ProjectsPortfolioPage, ...projectGalleryPages };
@@ -20,11 +21,11 @@ function routeUsesOverlayHeader(path) {
   return path === "/" || path === "/produk" || path === "/proyek" || path.startsWith("/proyek/") || path === "/tentang";
 }
 
-export default function App() {
-  const [route, setRoute] = useState(() => parseRoute(window.location.pathname));
-  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+export default function App({ initialPath = "/" } = {}) {
+  const [route, setRoute] = useState(() => parseRoute(typeof window === "undefined" ? initialPath : window.location.pathname));
+  const [theme, setTheme] = useState(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "dark" ? "dark" : "light");
   const { path: currentPath, language, albumSlug } = route;
-  const [headerSolid, setHeaderSolid] = useState(() => !routeUsesOverlayHeader(parseRoute(window.location.pathname).path));
+  const [headerSolid, setHeaderSolid] = useState(() => !routeUsesOverlayHeader(parseRoute(typeof window === "undefined" ? initialPath : window.location.pathname).path));
   const lenisRef = useRef(null);
   const themeTransitionRef = useRef(null);
   const Page = pages[currentPath] ?? HomePage;
@@ -51,9 +52,7 @@ export default function App() {
     try { localStorage.setItem("jagofarm-theme", theme); } catch {}
   }, [theme]);
 
-  useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
+  useEffect(() => applyRouteMetadata(route, (text) => translate(text, language)), [currentPath, language]);
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 768px) and (hover: hover) and (pointer: fine)");

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://jagofarm.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/tentang/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/tentang/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/tentang/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/tentang/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/produk/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/produk/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/produk/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/produk/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/proyek/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/proyek/bestari/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/bestari/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/bestari/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/bestari/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/proyek/pkm/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/pkm/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/pkm/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/pkm/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/proyek/sensor-ph-air/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/sensor-ph-air/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/sensor-ph-air/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/sensor-ph-air/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/proyek/iot/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/iot/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/iot/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/iot/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/proyek/ekosistem-sirkular/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/ekosistem-sirkular/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/ekosistem-sirkular/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/ekosistem-sirkular/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/en/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/en/tentang/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/tentang/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/tentang/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/tentang/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/en/produk/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/produk/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/produk/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/produk/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/en/proyek/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/en/proyek/bestari/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/bestari/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/bestari/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/bestari/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/en/proyek/pkm/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/pkm/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/pkm/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/pkm/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/en/proyek/sensor-ph-air/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/sensor-ph-air/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/sensor-ph-air/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/sensor-ph-air/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/en/proyek/iot/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/iot/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/iot/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/iot/" />
+  </url>
+  <url>
+    <loc>https://jagofarm.dev/en/proyek/ekosistem-sirkular/</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://jagofarm.dev/proyek/ekosistem-sirkular/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jagofarm.dev/en/proyek/ekosistem-sirkular/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jagofarm.dev/proyek/ekosistem-sirkular/" />
+  </url>
+</urlset>

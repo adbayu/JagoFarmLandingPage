@@ -335,6 +335,22 @@ const idToEnglish = new Map([
   ["Asisten tanya jawab tentang data kebun sendiri", "A question-and-answer assistant about the user’s own farm data"],
   ["Target pengguna: pelaku akuaponik, hidroponik, dan budidaya ikan skala kecil dan menengah di Indonesia.", "Target users: small and mid-sized aquaponics, hydroponics, and fish-farming operators in Indonesia."],
   ["Lihat dokumentasi perangkat dan dashboard", "View device and dashboard documentation"],
+  ["JagoFarm | Platform keputusan budidaya berbasis sensor", "JagoFarm | Sensor-based farming decision platform"],
+  ["Platform JagoFarm untuk akuaponik, hidroponik, dan budidaya ikan. ESP32 membaca pH, TDS, dan suhu air. Rekomendasi AI sedang diintegrasikan dengan Claude API.", "JagoFarm's platform serves aquaponics, hydroponics, and fish farms. ESP32 reads pH, TDS, and water temperature. Claude API recommendations are being integrated."],
+  ["Produk | JagoFarm", "Products | JagoFarm"],
+  ["Proyek | JagoFarm", "Projects | JagoFarm"],
+  ["Tentang | JagoFarm", "About | JagoFarm"],
+  ["Bestari | JagoFarm", "Bestari | JagoFarm"],
+  ["PKM | JagoFarm", "PKM | JagoFarm"],
+  ["Sensor pH Air | JagoFarm", "Water pH Sensor | JagoFarm"],
+  ["IoT untuk Budidaya | JagoFarm", "IoT for Farming | JagoFarm"],
+  ["Ekosistem Sirkular | JagoFarm", "Circular Ecosystem | JagoFarm"],
+  ["Katalog JagoFarm mencakup ikan, azolla, tanaman, dan platform sensor untuk budidaya.", "JagoFarm's catalog includes fish, azolla, crops, and a sensor platform for farming."],
+  ["Dokumentasi proyek JagoFarm mencakup kolaborasi, program pengabdian kepada masyarakat, teknologi sensor dan IoT, serta eksplorasi ekosistem sirkular.", "JagoFarm project documentation covers collaborations, community programs, sensor and IoT technology, and circular ecosystem research."],
+  ["JagoFarm adalah startup di bawah naungan Kolab Creative Hub. Tim melakukan riset dan pengembangan ekosistem budidaya sirkular serta teknologi pemantauan, dibantu AI.", "JagoFarm is a startup under the umbrella of Kolab Creative Hub. The team researches and develops a circular farming ecosystem and monitoring technology with AI assistance."],
+  ["Halaman tidak ditemukan", "Page not found"],
+  ["Halaman yang Anda cari tidak tersedia.", "The page you’re looking for isn’t available."],
+  ["Kembali ke beranda", "Back to home"],
 ]);
 
 const englishToIndonesian = new Map(
@@ -349,10 +365,10 @@ export function LanguageProvider({ language, children }) {
 
 export function useLanguage() {
   const language = useContext(LanguageContext);
-  const translate = (text) => {
-    if (typeof text !== "string") return text;
-    return (language === "en" ? idToEnglish : englishToIndonesian).get(text) ?? text;
-  };
+  return { language, t: (text) => translate(text, language) };
+}
 
-  return { language, t: translate };
+export function translate(text, language = "id") {
+  if (typeof text !== "string") return text;
+  return (language === "en" ? idToEnglish : englishToIndonesian).get(text) ?? text;
 }

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jagofarm.dev/sitemap.xml
