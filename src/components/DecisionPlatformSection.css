@@ -4,6 +4,8 @@
     var(--cream);
 }
 
+#decision-platform { scroll-margin-top: 110px; }
+
 .decision-platform-heading {
   max-width: 800px;
   margin-bottom: 48px;

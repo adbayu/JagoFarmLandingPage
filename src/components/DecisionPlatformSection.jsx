@@ -52,16 +52,14 @@ export default function DecisionPlatformSection() {
   const { t, language } = useLanguage();
 
   return (
-    <section className="section decision-platform" aria-labelledby="decision-platform-title">
+    <section id="decision-platform" className="section decision-platform" aria-labelledby="decision-platform-title">
       <div className="container">
         <header className="decision-platform-heading">
           <span className="number">{t("Platform keputusan budidaya")}</span>
           <h2 id="decision-platform-title">{t("Dari data sensor ke keputusan budidaya.")}</h2>
-          <p>
-            {t(
-              "Sensor berbasis ESP32 membaca pH, TDS, dan suhu air. Backend Python dengan FastAPI mengolah data tersebut. Lapisan AI dirancang untuk memberi rekomendasi dalam Bahasa Indonesia dan sedang diintegrasikan dengan Claude API.",
-            )}
-          </p>
+          <p>{t("Sensor berbasis ESP32 membaca pH, TDS, dan suhu air. Backend Python dengan FastAPI mengolah data tersebut.")}</p>
+          <p>{t("Claude API dipakai sebagai lapisan keputusan di dalam produk dan sedang diintegrasikan.")}</p>
+          <p>{t("Rekomendasi membantu pengelola mempertimbangkan tindakan, bukan menggantikan keputusan mereka.")}</p>
         </header>
 
         <div className="decision-platform-grid">
