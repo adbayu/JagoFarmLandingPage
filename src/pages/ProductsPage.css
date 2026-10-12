@@ -23,6 +23,8 @@
 .products-page .catalog-filters { justify-content: center; margin: 0 0 28px; gap: 12px; }
 .products-page .catalog-filters button { min-height: 44px; padding-inline: 19px; font-weight: 650; background: var(--paper); }
 .products-page .catalog-filters button.is-active { background: #0c4435; border-color: #0c4435; color: #fff; }
+.products-page .catalog-filters button:focus-visible { outline-color: var(--forest); }
+html[data-theme="dark"] .products-page .catalog-filters button:focus-visible { outline-color: var(--lime); }
 .products-page .catalog-grid { gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
 .products-page .catalog-card { min-height: 0; border-radius: 14px; border-color: color-mix(in srgb, var(--ink) 12%, transparent); background: var(--paper); box-shadow: 0 8px 24px rgba(40,55,30,.055); }
 .products-page .catalog-card-media { aspect-ratio: 1.9; }
@@ -42,6 +44,8 @@
 .products-page .catalog-marketplaces > span { font-size: .55rem; letter-spacing: .025em; font-weight: 650; }
 .products-page .catalog-marketplaces > div { min-width: 0; flex: 1; justify-content: flex-end; gap: 6px; }
 .products-page .marketplace-option { width: min(72px, 30%); height: 32px; padding: 7px 6px; opacity: .9; border-color: #e7e9e2; border-radius: 7px; }
+.catalog-category-notes { display: grid; gap: 6px; margin: 18px auto 0; max-width: 650px; text-align: center; font-size: .74rem; line-height: 1.6; }
+.catalog-category-notes p { margin: 0; }
 .catalog-visual-note { margin: 24px auto 0; max-width: 650px; text-align: center; font-size: .74rem; line-height: 1.6; }
 .catalog-margin-note { position: absolute; z-index: 0; width: 125px; font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.3rem; font-style: italic; line-height: 1.2; color: #927b58; opacity: .75; pointer-events: none; }
 .catalog-margin-note-left { top: 190px; left: max(22px, calc((100% - 1500px) / 2)); transform: rotate(-9deg); }

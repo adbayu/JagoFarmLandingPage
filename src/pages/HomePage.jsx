@@ -7,7 +7,7 @@ import { StageIcon } from "../components/media.jsx";
 import { Arrow, ButtonLink, Link } from "../components/navigation.jsx";
 import { products } from "../data/content.js";
 
-const featuredProducts = products.slice(0, 3);
+const featuredProducts = products.filter((product) => product.id !== "iot").slice(0, 3);
 
 export default function HomePage() {
   const { t } = useLanguage();

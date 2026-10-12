@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import ProductCard from "../components/ProductCard.jsx";
 import ProductFilters from "../components/ProductFilters.jsx";
-import { productCategories, products } from "../data/content.js";
+import { productCategories, products, productStatusLabels } from "../data/content.js";
 import { useLanguage } from "../i18n.jsx";
 import "./ProductsPage.css";
 
@@ -11,6 +11,8 @@ export default function ProductsPage() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const dialogRef = useRef(null);
   const filteredProducts = activeCategory === "all" ? products : products.filter((product) => product.category === activeCategory);
+  const hasAgriculturalProducts = filteredProducts.some((product) => product.id !== "iot");
+  const hasTechnologyProduct = filteredProducts.some((product) => product.id === "iot");
 
   useEffect(() => {
     if (selectedProduct) dialogRef.current.showModal();
@@ -46,24 +48,32 @@ export default function ProductsPage() {
           <header className="catalog-heading">
             <span className="number">{t("Riset ekosistem")}</span>
             <h2 id="catalog-title">{t("Calon hasil budidaya")}</h2>
-            <p>{t("Daftar awal hasil yang sedang dieksplorasi dari hubungan ikan, nutrisi, azolla, dan tanaman. Seluruh item masih dalam tahap riset.")}</p>
+            <p>{t("Daftar awal hasil yang sedang dieksplorasi dari hubungan ikan, nutrisi, azolla, dan tanaman.")}</p>
           </header>
+          <div className="catalog-category-notes" aria-live="polite" aria-atomic="true">
+            {hasAgriculturalProducts && (
+              <p>{t("Seluruh produk pertanian masih dalam tahap riset dan belum tersedia di marketplace.")}</p>
+            )}
+            {hasTechnologyProduct && (
+              <p>{t("Sensor dan dashboard JagoFarm sudah dibangun sebagai prototype, sementara rekomendasi AI sedang diintegrasikan dengan Claude API.")}</p>
+            )}
+          </div>
           <ProductFilters categories={productCategories} activeCategory={activeCategory} onChange={setActiveCategory} />
           <div className="catalog-grid" aria-live="polite">
             {filteredProducts.map((product) => <ProductCard product={product} key={product.id} onSelect={setSelectedProduct} />)}
           </div>
-          <p className="catalog-visual-note">{t("Gambar merupakan ilustrasi konsep. Produk masih dieksplorasi dan belum tersedia di marketplace.")}</p>
+          {hasAgriculturalProducts && <p className="catalog-visual-note" aria-live="polite">{t("Gambar produk pertanian merupakan ilustrasi konsep.")}</p>}
         </div>
       </section>
       <dialog className="product-detail-dialog" ref={dialogRef} aria-labelledby="product-detail-title" data-lenis-prevent onClose={() => setSelectedProduct(null)} onClick={(event) => { if (event.target === event.currentTarget) setSelectedProduct(null); }}>
         {selectedProduct && <>
           <button className="product-detail-close" type="button" onClick={() => setSelectedProduct(null)} aria-label={t("Tutup")}>×</button>
-          <img className="product-detail-image" src={selectedProduct.image} alt={`${t("Ilustrasi konsep")} ${t(selectedProduct.name)}`} />
+          <img className="product-detail-image" src={selectedProduct.image} alt={selectedProduct.id === "iot" ? t("Foto prototype sensor dan dashboard JagoFarm") : `${t("Ilustrasi konsep")} ${t(selectedProduct.name)}`} />
           <div className="product-detail-copy">
-            <span className="number">{t(selectedProduct.categoryLabel)} · {t("Dalam eksplorasi")}</span>
+            <span className="number">{t(selectedProduct.categoryLabel)} · {t(productStatusLabels[selectedProduct.status])}</span>
             <h2 id="product-detail-title">{t(selectedProduct.name)}</h2>
             <p>{t(selectedProduct.description)}</p>
-            <p className="product-detail-note">{t("Gambar merupakan ilustrasi konsep. Produk masih dieksplorasi dan belum tersedia di marketplace.")}</p>
+            {selectedProduct.id !== "iot" && <p className="product-detail-note">{t("Gambar produk pertanian merupakan ilustrasi konsep. Produk pertanian masih dalam tahap riset dan belum tersedia di marketplace.")}</p>}
           </div>
         </>}
       </dialog>

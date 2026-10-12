@@ -170,7 +170,7 @@ export function Footer() {
       </div>
       <div className="container footer-bottom">
         <span>© {currentYear} JagoFarm</span>
-        <span>{t("Konsep dan dokumentasi awal · 2 September 2026")}</span>
+        <span>{t("Prototype dalam pengembangan · Diperbarui 12 Oktober 2026")}</span>
         <Link to="/">{t("Kembali ke beranda ↑")}</Link>
       </div>
     </footer>

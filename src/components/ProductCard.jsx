@@ -1,5 +1,8 @@
 import { useLanguage } from "../i18n.jsx";
+import { productStatusLabels } from "../data/content.js";
 import { StageIcon } from "./media.jsx";
+
+const SHOW_MARKETPLACES = false;
 
 const marketplaces = [
   ["Shopee", "/assets/marketplaces/shopee.svg"],
@@ -13,8 +16,8 @@ export default function ProductCard({ product, onSelect }) {
   return (
     <article className="catalog-card">
       <div className="catalog-card-media">
-        <img src={product.image} alt={`${t("Ilustrasi konsep")} ${t(product.name)}`} loading="lazy" decoding="async" />
-        <span className="catalog-status">{t("Dalam eksplorasi")}</span>
+        <img src={product.image} alt={product.id === "iot" ? t("Foto prototype sensor dan dashboard JagoFarm") : `${t("Ilustrasi konsep")} ${t(product.name)}`} loading="lazy" decoding="async" />
+        <span className="catalog-status">{t(productStatusLabels[product.status])}</span>
         <span className="catalog-product-icon"><StageIcon type={product.icon} /></span>
       </div>
       <div className="catalog-card-body">
@@ -24,7 +27,7 @@ export default function ProductCard({ product, onSelect }) {
           {onSelect && <button className="catalog-card-open" type="button" onClick={() => onSelect(product)} aria-label={`${t("Lihat detail")} ${t(product.name)}`}><span aria-hidden="true">→</span></button>}
         </div>
         <p>{t(product.description)}</p>
-        <footer className="catalog-marketplaces">
+        {SHOW_MARKETPLACES && <footer className="catalog-marketplaces">
           <span>{t("Marketplace")}</span>
           <div>
             {marketplaces.map(([name, logo]) => (
@@ -34,7 +37,7 @@ export default function ProductCard({ product, onSelect }) {
               </span>
             ))}
           </div>
-        </footer>
+        </footer>}
       </div>
     </article>
   );
