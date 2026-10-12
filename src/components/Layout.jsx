@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { routes } from "../data/content.js";
+import { linkedinCompanyUrl, primaryContactEmail, routes } from "../data/content.js";
 import { useLanguage } from "../i18n.jsx";
 import { Arrow, Link } from "./navigation.jsx";
 
@@ -165,6 +165,17 @@ export function Footer() {
             rel="noreferrer"
           >
             YouTube
+          </a>
+          {linkedinCompanyUrl ? (
+            <a href={linkedinCompanyUrl} target="_blank" rel="noreferrer">
+              {t("LinkedIn")}
+            </a>
+          ) : null}
+        </nav>
+        <nav className="footer-links" aria-label={t("Kontak")}>
+          <span className="meta">{t("Kontak")}</span>
+          <a className="footer-contact-email" href={`mailto:${primaryContactEmail}`} aria-label={`${t("Kirim email ke")} ${primaryContactEmail}`}>
+            {primaryContactEmail}
           </a>
         </nav>
       </div>

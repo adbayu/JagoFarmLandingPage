@@ -2,14 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../i18n.jsx";
 import { adjacentTeamIndex } from "../team-navigation.js";
 import AboutAISection from "../components/AboutAISection.jsx";
+import { primaryContactEmail } from "../data/content.js";
 
 const team = [
   {
     id: "haikal",
     name: "Haykal",
-    role: "CTO",
+    role: "Co-founder & CTO",
     github: "https://github.com/Haykal-9",
-    email: "haykal@jagofarm.dev",
+    email: primaryContactEmail,
     position: {
       "--x": "5.39%",
       "--y": "19.43%",
@@ -460,6 +461,27 @@ export default function AboutPage() {
             </article>
           </div>
         </dialog>
+      </section>
+      <section className="team-directory" aria-labelledby="team-directory-title">
+        <div className="team-directory-inner">
+          <h2 id="team-directory-title">{t("Tim")}</h2>
+          <ul className="team-directory-list" aria-label={t("Daftar anggota tim JagoFarm")}>
+            {team.map((member) => (
+              <li className="team-directory-card" key={member.id}>
+                <h3>{member.name}</h3>
+                <p className="team-directory-role">{t(member.role)}</p>
+                <TeamContactLinks member={member} t={t} />
+              </li>
+            ))}
+          </ul>
+          <section className="team-support" aria-labelledby="team-support-title">
+            <h3 id="team-support-title">{t("JagoFarm dibina oleh Kolab Creative Hub.")}</h3>
+            <a href="https://kolab-landing.pages.dev/" target="_blank" rel="noopener noreferrer">
+              {t("Kunjungi Kolab Creative Hub")}
+            </a>
+            <p>{t("Biaya perangkat sejauh ini didukung pendanaan proyek akademik dari dosen. Belum ada pendanaan ekuitas dari luar.")}</p>
+          </section>
+        </div>
       </section>
       <AboutAISection />
     </>

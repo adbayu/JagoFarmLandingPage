@@ -1,5 +1,8 @@
 import heroLight from "../../assets/herosection/hero_section_light.webp";
 
+export const primaryContactEmail = "haykal@jagofarm.dev";
+export const linkedinCompanyUrl = "";
+
 export const routes = [
   ["/", "Beranda"],
   ["/produk", "Produk"],
