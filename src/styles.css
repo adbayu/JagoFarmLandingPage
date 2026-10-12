@@ -711,6 +711,7 @@ form .button { width: fit-content; }
 .footer-links .meta, .footer-contact .meta { margin-bottom: 8px; }
 .footer-links a { width: fit-content; color: #b8c8bf; transition: color .2s ease, transform .2s ease; }
 .footer-links .footer-contact-email { max-width: 100%; overflow-wrap: anywhere; }
+.footer-links .footer-contact-email small { display: block; margin-bottom: 2px; color: #8da398; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
 .footer-links a:hover { color: #fff; transform: translateX(4px); }
 .footer-contact h3 { margin: 14px 0 12px; color: #fff; font-size: 1.45rem; }
 .footer-contact p { max-width: 310px; margin-bottom: 24px; }

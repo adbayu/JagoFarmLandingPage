@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { linkedinCompanyUrl, primaryContactEmail, routes } from "../data/content.js";
+import { contactEmails, linkedinCompanyUrl, routes } from "../data/content.js";
 import { useLanguage } from "../i18n.jsx";
 import { Arrow, Link } from "./navigation.jsx";
 
@@ -174,9 +174,14 @@ export function Footer() {
         </nav>
         <nav className="footer-links" aria-label={t("Kontak")}>
           <span className="meta">{t("Kontak")}</span>
-          <a className="footer-contact-email" href={`mailto:${primaryContactEmail}`} aria-label={`${t("Kirim email ke")} ${primaryContactEmail}`}>
-            {primaryContactEmail}
-          </a>
+          {contactEmails.map(({ name, email }) => (
+            <a className="footer-contact-email" key={email} href={`mailto:${email}`} aria-label={`${t("Kirim email ke")} ${name}`}>
+              <small>{name}</small>
+              {email.split("@")[0]}
+              <wbr />
+              @{email.split("@")[1]}
+            </a>
+          ))}
         </nav>
       </div>
       <div className="container footer-bottom">

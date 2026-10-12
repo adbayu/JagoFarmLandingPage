@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../i18n.jsx";
 import { adjacentTeamIndex } from "../team-navigation.js";
 import AboutAISection from "../components/AboutAISection.jsx";
-import { primaryContactEmail } from "../data/content.js";
+import { teamEmails } from "../data/content.js";
 
 const team = [
   {
@@ -10,7 +10,7 @@ const team = [
     name: "Haykal",
     role: "Co-founder & CTO",
     github: "https://github.com/Haykal-9",
-    email: primaryContactEmail,
+    email: teamEmails.haykal,
     position: {
       "--x": "5.39%",
       "--y": "19.43%",
@@ -31,7 +31,7 @@ const team = [
     name: "Ega",
     role: "Co-founder & CEO",
     github: "https://github.com/egafiandra",
-    email: "egafiandraapratama@jagofarm.dev",
+    email: teamEmails.ega,
     position: {
       "--x": "28.73%",
       "--y": "21.92%",
@@ -52,7 +52,7 @@ const team = [
     name: "Bayu",
     role: "Co-founder & Head Dev Ops",
     github: "https://github.com/adbayu",
-    email: "andibayuhanggoro28@jagofarm.dev",
+    email: teamEmails.bayu,
     position: {
       "--x": "49.38%",
       "--y": "18.88%",
@@ -73,7 +73,7 @@ const team = [
     name: "Shafnat",
     role: "Co-founder & COO",
     github: "https://github.com/ShafnatFR",
-    email: "shafnatfuainiramadhan@jagofarm.dev",
+    email: teamEmails.shafnat,
     position: {
       "--x": "65.33%",
       "--y": "19.43%",

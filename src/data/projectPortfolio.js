@@ -16,6 +16,17 @@ const bestariPhotos = [
   { title: "Claude untuk lahan Bestari", image: "/assets/projects/bestari/claude-untuk-lahan-bestari.svg", alt: "Dokumentasi penggunaan Claude untuk membantu pekerjaan di lahan Bestari." },
 ];
 
+const ecosystemPhotos = [
+  { title: "Ikan di kolam terpal", image: "/assets/projects/ekosistem-sirkular/ikan-di-kolam-terpal.webp", alt: "Ikan berenang di kolam terpal dengan tanaman air mengapung di permukaan." },
+  { title: "Area budidaya dari kejauhan", image: "/assets/projects/ekosistem-sirkular/area-budidaya.webp", alt: "Kolam terpal, drum, dan kontainer toska di area budidaya terbuka." },
+  { title: "Tanaman air menutupi permukaan kolam", image: "/assets/projects/ekosistem-sirkular/kolam-tanaman-air.webp", alt: "Tanaman air hijau menutupi sebagian besar permukaan kolam terpal yang dipasangi jaring." },
+  { title: "Azolla dari dekat", image: "/assets/projects/ekosistem-sirkular/azolla-dari-dekat.webp", alt: "Azolla mengapung di permukaan air dalam wadah bening." },
+  { title: "Tanaman sayur di pot jaring", image: "/assets/projects/ekosistem-sirkular/tanaman-pot-jaring.webp", alt: "Tanaman sayur tumbuh di pot jaring pada wadah bulat." },
+  { title: "Bibit tanaman di bak tanam", image: "/assets/projects/ekosistem-sirkular/bibit-bak-tanam.webp", alt: "Beberapa bak tanam berisi bibit tanaman muda di atas tanah." },
+  { title: "Wadah filter di atas drum biru", image: "/assets/projects/ekosistem-sirkular/filter-di-atas-drum.webp", alt: "Wadah bening berisi media filter dan air di atas drum biru." },
+  { title: "Drum biru dengan saringan jaring dan pipa air", image: "/assets/projects/ekosistem-sirkular/drum-saringan-jaring.webp", alt: "Drum biru dengan saringan jaring hijau dan pipa yang mengalirkan air." },
+];
+
 export const projectPortfolio = [
   {
     slug: "bestari",
@@ -71,8 +82,9 @@ export const projectPortfolio = [
     kind: "Eksplorasi ekosistem",
     name: "Ekosistem Sirkular",
     description: "Area eksplorasi yang mempelajari hubungan ikan, sisa budidaya, azolla, dan tanaman.",
-    cover: null,
-    gallery: [],
+    cover: ecosystemPhotos[0],
+    gallery: ecosystemPhotos,
+    photoNote: "Foto area budidaya JagoFarm: kolam ikan, tanaman air, bak tanam, dan perangkat penyaring air.",
   },
 ].map((project) => ({
   ...project,

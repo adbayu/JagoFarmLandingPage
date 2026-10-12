@@ -1,6 +1,18 @@
 import heroLight from "../../assets/herosection/hero_section_light.webp";
 
-export const primaryContactEmail = "haykal@jagofarm.dev";
+export const teamEmails = {
+  haykal: "haykal@jagofarm.dev",
+  ega: "egafiandra@jagofarm.dev",
+  bayu: "andibayuhanggoro28@jagofarm.dev",
+  shafnat: "shafnat@jagofarm.dev",
+};
+export const primaryContactEmail = teamEmails.haykal;
+export const contactEmails = [
+  { name: "Haykal", email: teamEmails.haykal },
+  { name: "Ega", email: teamEmails.ega },
+  { name: "Bayu", email: teamEmails.bayu },
+  { name: "Shafnat", email: teamEmails.shafnat },
+];
 export const linkedinCompanyUrl = "https://www.linkedin.com/company/jagofarm";
 
 export const routes = [
