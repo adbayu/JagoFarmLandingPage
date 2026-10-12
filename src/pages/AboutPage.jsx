@@ -29,7 +29,7 @@ const team = [
   {
     id: "ega",
     name: "Ega",
-    role: "CEO",
+    role: "Co-founder & CEO",
     github: "https://github.com/egafiandra",
     email: "egafiandraapratama@jagofarm.dev",
     position: {
@@ -50,7 +50,7 @@ const team = [
   {
     id: "bayu",
     name: "Bayu",
-    role: "Head Dev Ops",
+    role: "Co-founder & Head Dev Ops",
     github: "https://github.com/adbayu",
     email: "andibayuhanggoro28@jagofarm.dev",
     position: {
@@ -71,7 +71,7 @@ const team = [
   {
     id: "shafnat",
     name: "Shafnat",
-    role: "COO",
+    role: "Co-founder & COO",
     github: "https://github.com/ShafnatFR",
     email: "shafnatfuainiramadhan@jagofarm.dev",
     position: {
@@ -475,11 +475,12 @@ export default function AboutPage() {
             ))}
           </ul>
           <section className="team-support" aria-labelledby="team-support-title">
-            <h3 id="team-support-title">{t("JagoFarm dibina oleh Kolab Creative Hub.")}</h3>
+            <h3 id="team-support-title">{t("JagoFarm adalah startup di bawah naungan Kolab Creative Hub.")}</h3>
             <a href="https://kolab-landing.pages.dev/" target="_blank" rel="noopener noreferrer">
               {t("Kunjungi Kolab Creative Hub")}
             </a>
-            <p>{t("Biaya perangkat sejauh ini didukung pendanaan proyek akademik dari dosen. Belum ada pendanaan ekuitas dari luar.")}</p>
+            <p>{t("Kolab berperan sebagai pengarah.")}</p>
+            <p>{t("JagoFarm dimulai pada 30 Juni 2026.")}</p>
           </section>
         </div>
       </section>
