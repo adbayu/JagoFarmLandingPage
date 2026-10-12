@@ -10,30 +10,24 @@ import ProductsPage from "./pages/ProductsPage.jsx";
 import ProjectsPortfolioPage from "./pages/ProjectsPortfolioPage.jsx";
 import ProjectGalleryPage from "./pages/ProjectGalleryPage.jsx";
 import { projectPortfolio } from "./data/projectPortfolio.js";
+import { localizedHref, parseRoute } from "./routing.js";
 
 const projectGalleryPages = Object.fromEntries(projectPortfolio.map(({ slug }) => [`/proyek/${slug}`, ProjectGalleryPage]));
 const pages = { "/": HomePage, "/tentang": AboutPage, "/produk": ProductsPage, "/proyek": ProjectsPortfolioPage, ...projectGalleryPages };
 const HERO_THEME_DURATION_MS = 2400;
-
-function routeFromHash() {
-  const path = window.location.hash.slice(1) || "/";
-  return pages[path] ? path : "/";
-}
 
 function routeUsesOverlayHeader(path) {
   return path === "/" || path === "/produk" || path === "/proyek" || path.startsWith("/proyek/") || path === "/tentang";
 }
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState(routeFromHash);
+  const [route, setRoute] = useState(() => parseRoute(window.location.pathname));
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme === "dark" ? "dark" : "light");
-  const [language, setLanguage] = useState(() => {
-    try { return localStorage.getItem("jagofarm-language") === "en" ? "en" : "id"; } catch { return "id"; }
-  });
-  const [headerSolid, setHeaderSolid] = useState(() => !routeUsesOverlayHeader(routeFromHash()));
+  const { path: currentPath, language, albumSlug } = route;
+  const [headerSolid, setHeaderSolid] = useState(() => !routeUsesOverlayHeader(parseRoute(window.location.pathname).path));
   const lenisRef = useRef(null);
   const themeTransitionRef = useRef(null);
-  const Page = pages[currentPath];
+  const Page = pages[currentPath] ?? HomePage;
 
   function toggleTheme() {
     const nextTheme = theme === "light" ? "dark" : "light";
@@ -46,7 +40,9 @@ export default function App() {
   }
 
   function toggleLanguage() {
-    setLanguage((currentLanguage) => currentLanguage === "id" ? "en" : "id");
+    const nextLanguage = language === "id" ? "en" : "id";
+    window.history.pushState(null, "", localizedHref(currentPath, nextLanguage));
+    window.dispatchEvent(new Event("jagofarm:navigate"));
   }
 
   useEffect(() => {
@@ -57,7 +53,6 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.lang = language;
-    try { localStorage.setItem("jagofarm-language", language); } catch {}
   }, [language]);
 
   useEffect(() => {
@@ -76,7 +71,15 @@ export default function App() {
   }, []);
 
   useEffect(() => () => window.clearTimeout(themeTransitionRef.current), []);
-  useEffect(() => { const update = () => setCurrentPath(routeFromHash()); window.addEventListener("hashchange", update); return () => window.removeEventListener("hashchange", update); }, []);
+  useEffect(() => {
+    const update = () => setRoute(parseRoute(window.location.pathname));
+    window.addEventListener("popstate", update);
+    window.addEventListener("jagofarm:navigate", update);
+    return () => {
+      window.removeEventListener("popstate", update);
+      window.removeEventListener("jagofarm:navigate", update);
+    };
+  }, []);
 
   useEffect(() => {
     const hero = document.querySelector(".hero, .product-hero, .team-hero, .documentation-hero, .projects-hero, .project-gallery-hero");
@@ -84,7 +87,7 @@ export default function App() {
     const observer = new IntersectionObserver(([entry]) => setHeaderSolid(entry.intersectionRatio < 0.08), { threshold: [0, 0.08] });
     observer.observe(hero);
     return () => observer.disconnect();
-  }, [currentPath]);
+  }, [route]);
 
   useEffect(() => {
     lenisRef.current?.scrollTo(0, { immediate: true });
@@ -95,12 +98,12 @@ export default function App() {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); } }), { threshold: 0.08, rootMargin: "0px 0px -8%" });
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
-  }, [currentPath]);
+  }, [route]);
 
   return (
     <LanguageProvider language={language}>
       <Header currentPath={currentPath} theme={theme} solid={headerSolid} onToggleTheme={toggleTheme} onToggleLanguage={toggleLanguage} />
-      <main><Page /></main>
+      <main><Page albumSlug={albumSlug} /></main>
       <Footer />
     </LanguageProvider>
   );

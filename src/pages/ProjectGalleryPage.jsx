@@ -6,9 +6,9 @@ import "./ProjectGalleryPage.css";
 
 import { useLanguage } from "../i18n.jsx";
 
-export default function ProjectGalleryPage() {
+export default function ProjectGalleryPage({ albumSlug }) {
   const { t } = useLanguage();
-  const slug = window.location.hash.slice(1).split("/")[2];
+  const slug = albumSlug;
   const project = projectPortfolio.find((item) => item.slug === slug) ?? projectPortfolio[0];
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(null);
   const lightboxRef = useRef(null);
