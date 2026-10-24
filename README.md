@@ -1,5 +1,7 @@
 ﻿# JagoFarm
 
+![Momen terbaik bersama JagoFarm](assets/jagofarm-momen-terbaik.png)
+
 Website React/Vite dengan pilihan bahasa Indonesia dan Inggris, tema terang/gelap, katalog produk, album proyek, dan profil tim.
 
 ## Development
