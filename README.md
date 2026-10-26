@@ -17,21 +17,15 @@ npm run dev
 
 CMS lokal untuk mengelola produk dan proyek (berjalan di `http://localhost:3333`):
 
-1. Buat file `.env` dari `.env.example`:
+1. Salin file template environment dan sesuaikan kredensial:
    ```sh
    cp .env.example .env
    ```
-2. Sesuaikan kredensial di `.env`:
-   ```ini
-   CMS_ADMIN_EMAIL=admin@jagofarm.dev
-   CMS_ADMIN_PASSWORD=password_anda
-   CMS_SESSION_SECRET=secret_acak_anda
-   ```
-3. Jalankan server CMS:
+2. Jalankan server CMS:
    ```sh
    npm run cms
    ```
-4. Buka `http://localhost:3333` di browser dan masuk menggunakan email serta password yang telah dikonfigurasi.
+3. Buka `http://localhost:3333` di browser dan masuk menggunakan kredensial yang telah dikonfigurasi di `.env`.
 
 ## Deployment
 
