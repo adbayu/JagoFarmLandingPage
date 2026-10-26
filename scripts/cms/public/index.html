@@ -31,24 +31,13 @@
       </div>
 
       <nav class="pb-nav">
-        <div class="pb-nav-section-label">Collections</div>
-        <button class="pb-nav-item active" data-collection="products" id="nav-products">
-          <svg class="pb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-            <line x1="12" y1="22.08" x2="12" y2="12"/>
-          </svg>
-          <span class="pb-nav-label">Products</span>
-          <span class="pb-count-badge" id="count-products">0</span>
-        </button>
-
-        <button class="pb-nav-item" data-collection="projects" id="nav-projects">
-          <svg class="pb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-          </svg>
-          <span class="pb-nav-label">Projects</span>
-          <span class="pb-count-badge" id="count-projects">0</span>
-        </button>
+        <div class="pb-nav-section-header">
+          <div class="pb-nav-section-label">Collections</div>
+          <button class="pb-add-collection-btn" id="btn-add-collection" type="button" title="Create new collection">+ New</button>
+        </div>
+        <div class="pb-collections-list" id="collections-list">
+          <!-- Dynamically rendered collection buttons -->
+        </div>
       </nav>
 
       <div class="pb-nav-system">
@@ -108,6 +97,13 @@
             <option value="all">All statuses</option>
           </select>
 
+          <button class="pb-btn pb-btn-danger" id="btn-delete-collection" type="button" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+            Delete collection
+          </button>
           <button class="pb-btn pb-btn-primary" id="btn-new-record">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="12" y1="5" x2="12" y2="19"/>
@@ -193,6 +189,38 @@
     <!-- Toast Notifications Container -->
     <div class="pb-toast-container" id="toast-container"></div>
   </div>
+
+  <!-- Collection Builder Modal -->
+  <dialog id="modal-collection" class="pb-modal">
+    <div class="pb-modal-card">
+      <div class="pb-modal-header">
+        <h3 id="modal-collection-title">New Collection</h3>
+        <button type="button" class="pb-modal-close" id="modal-collection-close">&times;</button>
+      </div>
+      <div class="pb-modal-body">
+        <div class="pb-form-group">
+          <label for="col-title">Collection Display Name *</label>
+          <input type="text" id="col-title" class="pb-input" placeholder="e.g. Partners, Team, Testimonials" required>
+        </div>
+        <div class="pb-form-group">
+          <label for="col-name">Collection ID (Identifier / File name) *</label>
+          <input type="text" id="col-name" class="pb-input mono" placeholder="e.g. partners" required>
+          <div class="pb-help">Saves to src/data/&lt;name&gt;.json. Lowercase, kebab-case.</div>
+        </div>
+        <div class="pb-form-group">
+          <label>Fields Schema</label>
+          <div class="pb-fields-builder" id="fields-builder-list">
+            <!-- Field items rendered here -->
+          </div>
+          <button type="button" class="pb-btn pb-btn-secondary" id="btn-builder-add-field" style="margin-top: 10px;">+ Add Field</button>
+        </div>
+      </div>
+      <div class="pb-modal-footer">
+        <button type="button" class="pb-btn pb-btn-secondary" id="btn-cancel-collection">Cancel</button>
+        <button type="button" class="pb-btn pb-btn-primary" id="btn-submit-collection">Create Collection</button>
+      </div>
+    </div>
+  </dialog>
 
   <script type="module" src="/cms.js"></script>
 </body>

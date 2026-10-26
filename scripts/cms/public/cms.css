@@ -903,3 +903,135 @@ body {
 @keyframes pbSpin {
   to { transform: rotate(360deg); }
 }
+
+/* Collection Builder & Dynamic Navigation Styles */
+.pb-nav-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px 4px;
+}
+
+.pb-nav-section-header .pb-nav-section-label {
+  padding: 0;
+}
+
+.pb-add-collection-btn {
+  background: transparent;
+  border: 1px solid var(--pb-border);
+  color: var(--pb-primary);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pb-add-collection-btn:hover {
+  background: var(--pb-primary);
+  color: #fff;
+  border-color: var(--pb-primary);
+}
+
+.pb-collections-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Modal Dialog */
+.pb-modal {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.6);
+  border: none;
+  display: none;
+  place-items: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.pb-modal[open] {
+  display: grid;
+}
+
+.pb-modal-card {
+  background: var(--pb-surface);
+  color: var(--pb-text);
+  border: 1px solid var(--pb-border);
+  border-radius: 12px;
+  width: min(640px, 100%);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--pb-shadow-lg);
+}
+
+.pb-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--pb-border);
+}
+
+.pb-modal-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.pb-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--pb-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.pb-modal-close:hover {
+  color: var(--pb-text);
+}
+
+.pb-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pb-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--pb-border);
+}
+
+.pb-fields-builder {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pb-field-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  background: var(--pb-surface-alt);
+  border: 1px solid var(--pb-border);
+  border-radius: 6px;
+}
+
+.pb-field-row input, .pb-field-row select {
+  padding: 6px 8px;
+  font-size: 12px;
+}
