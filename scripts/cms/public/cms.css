@@ -1035,3 +1035,111 @@ body {
   padding: 6px 8px;
   font-size: 12px;
 }
+
+/* Login & Authentication UI */
+.pb-login-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  background-color: var(--pb-bg);
+  padding: 24px;
+}
+.pb-login-card {
+  width: min(420px, 100%);
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-border);
+  border-radius: 14px;
+  padding: 36px 32px;
+  box-shadow: var(--pb-shadow-lg);
+}
+.pb-login-brand {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.pb-login-brand h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 12px;
+  color: var(--pb-text);
+}
+.pb-login-subtitle {
+  font-size: 13px;
+  color: var(--pb-muted);
+  margin-top: 4px;
+}
+.pb-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pb-password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.pb-password-wrap input {
+  padding-right: 36px;
+}
+.pb-pw-toggle {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--pb-muted);
+  padding: 4px;
+}
+.pb-btn-block {
+  width: 100%;
+  justify-content: center;
+  padding: 10px;
+  font-size: 14px;
+}
+.pb-user-session {
+  border-top: 1px solid var(--pb-border);
+  padding-top: 10px;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pb-user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+}
+.pb-user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--pb-primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pb-user-email {
+  font-size: 12px;
+  color: var(--pb-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pb-alert {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.pb-alert-danger {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
