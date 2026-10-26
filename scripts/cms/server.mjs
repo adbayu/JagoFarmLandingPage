@@ -32,16 +32,33 @@ const MIME_TYPES = {
 
 const KEBAB_CASE_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-const ADMIN_EMAIL = process.env.CMS_ADMIN_EMAIL || "admin@jagofarm.dev";
-const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || "jagofarm2026!";
-const SESSION_SECRET = process.env.CMS_SESSION_SECRET || "jagofarm-local-session-secret-change-in-prod-2026";
+const ENV_PATH = path.join(ROOT_DIR, ".env");
+if (existsSync(ENV_PATH)) {
+  try {
+    process.loadEnvFile(ENV_PATH);
+  } catch {}
+}
+
+const DEFAULT_SECRET = crypto.randomBytes(32).toString("hex");
+
+function getSessionSecret() {
+  return process.env.CMS_SESSION_SECRET || DEFAULT_SECRET;
+}
+
+function getAdminCredentials() {
+  return {
+    email: process.env.CMS_ADMIN_EMAIL,
+    password: process.env.CMS_ADMIN_PASSWORD,
+  };
+}
+
 const TOKEN_COOKIE_NAME = "jagofarm_cms_token";
 const TOKEN_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 function createSessionToken(email) {
   const expiresAt = Date.now() + TOKEN_MAX_AGE_MS;
   const payload = `${email}.${expiresAt}`;
-  const hmac = crypto.createHmac("sha256", SESSION_SECRET).update(payload).digest("hex");
+  const hmac = crypto.createHmac("sha256", getSessionSecret()).update(payload).digest("hex");
   return `${payload}.${hmac}`;
 }
 
@@ -59,7 +76,7 @@ function verifySessionToken(token) {
   const expiresAt = parseInt(expiresAtStr, 10);
   if (isNaN(expiresAt) || Date.now() > expiresAt) return null;
 
-  const expectedHmac = crypto.createHmac("sha256", SESSION_SECRET).update(payload).digest("hex");
+  const expectedHmac = crypto.createHmac("sha256", getSessionSecret()).update(payload).digest("hex");
 
   // Constant time comparison to prevent timing attacks
   const sigBuf = Buffer.from(signature);
@@ -147,9 +164,17 @@ export function createCmsServer() {
         }
 
         const { email, password } = payload || {};
-        const validEmail = email && email.toLowerCase().trim() === ADMIN_EMAIL.toLowerCase();
+        const { email: adminEmail, password: adminPassword } = getAdminCredentials();
+
+        if (!adminEmail || !adminPassword) {
+          res.writeHead(500, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "CMS admin credentials are not configured. Please set CMS_ADMIN_EMAIL and CMS_ADMIN_PASSWORD in your .env file." }));
+          return;
+        }
+
+        const validEmail = email && email.toLowerCase().trim() === adminEmail.toLowerCase();
         const passBuf = Buffer.from(password || "");
-        const targetPassBuf = Buffer.from(ADMIN_PASSWORD);
+        const targetPassBuf = Buffer.from(adminPassword);
         const validPass = passBuf.length === targetPassBuf.length && crypto.timingSafeEqual(passBuf, targetPassBuf);
 
         if (!validEmail || !validPass) {
@@ -158,14 +183,14 @@ export function createCmsServer() {
           return;
         }
 
-        const token = createSessionToken(ADMIN_EMAIL);
+        const token = createSessionToken(adminEmail);
         const isSecure = (req.headers["x-forwarded-proto"] === "https");
         const cookie = `${TOKEN_COOKIE_NAME}=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isSecure ? "; Secure" : ""}`;
         res.writeHead(200, {
           "Content-Type": "application/json",
           "Set-Cookie": cookie,
         });
-        res.end(JSON.stringify({ success: true, email: ADMIN_EMAIL, token }));
+        res.end(JSON.stringify({ success: true, email: adminEmail, token }));
         return;
       }
 
@@ -487,6 +512,10 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   }
 
   const server = createCmsServer();
+  const { email: adminEmail, password: adminPassword } = getAdminCredentials();
+  if (!adminEmail || !adminPassword) {
+    console.warn("⚠️  [CMS] Warning: CMS_ADMIN_EMAIL and/or CMS_ADMIN_PASSWORD are not set in .env or environment.");
+  }
   server.listen(port, () => {
     console.log("JagoFarm CMS server running at http://localhost:" + port);
   });

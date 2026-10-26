@@ -12,6 +12,19 @@ const PROJECTS_JSON = path.join(ROOT_DIR, "src/data/projects.json");
 const SCHEMA_JSON = path.join(ROOT_DIR, "src/data/_schema.json");
 const PORT = 3334;
 
+const ENV_PATH = path.join(ROOT_DIR, ".env");
+if (existsSync(ENV_PATH)) {
+  try {
+    process.loadEnvFile(ENV_PATH);
+  } catch {}
+}
+
+const testEmail = process.env.CMS_ADMIN_EMAIL || "test-admin@jagofarm.dev";
+const testPassword = process.env.CMS_ADMIN_PASSWORD || "test-secret-2026!";
+
+if (!process.env.CMS_ADMIN_EMAIL) process.env.CMS_ADMIN_EMAIL = testEmail;
+if (!process.env.CMS_ADMIN_PASSWORD) process.env.CMS_ADMIN_PASSWORD = testPassword;
+
 async function runTest() {
   const server = createCmsServer();
   await new Promise((resolve) => server.listen(PORT, resolve));
@@ -39,7 +52,7 @@ async function runTest() {
     const resInvalidLogin = await fetch(`http://localhost:${PORT}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: "admin@jagofarm.dev", password: "wrongpassword!" }),
+      body: JSON.stringify({ email: testEmail, password: "wrongpassword!" }),
     });
     assert.equal(resInvalidLogin.status, 401, "POST /api/auth/login with wrong password must return 401");
     const invalidJson = await resInvalidLogin.json();
@@ -49,12 +62,12 @@ async function runTest() {
     const resValidLogin = await fetch(`http://localhost:${PORT}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: "admin@jagofarm.dev", password: "jagofarm2026!" }),
+      body: JSON.stringify({ email: testEmail, password: testPassword }),
     });
     assert.equal(resValidLogin.status, 200, "POST /api/auth/login with valid credentials must return 200");
     const loginData = await resValidLogin.json();
     assert.equal(loginData.success, true);
-    assert.equal(loginData.email, "admin@jagofarm.dev");
+    assert.equal(loginData.email, testEmail);
     assert(loginData.token, "Login must return session token");
 
     // Extract cookie from Set-Cookie header
@@ -73,7 +86,7 @@ async function runTest() {
     assert.equal(resAuthMe.status, 200, "GET /api/auth/me authenticated must return 200");
     const meData = await resAuthMe.json();
     assert.equal(meData.authenticated, true);
-    assert.equal(meData.email, "admin@jagofarm.dev");
+    assert.equal(meData.email, testEmail);
 
     // Test Bearer token on GET /api/auth/me
     const resBearerMe = await fetch(`http://localhost:${PORT}/api/auth/me`, {
