@@ -1,0 +1,221 @@
+[
+  {
+    "slug": "bestari",
+    "number": "01",
+    "status": "berjalan",
+    "kind": "Proyek lapangan",
+    "name": "Bestari",
+    "description": "Dokumentasi kegiatan JagoFarm di lahan Bestari, dari persiapan dan pemantauan lapangan hingga perangkat IoT dan peninjauan data.",
+    "cover": {
+      "title": "Ega di saung Bestari",
+      "image": "/assets/projects/bestari/ega-di-saung-bestari.svg",
+      "alt": "Ega di area saung proyek Bestari."
+    },
+    "gallery": [
+      {
+        "title": "Ega di saung Bestari",
+        "image": "/assets/projects/bestari/ega-di-saung-bestari.svg",
+        "alt": "Ega di area saung proyek Bestari."
+      },
+      {
+        "title": "Persiapan lahan kedua",
+        "image": "/assets/projects/bestari/persiapan-lahan-kedua.svg",
+        "alt": "Persiapan penanaman di lahan kedua proyek Bestari."
+      },
+      {
+        "title": "Pemasangan PLTS",
+        "image": "/assets/projects/bestari/pemasangan-plts.svg",
+        "alt": "Dokumentasi pemasangan PLTS di proyek Bestari."
+      },
+      {
+        "title": "Pemasangan PLTS · dokumentasi tambahan",
+        "image": "/assets/projects/bestari/pemasangan-plts-2.svg",
+        "alt": "Dokumentasi tambahan pemasangan PLTS di proyek Bestari."
+      },
+      {
+        "title": "Stasiun cuaca",
+        "image": "/assets/projects/bestari/stasiun-cuaca.svg",
+        "alt": "Stasiun cuaca di area proyek Bestari."
+      },
+      {
+        "title": "Perangkat IoT v2",
+        "image": "/assets/projects/bestari/alat-iot-v2.svg",
+        "alt": "Perangkat IoT versi 2 untuk proyek Bestari."
+      },
+      {
+        "title": "Perangkat IoT v2 · dokumentasi tambahan",
+        "image": "/assets/projects/bestari/alat-iot-v2-2.svg",
+        "alt": "Dokumentasi tambahan perangkat IoT versi 2."
+      },
+      {
+        "title": "Dashboard perangkat v1",
+        "image": "/assets/projects/bestari/dashboard-alat-v1.svg",
+        "alt": "Dashboard untuk pengecekan data dari perangkat versi 1."
+      },
+      {
+        "title": "Koordinat lahan dengan Claude",
+        "image": "/assets/projects/bestari/koordinat-lahan-claude.svg",
+        "alt": "Daftar koordinat lahan yang disusun dengan bantuan Claude."
+      },
+      {
+        "title": "Penempatan titik di lahan dengan Claude",
+        "image": "/assets/projects/bestari/penempatan-titik-lahan-claude.svg",
+        "alt": "Penggunaan Claude untuk membantu menentukan titik pada lahan."
+      },
+      {
+        "title": "Dokumentasi lapangan · 20 September 2026",
+        "image": "/assets/projects/bestari/dokumentasi-2026-09-20.svg",
+        "alt": "Foto dokumentasi lapangan proyek Bestari, 20 September 2026."
+      },
+      {
+        "title": "Dokumentasi lapangan · 28 September 2026",
+        "image": "/assets/projects/bestari/dokumentasi-2026-09-28.svg",
+        "alt": "Foto dokumentasi lapangan proyek Bestari, 28 September 2026."
+      },
+      {
+        "title": "Dokumentasi lapangan · 4 Oktober 2026",
+        "image": "/assets/projects/bestari/dokumentasi-2026-10-04.svg",
+        "alt": "Foto dokumentasi lapangan proyek Bestari, 4 Oktober 2026."
+      },
+      {
+        "title": "Dokumentasi lapangan · 7 Oktober 2026",
+        "image": "/assets/projects/bestari/dokumentasi-2026-10-07.svg",
+        "alt": "Foto dokumentasi lapangan proyek Bestari, 7 Oktober 2026."
+      },
+      {
+        "title": "Claude untuk lahan Bestari",
+        "image": "/assets/projects/bestari/claude-untuk-lahan-bestari.svg",
+        "alt": "Dokumentasi penggunaan Claude untuk membantu pekerjaan di lahan Bestari."
+      }
+    ],
+    "photoNote": "Album ini berisi dokumentasi khusus proyek Bestari dari arsip lapangan yang diberikan.",
+    "partners": [
+      {
+        "name": "JagoAI",
+        "slug": "jagoai",
+        "logo": "/assets/projects/bestari/partner-jagoai.svg",
+        "website": "https://jagoai.dev/"
+      },
+      {
+        "name": "Sorgumi",
+        "slug": "sorgumi",
+        "logo": "/assets/projects/bestari/partner-sorgumi.svg"
+      },
+      {
+        "name": "Kampung Sorgum",
+        "slug": "kampung-sorgum",
+        "logo": "/assets/projects/bestari/partner-kampung-sorgum.svg",
+        "website": "https://kampungsorgum.com/"
+      }
+    ]
+  },
+  {
+    "slug": "pkm",
+    "number": "02",
+    "status": "berjalan",
+    "kind": "Pengabdian kepada masyarakat",
+    "name": "PKM",
+    "description": "Program JagoFarm dalam ranah pengabdian kepada masyarakat.",
+    "cover": null,
+    "gallery": [],
+    "photoNote": "Belum ada foto untuk proyek ini."
+  },
+  {
+    "slug": "sensor-ph-air",
+    "number": "03",
+    "status": "berjalan",
+    "kind": "Sensor & instrumentasi",
+    "name": "Sensor pH Air",
+    "description": "pH adalah salah satu pembacaan sensor pada perangkat IoT JagoFarm.",
+    "cover": null,
+    "gallery": [],
+    "photoNote": "Belum ada foto untuk proyek ini."
+  },
+  {
+    "slug": "iot",
+    "number": "04",
+    "status": "berjalan",
+    "kind": "Sistem informasi",
+    "name": "IoT untuk Budidaya",
+    "description": "Perangkat IoT v2 dan dashboard perangkat v1 sudah dibuat untuk pengecekan data budidaya.",
+    "cover": {
+      "title": "Perangkat IoT v2",
+      "image": "/assets/projects/bestari/alat-iot-v2.svg",
+      "alt": "Perangkat IoT versi 2 untuk proyek Bestari."
+    },
+    "gallery": [
+      {
+        "title": "Perangkat IoT v2",
+        "image": "/assets/projects/bestari/alat-iot-v2.svg",
+        "alt": "Perangkat IoT versi 2 untuk proyek Bestari."
+      },
+      {
+        "title": "Perangkat IoT v2 · dokumentasi tambahan",
+        "image": "/assets/projects/bestari/alat-iot-v2-2.svg",
+        "alt": "Dokumentasi tambahan perangkat IoT versi 2."
+      },
+      {
+        "title": "Dashboard perangkat v1",
+        "image": "/assets/projects/bestari/dashboard-alat-v1.svg",
+        "alt": "Dashboard untuk pengecekan data dari perangkat versi 1."
+      }
+    ],
+    "photoNote": "Foto perangkat dan dashboard di album ini berasal dari dokumentasi proyek Bestari."
+  },
+  {
+    "slug": "ekosistem-sirkular",
+    "number": "05",
+    "status": "berjalan",
+    "kind": "Eksplorasi ekosistem",
+    "name": "Ekosistem Sirkular",
+    "description": "Area eksplorasi yang mempelajari hubungan ikan, sisa budidaya, azolla, dan tanaman.",
+    "cover": {
+      "title": "Ikan di kolam terpal",
+      "image": "/assets/projects/ekosistem-sirkular/ikan-di-kolam-terpal.webp",
+      "alt": "Ikan berenang di kolam terpal dengan tanaman air mengapung di permukaan."
+    },
+    "gallery": [
+      {
+        "title": "Ikan di kolam terpal",
+        "image": "/assets/projects/ekosistem-sirkular/ikan-di-kolam-terpal.webp",
+        "alt": "Ikan berenang di kolam terpal dengan tanaman air mengapung di permukaan."
+      },
+      {
+        "title": "Area budidaya dari kejauhan",
+        "image": "/assets/projects/ekosistem-sirkular/area-budidaya.webp",
+        "alt": "Kolam terpal, drum, dan kontainer toska di area budidaya terbuka."
+      },
+      {
+        "title": "Tanaman air menutupi permukaan kolam",
+        "image": "/assets/projects/ekosistem-sirkular/kolam-tanaman-air.webp",
+        "alt": "Tanaman air hijau menutupi sebagian besar permukaan kolam terpal yang dipasangi jaring."
+      },
+      {
+        "title": "Azolla dari dekat",
+        "image": "/assets/projects/ekosistem-sirkular/azolla-dari-dekat.webp",
+        "alt": "Azolla mengapung di permukaan air dalam wadah bening."
+      },
+      {
+        "title": "Tanaman sayur di pot jaring",
+        "image": "/assets/projects/ekosistem-sirkular/tanaman-pot-jaring.webp",
+        "alt": "Tanaman sayur tumbuh di pot jaring pada wadah bulat."
+      },
+      {
+        "title": "Bibit tanaman di bak tanam",
+        "image": "/assets/projects/ekosistem-sirkular/bibit-bak-tanam.webp",
+        "alt": "Beberapa bak tanam berisi bibit tanaman muda di atas tanah."
+      },
+      {
+        "title": "Wadah filter di atas drum biru",
+        "image": "/assets/projects/ekosistem-sirkular/filter-di-atas-drum.webp",
+        "alt": "Wadah bening berisi media filter dan air di atas drum biru."
+      },
+      {
+        "title": "Drum biru dengan saringan jaring dan pipa air",
+        "image": "/assets/projects/ekosistem-sirkular/drum-saringan-jaring.webp",
+        "alt": "Drum biru dengan saringan jaring hijau dan pipa yang mengalirkan air."
+      }
+    ],
+    "photoNote": "Foto area budidaya JagoFarm: kolam ikan, tanaman air, bak tanam, dan perangkat penyaring air."
+  }
+]
