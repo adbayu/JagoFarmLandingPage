@@ -14,16 +14,15 @@ const PORT = 3334;
 
 const ENV_PATH = path.join(ROOT_DIR, ".env");
 if (existsSync(ENV_PATH)) {
-  try {
-    process.loadEnvFile(ENV_PATH);
-  } catch {}
+  process.loadEnvFile(ENV_PATH);
 }
 
-const testEmail = process.env.CMS_ADMIN_EMAIL || "test-admin@jagofarm.dev";
-const testPassword = process.env.CMS_ADMIN_PASSWORD || "test-secret-2026!";
+const testEmail = process.env.CMS_ADMIN_EMAIL;
+const testPassword = process.env.CMS_ADMIN_PASSWORD;
 
-if (!process.env.CMS_ADMIN_EMAIL) process.env.CMS_ADMIN_EMAIL = testEmail;
-if (!process.env.CMS_ADMIN_PASSWORD) process.env.CMS_ADMIN_PASSWORD = testPassword;
+if (!testEmail || !testPassword) {
+  throw new Error("CMS_ADMIN_EMAIL and CMS_ADMIN_PASSWORD must be configured in your local .env file or environment.");
+}
 
 async function runTest() {
   const server = createCmsServer();
@@ -52,7 +51,7 @@ async function runTest() {
     const resInvalidLogin = await fetch(`http://localhost:${PORT}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: testEmail, password: "wrongpassword!" }),
+      body: JSON.stringify({ email: testEmail, password: testPassword + "_invalid_test" }),
     });
     assert.equal(resInvalidLogin.status, 401, "POST /api/auth/login with wrong password must return 401");
     const invalidJson = await resInvalidLogin.json();
