@@ -58,5 +58,25 @@
     "categoryLabel": "Tanaman",
     "icon": "plant",
     "status": "riset"
+  },
+  {
+    "id": "jabran-vronka",
+    "name": "jabran vronka",
+    "description": "bang jabran",
+    "image": "/assets/products/1792997772933-155128950_16910059756_1786973352091.png",
+    "category": "teknologi",
+    "categoryLabel": "Teknologi",
+    "icon": "sensor",
+    "status": "prototype"
+  },
+  {
+    "id": "ikan-lele",
+    "name": "Ikan lele",
+    "description": "sunda free living",
+    "image": "/assets/products/1792998011208-062789000_1496475543-lele-mengandung-3000-sel-kanker-hoaks-atau-fakta__1_.jpg",
+    "category": "akuakultur",
+    "categoryLabel": "Akuakultur",
+    "icon": "fish",
+    "status": "riset"
   }
 ]

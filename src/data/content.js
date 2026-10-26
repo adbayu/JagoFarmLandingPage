@@ -25,6 +25,10 @@ export const routes = [
 import productsData from "./products.json" with { type: "json" };
 export const products = productsData;
 
+export function isAgriculturalProduct(product) {
+  return Boolean(product && product.category !== "teknologi");
+}
+
 export const productStatusLabels = {
   prototype: "Prototype",
   riset: "Dalam eksplorasi",

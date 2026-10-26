@@ -1,5 +1,5 @@
 import { useLanguage } from "../i18n.jsx";
-import { productStatusLabels } from "../data/content.js";
+import { isAgriculturalProduct, productStatusLabels } from "../data/content.js";
 import { StageIcon } from "./media.jsx";
 
 const SHOW_MARKETPLACES = false;
@@ -16,7 +16,7 @@ export default function ProductCard({ product, onSelect }) {
   return (
     <article className="catalog-card">
       <div className="catalog-card-media">
-        <img src={product.image} alt={product.id === "iot" ? t("Foto prototype sensor dan dashboard JagoFarm") : `${t("Ilustrasi konsep")} ${t(product.name)}`} loading="lazy" decoding="async" />
+        <img src={product.image} alt={!isAgriculturalProduct(product) ? (product.id === "iot" ? t("Foto prototype sensor dan dashboard JagoFarm") : t(product.name)) : `${t("Ilustrasi konsep")} ${t(product.name)}`} loading="lazy" decoding="async" />
         <span className="catalog-status">{t(productStatusLabels[product.status])}</span>
         <span className="catalog-product-icon"><StageIcon type={product.icon} /></span>
       </div>

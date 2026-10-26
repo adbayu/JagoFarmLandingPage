@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import ProductCard from "../components/ProductCard.jsx";
 import ProductFilters from "../components/ProductFilters.jsx";
-import { productCategories, products, productStatusLabels } from "../data/content.js";
+import { isAgriculturalProduct, productCategories, products, productStatusLabels } from "../data/content.js";
 import { useLanguage } from "../i18n.jsx";
 import "./ProductsPage.css";
 
@@ -11,8 +11,8 @@ export default function ProductsPage() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const dialogRef = useRef(null);
   const filteredProducts = activeCategory === "all" ? products : products.filter((product) => product.category === activeCategory);
-  const hasAgriculturalProducts = filteredProducts.some((product) => product.id !== "iot");
-  const hasTechnologyProduct = filteredProducts.some((product) => product.id === "iot");
+  const hasAgriculturalProducts = filteredProducts.some(isAgriculturalProduct);
+  const hasTechnologyProduct = filteredProducts.some((product) => !isAgriculturalProduct(product));
 
   useEffect(() => {
     if (selectedProduct) dialogRef.current.showModal();
@@ -68,12 +68,12 @@ export default function ProductsPage() {
       <dialog className="product-detail-dialog" ref={dialogRef} aria-labelledby="product-detail-title" data-lenis-prevent onClose={() => setSelectedProduct(null)} onClick={(event) => { if (event.target === event.currentTarget) setSelectedProduct(null); }}>
         {selectedProduct && <>
           <button className="product-detail-close" type="button" onClick={() => setSelectedProduct(null)} aria-label={t("Tutup")}>×</button>
-          <img className="product-detail-image" src={selectedProduct.image} alt={selectedProduct.id === "iot" ? t("Foto prototype sensor dan dashboard JagoFarm") : `${t("Ilustrasi konsep")} ${t(selectedProduct.name)}`} />
+          <img className="product-detail-image" src={selectedProduct.image} alt={!isAgriculturalProduct(selectedProduct) ? (selectedProduct.id === "iot" ? t("Foto prototype sensor dan dashboard JagoFarm") : t(selectedProduct.name)) : `${t("Ilustrasi konsep")} ${t(selectedProduct.name)}`} />
           <div className="product-detail-copy">
             <span className="number">{t(selectedProduct.categoryLabel)} · {t(productStatusLabels[selectedProduct.status])}</span>
             <h2 id="product-detail-title">{t(selectedProduct.name)}</h2>
             <p>{t(selectedProduct.description)}</p>
-            {selectedProduct.id !== "iot" && <p className="product-detail-note">{t("Gambar produk pertanian merupakan ilustrasi konsep. Produk pertanian masih dalam tahap riset dan belum tersedia di marketplace.")}</p>}
+            {isAgriculturalProduct(selectedProduct) && <p className="product-detail-note">{t("Gambar produk pertanian merupakan ilustrasi konsep. Produk pertanian masih dalam tahap riset dan belum tersedia di marketplace.")}</p>}
           </div>
         </>}
       </dialog>
