@@ -205,7 +205,7 @@ async function runTest() {
         const schema = JSON.parse(await fs.readFile(SCHEMA_JSON, "utf8"));
         const cleaned = schema.filter(c => c.name !== "test-testimonials");
         if (cleaned.length !== schema.length) {
-          await fs.writeFile(SCHEMA_JSON, JSON.stringify(cleaned, null, 2) + "\n", "utf8");
+          await fs.writeFile(SCHEMA_JSON, (JSON.stringify(cleaned, null, 2) + "\n").replace(/\r?\n/g, "\r\n"), "utf8");
         }
       } catch {}
     }

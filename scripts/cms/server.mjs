@@ -41,7 +41,7 @@ async function loadSchema() {
 }
 
 async function saveSchema(schema) {
-  await fs.writeFile(SCHEMA_JSON, JSON.stringify(schema, null, 2) + "\n", "utf8");
+  await fs.writeFile(SCHEMA_JSON, (JSON.stringify(schema, null, 2) + "\n").replace(/\r?\n/g, "\r\n"), "utf8");
 }
 
 async function readBody(req) {
