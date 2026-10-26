@@ -44,6 +44,8 @@ const drawerBtnCancel = document.getElementById('drawer-btn-cancel');
 const drawerBtnSave = document.getElementById('drawer-btn-save');
 const saveSpinner = document.getElementById('save-spinner');
 const toastContainer = document.getElementById('toast-container');
+const btnToggleTheme = document.getElementById('btn-toggle-theme');
+const themeToggleLabel = document.getElementById('theme-toggle-label');
 const btnOpenLogs = document.getElementById('btn-open-logs');
 const logsBackdrop = document.getElementById('logs-backdrop');
 const logsDrawer = document.getElementById('logs-drawer');
@@ -974,6 +976,33 @@ window.addEventListener('keydown', (e) => {
     }
   }
 });
+
+function updateThemeUI(theme) {
+  const isDark = theme === 'dark';
+  const moonIcon = btnToggleTheme?.querySelector('.theme-icon-moon');
+  const sunIcon = btnToggleTheme?.querySelector('.theme-icon-sun');
+  if (moonIcon) moonIcon.style.display = isDark ? 'none' : 'block';
+  if (sunIcon) sunIcon.style.display = isDark ? 'block' : 'none';
+  if (themeToggleLabel) {
+    themeToggleLabel.textContent = isDark ? 'Light mode' : 'Dark mode';
+  }
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.dataset.theme || 'light';
+  const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = nextTheme;
+  try {
+    localStorage.setItem('jagofarm-cms-theme', nextTheme);
+  } catch {}
+  updateThemeUI(nextTheme);
+  showToast(`Switched to ${nextTheme === 'dark' ? 'Dark' : 'Light'} mode`, 'info');
+}
+
+if (btnToggleTheme) {
+  btnToggleTheme.addEventListener('click', toggleTheme);
+  updateThemeUI(document.documentElement.dataset.theme || 'light');
+}
 
 // Init
 loadData();
