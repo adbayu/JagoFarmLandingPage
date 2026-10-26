@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JagoFarm CMS</title>
+  <link rel="stylesheet" href="/cms.css">
+</head>
+<body>
+  <div class="pb-app">
+    <!-- Left Sidebar -->
+    <aside class="pb-sidebar">
+      <div class="pb-brand">
+        <div class="pb-brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="pb-brand-text">
+          <span class="pb-brand-title">JagoFarm</span>
+          <span class="pb-badge">v1.0 (local)</span>
+        </div>
+      </div>
+
+      <nav class="pb-nav">
+        <div class="pb-nav-section-label">Collections</div>
+        <button class="pb-nav-item active" data-collection="products" id="nav-products">
+          <svg class="pb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+          <span class="pb-nav-label">Products</span>
+          <span class="pb-count-badge" id="count-products">0</span>
+        </button>
+
+        <button class="pb-nav-item" data-collection="projects" id="nav-projects">
+          <svg class="pb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span class="pb-nav-label">Projects</span>
+          <span class="pb-count-badge" id="count-projects">0</span>
+        </button>
+      </nav>
+
+      <div class="pb-nav-system">
+        <button class="pb-nav-item" id="btn-open-logs">
+          <svg class="pb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="4 17 10 11 4 5"/>
+            <line x1="12" y1="19" x2="20" y2="19"/>
+          </svg>
+          <span class="pb-nav-label">Build & Logs</span>
+        </button>
+        <a class="pb-nav-item" href="http://localhost:5173/" target="_blank" rel="noreferrer" id="link-preview">
+          <svg class="pb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          <span class="pb-nav-label">Preview Website</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="pb-main">
+      <header class="pb-header">
+        <div class="pb-header-left">
+          <h1 class="pb-collection-title" id="page-title">Products</h1>
+          <span class="pb-record-count" id="record-count-text">6 records</span>
+        </div>
+        <div class="pb-header-actions">
+          <div class="pb-search-box">
+            <svg class="pb-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="search-input" placeholder="Search by name, ID, category..." autocomplete="off">
+            <button class="pb-clear-btn" id="search-clear" style="display:none;">&times;</button>
+          </div>
+
+          <select id="filter-status" class="pb-select">
+            <option value="all">All statuses</option>
+          </select>
+
+          <button class="pb-btn pb-btn-primary" id="btn-new-record">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            New record
+          </button>
+        </div>
+      </header>
+
+      <!-- Table Container -->
+      <div class="pb-table-wrapper">
+        <table class="pb-table" id="data-table">
+          <thead>
+            <tr>
+              <th style="width: 60px;">Thumb</th>
+              <th class="sortable" data-sort="name">Name</th>
+              <th class="sortable" data-sort="category">Category / Kind</th>
+              <th class="sortable" data-sort="status">Status</th>
+              <th class="sortable" data-sort="id">ID / Slug</th>
+              <th style="width: 100px; text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+        <div class="pb-empty-state" id="empty-state" style="display: none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <p>No records found matching your query.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Slide-over Record Drawer -->
+    <div class="pb-drawer-backdrop" id="drawer-backdrop"></div>
+    <aside class="pb-drawer" id="record-drawer">
+      <div class="pb-drawer-header">
+        <h2 id="drawer-title">New Record</h2>
+        <button class="pb-close-btn" id="drawer-close" title="Close (Esc)">&times;</button>
+      </div>
+
+      <form class="pb-drawer-body" id="drawer-form">
+        <!-- Rendered dynamically depending on collection -->
+      </form>
+
+      <div class="pb-drawer-footer">
+        <button type="button" class="pb-btn pb-btn-danger" id="drawer-btn-delete" style="display: none;">Delete</button>
+        <div class="pb-drawer-footer-right">
+          <button type="button" class="pb-btn pb-btn-secondary" id="drawer-btn-cancel">Cancel</button>
+          <button type="button" class="pb-btn pb-btn-primary" id="drawer-btn-save">
+            <span class="pb-spinner" id="save-spinner" style="display: none;"></span>
+            Save changes
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Slide-up Build & Logs Terminal Drawer -->
+    <div class="pb-logs-backdrop" id="logs-backdrop"></div>
+    <div class="pb-logs-drawer" id="logs-drawer">
+      <div class="pb-logs-header">
+        <div class="pb-logs-title">
+          <svg class="pb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="4 17 10 11 4 5"/>
+            <line x1="12" y1="19" x2="20" y2="19"/>
+          </svg>
+          Build & Pre-render Logs
+        </div>
+        <div class="pb-logs-actions">
+          <button class="pb-btn pb-btn-secondary" id="btn-run-build">Trigger Build</button>
+          <button class="pb-close-btn" id="logs-close">&times;</button>
+        </div>
+      </div>
+      <div class="pb-logs-content">
+        <pre id="logs-pre">Click "Trigger Build" to run SSG prerender pipeline...</pre>
+      </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="pb-toast-container" id="toast-container"></div>
+  </div>
+
+  <script type="module" src="/cms.js"></script>
+</body>
+</html>
