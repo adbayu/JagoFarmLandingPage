@@ -12,8 +12,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.resolve(__dirname, "../../");
 const PUBLIC_CMS_DIR = path.join(__dirname, "public");
 const PUBLIC_ASSETS_DIR = path.join(ROOT_DIR, "public");
-const PRODUCTS_JSON = path.join(ROOT_DIR, "src/data/products.json");
-const PROJECTS_JSON = path.join(ROOT_DIR, "src/data/projects.json");
+const DATA_DIR = path.join(ROOT_DIR, "src/data");
+const SCHEMA_JSON = path.join(DATA_DIR, "_schema.json");
 
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -28,6 +28,21 @@ const MIME_TYPES = {
   ".jpeg": "image/jpeg",
   ".ico": "image/x-icon",
 };
+
+const KEBAB_CASE_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+async function loadSchema() {
+  if (!existsSync(SCHEMA_JSON)) return [];
+  try {
+    return JSON.parse(await fs.readFile(SCHEMA_JSON, "utf8"));
+  } catch {
+    return [];
+  }
+}
+
+async function saveSchema(schema) {
+  await fs.writeFile(SCHEMA_JSON, JSON.stringify(schema, null, 2) + "\n", "utf8");
+}
 
 async function readBody(req) {
   const chunks = [];
@@ -54,93 +69,202 @@ export function createCmsServer() {
     }
 
     try {
-      if (pathname === "/api/products" && method === "GET") {
-        const data = await fs.readFile(PRODUCTS_JSON, "utf8");
+      // API: GET /api/collections
+      if (pathname === "/api/collections" && method === "GET") {
+        const schema = await loadSchema();
         res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-        res.end(data);
+        res.end(JSON.stringify(schema, null, 2));
         return;
       }
 
-      if (pathname === "/api/products" && method === "PUT") {
+      // API: POST /api/collections
+      if (pathname === "/api/collections" && method === "POST") {
         const bodyBuf = await readBody(req);
-        let products;
+        let payload;
         try {
-          products = JSON.parse(bodyBuf.toString("utf8"));
+          payload = JSON.parse(bodyBuf.toString("utf8"));
         } catch {
           res.writeHead(400, { "Content-Type": "application/json" });
           res.end(JSON.stringify({ error: "Invalid JSON" }));
           return;
         }
 
-        if (!Array.isArray(products)) {
+        const { name, title, fields } = payload || {};
+        if (!name || typeof name !== "string" || !KEBAB_CASE_REGEX.test(name)) {
           res.writeHead(400, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: "Products payload must be an array" }));
+          res.end(JSON.stringify({ error: "Collection name must be lowercase kebab-case (e.g. partners, blog-posts)" }));
           return;
         }
 
-        for (const p of products) {
+        const schema = await loadSchema();
+        if (schema.some(c => c.name === name)) {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: `Collection "${name}" already exists` }));
+          return;
+        }
+
+        const newCol = {
+          name,
+          title: (title && typeof title === "string" ? title.trim() : name),
+          system: false,
+          fields: Array.isArray(fields) ? fields : []
+        };
+
+        const targetFile = path.join(DATA_DIR, `${name}.json`);
+        if (!existsSync(targetFile)) {
+          await fs.writeFile(targetFile, "[]\n", "utf8");
+        }
+
+        schema.push(newCol);
+        await saveSchema(schema);
+
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ success: true, collection: newCol }));
+        return;
+      }
+
+      // API: DELETE /api/collections/:name
+      const deleteMatch = pathname.match(/^\/api\/collections\/([a-zA-Z0-9_-]+)$/);
+      if (deleteMatch && method === "DELETE") {
+        const targetName = deleteMatch[1];
+        const schema = await loadSchema();
+        const existingIdx = schema.findIndex(c => c.name === targetName);
+
+        if (existingIdx === -1) {
+          res.writeHead(404, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: `Collection "${targetName}" not found` }));
+          return;
+        }
+
+        if (schema[existingIdx].system) {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "Cannot delete system collection" }));
+          return;
+        }
+
+        schema.splice(existingIdx, 1);
+        await saveSchema(schema);
+
+        const targetFile = path.join(DATA_DIR, `${targetName}.json`);
+        if (existsSync(targetFile)) {
           try {
-            validateProduct(p);
-          } catch (err) {
-            res.writeHead(400, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ error: err.message }));
+            await fs.unlink(targetFile);
+          } catch {}
+        }
+
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ success: true }));
+        return;
+      }
+
+      // API: GET /api/:collection
+      const colRecordMatch = pathname.match(/^\/api\/([a-zA-Z0-9_-]+)$/);
+      if (colRecordMatch && colRecordMatch[1] !== "collections" && colRecordMatch[1] !== "upload" && colRecordMatch[1] !== "build") {
+        const colName = colRecordMatch[1];
+        if (!KEBAB_CASE_REGEX.test(colName)) {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "Invalid collection name" }));
+          return;
+        }
+
+        const targetFile = path.join(DATA_DIR, `${colName}.json`);
+
+        if (method === "GET") {
+          if (!existsSync(targetFile)) {
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: `Collection "${colName}" does not exist` }));
             return;
           }
-        }
-
-        await fs.writeFile(PRODUCTS_JSON, JSON.stringify(products, null, 2) + "\n", "utf8");
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ success: true, count: products.length }));
-        return;
-      }
-
-      if (pathname === "/api/projects" && method === "GET") {
-        const data = await fs.readFile(PROJECTS_JSON, "utf8");
-        res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-        res.end(data);
-        return;
-      }
-
-      if (pathname === "/api/projects" && method === "PUT") {
-        const bodyBuf = await readBody(req);
-        let projects;
-        try {
-          projects = JSON.parse(bodyBuf.toString("utf8"));
-        } catch {
-          res.writeHead(400, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: "Invalid JSON" }));
+          const data = await fs.readFile(targetFile, "utf8");
+          res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+          res.end(data);
           return;
         }
 
-        if (!Array.isArray(projects)) {
-          res.writeHead(400, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: "Projects payload must be an array" }));
-          return;
-        }
-
-        for (const prj of projects) {
+        if (method === "PUT") {
+          const bodyBuf = await readBody(req);
+          let items;
           try {
-            validateProject(prj);
-          } catch (err) {
+            items = JSON.parse(bodyBuf.toString("utf8"));
+          } catch {
             res.writeHead(400, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ error: err.message }));
+            res.end(JSON.stringify({ error: "Invalid JSON" }));
             return;
           }
-        }
 
-        await fs.writeFile(PROJECTS_JSON, JSON.stringify(projects, null, 2) + "\n", "utf8");
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ success: true, count: projects.length }));
-        return;
+          if (!Array.isArray(items)) {
+            res.writeHead(400, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Payload must be an array" }));
+            return;
+          }
+
+          if (colName === "products") {
+            for (const p of items) {
+              try {
+                validateProduct(p);
+              } catch (err) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: err.message }));
+                return;
+              }
+            }
+          } else if (colName === "projects") {
+            for (const prj of items) {
+              try {
+                validateProject(prj);
+              } catch (err) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: err.message }));
+                return;
+              }
+            }
+          } else {
+            // Custom collection validation against schema
+            const schema = await loadSchema();
+            const colDef = schema.find(c => c.name === colName);
+            if (colDef && Array.isArray(colDef.fields)) {
+              const reqFields = colDef.fields.filter(f => f.required);
+              for (const it of items) {
+                if (!it || typeof it !== "object") {
+                  res.writeHead(400, { "Content-Type": "application/json" });
+                  res.end(JSON.stringify({ error: "Each item must be an object" }));
+                  return;
+                }
+                for (const rf of reqFields) {
+                  const val = it[rf.name];
+                  if (val === undefined || val === null || (typeof val === "string" && !val.trim())) {
+                    res.writeHead(400, { "Content-Type": "application/json" });
+                    res.end(JSON.stringify({ error: `Field "${rf.label || rf.name}" is required` }));
+                    return;
+                  }
+                }
+              }
+            }
+          }
+
+          await fs.writeFile(targetFile, JSON.stringify(items, null, 2) + "\n", "utf8");
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ success: true, count: items.length }));
+          return;
+        }
       }
 
+      // API: POST /api/upload?folder=<collection>&filename=<name>
       if (pathname === "/api/upload" && method === "POST") {
         const folder = parsedUrl.searchParams.get("folder");
         const rawFilename = parsedUrl.searchParams.get("filename") || "image.png";
 
-        if (folder !== "products" && folder !== "projects") {
+        if (!folder || !KEBAB_CASE_REGEX.test(folder)) {
           res.writeHead(400, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: "Invalid folder. Must be products or projects" }));
+          res.end(JSON.stringify({ error: "Invalid folder parameter" }));
+          return;
+        }
+
+        const schema = await loadSchema();
+        const validFolder = schema.some(c => c.name === folder) || folder === "products" || folder === "projects";
+        if (!validFolder) {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: `Invalid folder "${folder}". Must be a valid collection name.` }));
           return;
         }
 
@@ -162,6 +286,7 @@ export function createCmsServer() {
         return;
       }
 
+      // API: POST /api/build
       if (pathname === "/api/build" && method === "POST") {
         try {
           const { stdout, stderr } = await execAsync("npm run build", { cwd: ROOT_DIR });
@@ -174,6 +299,7 @@ export function createCmsServer() {
         return;
       }
 
+      // Static assets from public/assets
       if (pathname.startsWith("/assets/")) {
         const assetFilePath = path.join(PUBLIC_ASSETS_DIR, pathname);
         const normalized = path.normalize(assetFilePath);
@@ -188,6 +314,7 @@ export function createCmsServer() {
         }
       }
 
+      // Static files for CMS UI from scripts/cms/public
       let relativeFile = pathname === "/" ? "index.html" : pathname.replace(/^\//, "");
       let filePath = path.join(PUBLIC_CMS_DIR, relativeFile);
       let normalized = path.normalize(filePath);
@@ -211,6 +338,7 @@ export function createCmsServer() {
   });
 }
 
+// Direct execution
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   let port = 3333;
   const testPortIdx = process.argv.indexOf("--test-port");
