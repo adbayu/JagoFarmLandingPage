@@ -1,4 +1,5 @@
 import http from "node:http";
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import { createReadStream, existsSync } from "node:fs";
 import path from "node:path";
@@ -31,6 +32,54 @@ const MIME_TYPES = {
 
 const KEBAB_CASE_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
+const ADMIN_EMAIL = process.env.CMS_ADMIN_EMAIL || "admin@jagofarm.dev";
+const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || "jagofarm2026!";
+const SESSION_SECRET = process.env.CMS_SESSION_SECRET || "jagofarm-local-session-secret-change-in-prod-2026";
+const TOKEN_COOKIE_NAME = "jagofarm_cms_token";
+const TOKEN_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+function createSessionToken(email) {
+  const expiresAt = Date.now() + TOKEN_MAX_AGE_MS;
+  const payload = `${email}.${expiresAt}`;
+  const hmac = crypto.createHmac("sha256", SESSION_SECRET).update(payload).digest("hex");
+  return `${payload}.${hmac}`;
+}
+
+function verifySessionToken(token) {
+  if (!token || typeof token !== "string") return null;
+  const parts = token.split(".");
+  if (parts.length !== 3) return null;
+  const [email, expiresAtStr, signature] = parts;
+  const expiresAt = parseInt(expiresAtStr, 10);
+  if (isNaN(expiresAt) || Date.now() > expiresAt) return null;
+
+  const payload = `${email}.${expiresAtStr}`;
+  const expectedHmac = crypto.createHmac("sha256", SESSION_SECRET).update(payload).digest("hex");
+
+  // Constant time comparison to prevent timing attacks
+  const sigBuf = Buffer.from(signature);
+  const expBuf = Buffer.from(expectedHmac);
+  if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
+    return null;
+  }
+  return { email, expiresAt };
+}
+
+function extractTokenFromRequest(req) {
+  // 1. Check Authorization: Bearer ***
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    return authHeader.slice(7).trim();
+  }
+  // 2. Check Cookie: jagofarm_cms_token=<token>
+  const cookieHeader = req.headers.cookie;
+  if (cookieHeader) {
+    const match = cookieHeader.match(new RegExp(`(?:^|;\s*)${TOKEN_COOKIE_NAME}=([^;]+)`));
+    if (match) return decodeURIComponent(match[1]);
+  }
+  return null;
+}
+
 async function loadSchema() {
   if (!existsSync(SCHEMA_JSON)) return [];
   try {
@@ -60,7 +109,7 @@ export function createCmsServer() {
 
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
     if (method === "OPTIONS") {
       res.writeHead(204);
@@ -69,6 +118,65 @@ export function createCmsServer() {
     }
 
     try {
+      // API: POST /api/auth/login
+      if (pathname === "/api/auth/login" && method === "POST") {
+        const bodyBuf = await readBody(req);
+        let payload;
+        try {
+          payload = JSON.parse(bodyBuf.toString("utf8"));
+        } catch {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "Invalid JSON" }));
+          return;
+        }
+
+        const { email, password } = payload || {};
+        const validEmail = email && email.toLowerCase().trim() === ADMIN_EMAIL.toLowerCase();
+        const passBuf = Buffer.from(password || "");
+        const targetPassBuf = Buffer.from(ADMIN_PASSWORD);
+        const validPass = passBuf.length === targetPassBuf.length && crypto.timingSafeEqual(passBuf, targetPassBuf);
+
+        if (!validEmail || !validPass) {
+          res.writeHead(401, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "Invalid email or password" }));
+          return;
+        }
+
+        const token = createSessionToken(ADMIN_EMAIL);
+        const isSecure = (req.headers["x-forwarded-proto"] === "https");
+        const cookie = `${TOKEN_COOKIE_NAME}=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isSecure ? "; Secure" : ""}`;
+        res.writeHead(200, {
+          "Content-Type": "application/json",
+          "Set-Cookie": cookie,
+        });
+        res.end(JSON.stringify({ success: true, email: ADMIN_EMAIL, token }));
+        return;
+      }
+
+      // API: POST /api/auth/logout
+      if (pathname === "/api/auth/logout" && method === "POST") {
+        res.writeHead(200, {
+          "Content-Type": "application/json",
+          "Set-Cookie": `${TOKEN_COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`,
+        });
+        res.end(JSON.stringify({ success: true }));
+        return;
+      }
+
+      // API: GET /api/auth/me
+      if (pathname === "/api/auth/me" && method === "GET") {
+        const token = extractTokenFromRequest(req);
+        const session = verifySessionToken(token);
+        if (!session) {
+          res.writeHead(401, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ authenticated: false }));
+          return;
+        }
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ authenticated: true, email: session.email }));
+        return;
+      }
+
       // API: GET /api/collections
       if (pathname === "/api/collections" && method === "GET") {
         const schema = await loadSchema();
