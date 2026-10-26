@@ -1,13 +1,15 @@
-// JagoFarm CMS - PocketBase-Style Interactive Script
+// JagoFarm CMS - PocketBase-Style Interactive Script with Dynamic Collection Builder
 const state = {
   collection: 'products',
+  collections: [],
+  data: {},
   products: [],
   projects: [],
   search: '',
   statusFilter: 'all',
   sortField: 'name',
   sortAsc: true,
-  activeRecord: null, // null = new record, object = editing existing
+  activeRecord: null,
   isEditing: false,
   isDirty: false,
 };
@@ -21,17 +23,17 @@ const CATEGORIES = {
 
 const ICONS = ['sensor', 'fish', 'leaf', 'plant'];
 
-// Elements
-const navProducts = document.getElementById('nav-products');
-const navProjects = document.getElementById('nav-projects');
-const countProducts = document.getElementById('count-products');
-const countProjects = document.getElementById('count-projects');
+// DOM Elements
+const collectionsList = document.getElementById('collections-list');
+const btnAddCollection = document.getElementById('btn-add-collection');
+const btnDeleteCollection = document.getElementById('btn-delete-collection');
 const pageTitle = document.getElementById('page-title');
 const recordCountText = document.getElementById('record-count-text');
 const searchInput = document.getElementById('search-input');
 const searchClear = document.getElementById('search-clear');
 const filterStatus = document.getElementById('filter-status');
 const btnNewRecord = document.getElementById('btn-new-record');
+const dataTable = document.getElementById('data-table');
 const tableBody = document.getElementById('table-body');
 const emptyState = document.getElementById('empty-state');
 const drawerBackdrop = document.getElementById('drawer-backdrop');
@@ -53,6 +55,16 @@ const logsClose = document.getElementById('logs-close');
 const btnRunBuild = document.getElementById('btn-run-build');
 const logsPre = document.getElementById('logs-pre');
 
+// Modal Elements
+const modalCollection = document.getElementById('modal-collection');
+const modalCollectionClose = document.getElementById('modal-collection-close');
+const btnCancelCollection = document.getElementById('btn-cancel-collection');
+const btnSubmitCollection = document.getElementById('btn-submit-collection');
+const colTitleInput = document.getElementById('col-title');
+const colNameInput = document.getElementById('col-name');
+const fieldsBuilderList = document.getElementById('fields-builder-list');
+const btnBuilderAddField = document.getElementById('btn-builder-add-field');
+
 // Toast notifications
 export function showToast(message, type = 'success', duration = 3500) {
   const toast = document.createElement('div');
@@ -71,58 +83,164 @@ export function showToast(message, type = 'success', duration = 3500) {
   }, duration);
 }
 
-// Data Fetching
-async function loadData() {
-  try {
-    const [resProducts, resProjects] = await Promise.all([
-      fetch('/api/products').then(r => r.json()),
-      fetch('/api/projects').then(r => r.json()),
-    ]);
-    state.products = resProducts;
-    state.projects = resProjects;
-    updateCounts();
-    populateStatusFilter();
-    renderTable();
-  } catch (err) {
-    showToast('Failed to load data: ' + err.message, 'error');
-  }
-}
-
-function updateCounts() {
-  countProducts.textContent = state.products.length;
-  countProjects.textContent = state.projects.length;
-}
-
-function populateStatusFilter() {
-  filterStatus.innerHTML = '<option value="all">All statuses</option>';
-  if (state.collection === 'products') {
-    filterStatus.innerHTML += `
-      <option value="prototype">Prototype</option>
-      <option value="riset">Dalam eksplorasi (riset)</option>
-    `;
-  } else {
-    filterStatus.innerHTML += `
-      <option value="berjalan">Berjalan</option>
-      <option value="selesai">Selesai</option>
-    `;
-  }
-  filterStatus.value = state.statusFilter;
+// Helpers
+function getActiveCollectionDef() {
+  return state.collections.find(c => c.name === state.collection) || null;
 }
 
 function getRecords() {
-  return state.collection === 'products' ? state.products : state.projects;
+  if (state.collection === 'products') return state.products;
+  if (state.collection === 'projects') return state.projects;
+  return state.data[state.collection] || [];
 }
 
 function setRecords(newRecords) {
   if (state.collection === 'products') {
     state.products = newRecords;
-  } else {
+  } else if (state.collection === 'projects') {
     state.projects = newRecords;
+  }
+  state.data[state.collection] = newRecords;
+}
+
+// Data Fetching
+async function loadData() {
+  try {
+    const resCols = await fetch('/api/collections');
+    state.collections = await resCols.json();
+
+    // Load data for all collections
+    await Promise.all(state.collections.map(async (c) => {
+      try {
+        const res = await fetch(`/api/${c.name}`);
+        const items = await res.json();
+        state.data[c.name] = items;
+        if (c.name === 'products') state.products = items;
+        if (c.name === 'projects') state.projects = items;
+      } catch {
+        state.data[c.name] = [];
+      }
+    }));
+
+    if (!state.collections.some(c => c.name === state.collection)) {
+      state.collection = state.collections[0]?.name || 'products';
+    }
+
+    renderSidebarCollections();
+    updateCollectionUI();
+  } catch (err) {
+    showToast('Failed to load collections: ' + err.message, 'error');
   }
 }
 
+function renderSidebarCollections() {
+  if (!collectionsList) return;
+  collectionsList.innerHTML = '';
+
+  state.collections.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = `pb-nav-item ${state.collection === c.name ? 'active' : ''}`;
+    btn.dataset.collection = c.name;
+    btn.id = `nav-${c.name}`;
+
+    let iconSvg = '';
+    if (c.name === 'products') {
+      iconSvg = `
+        <svg class="pb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
+        </svg>
+      `;
+    } else if (c.name === 'projects') {
+      iconSvg = `
+        <svg class="pb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+        </svg>
+      `;
+    } else {
+      iconSvg = `
+        <svg class="pb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"/>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+        </svg>
+      `;
+    }
+
+    const count = (state.data[c.name] || []).length;
+    btn.innerHTML = `
+      ${iconSvg}
+      <span class="pb-nav-label">${c.title || c.name}</span>
+      <span class="pb-count-badge" id="count-${c.name}">${count}</span>
+    `;
+
+    btn.onclick = () => switchCollection(c.name);
+    collectionsList.appendChild(btn);
+  });
+}
+
+function updateCounts() {
+  state.collections.forEach(c => {
+    const el = document.getElementById(`count-${c.name}`);
+    if (el) el.textContent = (state.data[c.name] || []).length;
+  });
+}
+
+function updateCollectionUI() {
+  const colDef = getActiveCollectionDef();
+  if (colDef) {
+    pageTitle.textContent = colDef.title || colDef.name;
+    if (btnDeleteCollection) {
+      btnDeleteCollection.style.display = colDef.system ? 'none' : 'inline-flex';
+    }
+  }
+
+  // Update active class in sidebar
+  document.querySelectorAll('.pb-collections-list .pb-nav-item').forEach(btn => {
+    if (btn.dataset.collection === state.collection) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  populateStatusFilter();
+  renderTable();
+}
+
+function populateStatusFilter() {
+  filterStatus.innerHTML = '<option value="all">All statuses</option>';
+  if (state.collection === 'products') {
+    filterStatus.style.display = 'inline-block';
+    filterStatus.innerHTML += `
+      <option value="prototype">Prototype</option>
+      <option value="riset">Dalam eksplorasi (riset)</option>
+    `;
+  } else if (state.collection === 'projects') {
+    filterStatus.style.display = 'inline-block';
+    filterStatus.innerHTML += `
+      <option value="berjalan">Berjalan</option>
+      <option value="selesai">Selesai</option>
+    `;
+  } else {
+    // Custom collection: check if has status field
+    const colDef = getActiveCollectionDef();
+    const statusField = colDef?.fields?.find(f => f.name === 'status' && f.type === 'select');
+    if (statusField && statusField.options) {
+      filterStatus.style.display = 'inline-block';
+      statusField.options.forEach(opt => {
+        filterStatus.innerHTML += `<option value="${opt}">${opt}</option>`;
+      });
+    } else {
+      filterStatus.style.display = 'none';
+    }
+  }
+  filterStatus.value = state.statusFilter;
+}
+
 // Switching Collections
-function switchCollection(col) {
+async function switchCollection(col) {
   if (state.collection === col) return;
   state.collection = col;
   state.search = '';
@@ -130,18 +248,16 @@ function switchCollection(col) {
   searchClear.style.display = 'none';
   state.statusFilter = 'all';
 
-  if (col === 'products') {
-    navProducts.classList.add('active');
-    navProjects.classList.remove('active');
-    pageTitle.textContent = 'Products';
-  } else {
-    navProjects.classList.add('active');
-    navProducts.classList.remove('active');
-    pageTitle.textContent = 'Projects';
+  if (!state.data[col]) {
+    try {
+      const res = await fetch(`/api/${col}`);
+      state.data[col] = await res.json();
+    } catch {
+      state.data[col] = [];
+    }
   }
 
-  populateStatusFilter();
-  renderTable();
+  updateCollectionUI();
 }
 
 // Filtering and Sorting
@@ -151,11 +267,11 @@ function getFilteredRecords() {
 
   if (q) {
     records = records.filter(r => {
-      const name = (r.name || '').toLowerCase();
-      const idOrSlug = (r.id || r.slug || '').toLowerCase();
-      const cat = (r.category || r.kind || '').toLowerCase();
-      const desc = (r.description || '').toLowerCase();
-      return name.includes(q) || idOrSlug.includes(q) || cat.includes(q) || desc.includes(q);
+      return Object.values(r).some(val => {
+        if (typeof val === 'string') return val.toLowerCase().includes(q);
+        if (typeof val === 'number') return String(val).includes(q);
+        return false;
+      });
     });
   }
 
@@ -165,8 +281,8 @@ function getFilteredRecords() {
 
   // Sort
   records.sort((a, b) => {
-    let valA = a[state.sortField] || a.id || a.slug || '';
-    let valB = b[state.sortField] || b.id || b.slug || '';
+    let valA = a[state.sortField] ?? a.name ?? a.id ?? a.slug ?? '';
+    let valB = b[state.sortField] ?? b.name ?? b.id ?? b.slug ?? '';
     if (typeof valA === 'string') valA = valA.toLowerCase();
     if (typeof valB === 'string') valB = valB.toLowerCase();
     if (valA < valB) return state.sortAsc ? -1 : 1;
@@ -182,6 +298,56 @@ function renderTable() {
   const records = getFilteredRecords();
   recordCountText.textContent = `${records.length} of ${getRecords().length} records`;
 
+  const colDef = getActiveCollectionDef();
+  const thead = dataTable.querySelector('thead');
+
+  if (state.collection === 'products') {
+    thead.innerHTML = `
+      <tr>
+        <th style="width: 60px;">Thumb</th>
+        <th class="sortable" data-sort="name">Name</th>
+        <th class="sortable" data-sort="category">Category / Kind</th>
+        <th class="sortable" data-sort="status">Status</th>
+        <th class="sortable" data-sort="id">ID / Slug</th>
+        <th style="width: 100px; text-align: right;">Actions</th>
+      </tr>
+    `;
+  } else if (state.collection === 'projects') {
+    thead.innerHTML = `
+      <tr>
+        <th style="width: 60px;">Thumb</th>
+        <th class="sortable" data-sort="name">Name</th>
+        <th class="sortable" data-sort="kind">Category / Kind</th>
+        <th class="sortable" data-sort="status">Status</th>
+        <th class="sortable" data-sort="slug">ID / Slug</th>
+        <th style="width: 100px; text-align: right;">Actions</th>
+      </tr>
+    `;
+  } else {
+    // Custom Collection Table Headers (derived from first 4 fields)
+    const displayFields = (colDef?.fields || []).slice(0, 4);
+    thead.innerHTML = `
+      <tr>
+        ${displayFields.map(f => `<th class="sortable" data-sort="${f.name}">${f.label || f.name}</th>`).join('')}
+        <th style="width: 100px; text-align: right;">Actions</th>
+      </tr>
+    `;
+  }
+
+  // Bind sortable headers
+  thead.querySelectorAll('th.sortable').forEach(th => {
+    th.onclick = () => {
+      const field = th.dataset.sort;
+      if (state.sortField === field) {
+        state.sortAsc = !state.sortAsc;
+      } else {
+        state.sortField = field;
+        state.sortAsc = true;
+      }
+      renderTable();
+    };
+  });
+
   tableBody.innerHTML = '';
   if (records.length === 0) {
     emptyState.style.display = 'block';
@@ -189,61 +355,83 @@ function renderTable() {
   }
   emptyState.style.display = 'none';
 
-  records.forEach(r => {
+  records.forEach((r, idx) => {
     const tr = document.createElement('tr');
-    const isProduct = state.collection === 'products';
-    const idOrSlug = isProduct ? r.id : r.slug;
-    const catOrKind = isProduct ? (r.categoryLabel || r.category) : r.kind;
-    const thumbUrl = isProduct ? r.image : (r.cover ? r.cover.image : (r.gallery && r.gallery[0] ? r.gallery[0].image : ''));
-    const isSuccessStatus = r.status === 'prototype' || r.status === 'berjalan';
 
-    tr.innerHTML = `
-      <td>
-        ${thumbUrl
-          ? `<img src="${thumbUrl}" class="pb-thumb" alt="${r.name}" onerror="this.onerror=null;this.src='';this.className='pb-thumb-placeholder';">`
-          : `<div class="pb-thumb-placeholder">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-              </svg>
-            </div>`
+    if (state.collection === 'products') {
+      const isSuccessStatus = r.status === 'prototype';
+      tr.innerHTML = `
+        <td>
+          ${r.image
+            ? `<img src="${r.image}" class="pb-thumb" alt="${r.name}" onerror="this.onerror=null;this.src='';this.className='pb-thumb-placeholder';">`
+            : `<div class="pb-thumb-placeholder"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`
+          }
+        </td>
+        <td><div class="pb-table-title">${r.name}</div></td>
+        <td><span style="color:var(--pb-text-secondary);">${r.categoryLabel || r.category || '-'}</span></td>
+        <td>
+          <span class="pb-chip ${isSuccessStatus ? 'active' : 'muted'}">
+            <span class="pb-chip-dot"></span>
+            ${r.status}
+          </span>
+        </td>
+        <td><span class="pb-code">${r.id}</span></td>
+        <td>${renderRowActionButtons(r, idx)}</td>
+      `;
+    } else if (state.collection === 'projects') {
+      const thumbUrl = r.cover ? r.cover.image : (r.gallery && r.gallery[0] ? r.gallery[0].image : '');
+      const isSuccessStatus = r.status === 'berjalan';
+      tr.innerHTML = `
+        <td>
+          ${thumbUrl
+            ? `<img src="${thumbUrl}" class="pb-thumb" alt="${r.name}" onerror="this.onerror=null;this.src='';this.className='pb-thumb-placeholder';">`
+            : `<div class="pb-thumb-placeholder"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`
+          }
+        </td>
+        <td><div class="pb-table-title">${r.name}</div></td>
+        <td><span style="color:var(--pb-text-secondary);">${r.kind || '-'}</span></td>
+        <td>
+          <span class="pb-chip ${isSuccessStatus ? 'active' : 'muted'}">
+            <span class="pb-chip-dot"></span>
+            ${r.status}
+          </span>
+        </td>
+        <td><span class="pb-code">${r.slug}</span></td>
+        <td>${renderRowActionButtons(r, idx)}</td>
+      `;
+    } else {
+      // Custom Collection Row
+      const displayFields = (colDef?.fields || []).slice(0, 4);
+      let cellsHtml = '';
+      displayFields.forEach(f => {
+        const val = r[f.name];
+        if (f.type === 'file') {
+          cellsHtml += `
+            <td>
+              ${val
+                ? `<img src="${val}" class="pb-thumb" alt="File" onerror="this.onerror=null;this.src='';this.className='pb-thumb-placeholder';">`
+                : `<div class="pb-thumb-placeholder">-</div>`
+              }
+            </td>
+          `;
+        } else if (f.type === 'bool') {
+          cellsHtml += `
+            <td>
+              <span class="pb-chip ${val ? 'active' : 'muted'}">
+                <span class="pb-chip-dot"></span>
+                ${val ? 'Yes' : 'No'}
+              </span>
+            </td>
+          `;
+        } else if (f.name === 'id' || f.name === 'slug') {
+          cellsHtml += `<td><span class="pb-code">${val ?? '-'}</span></td>`;
+        } else {
+          cellsHtml += `<td><span style="color:var(--pb-text);">${val !== undefined && val !== null ? String(val) : '-'}</span></td>`;
         }
-      </td>
-      <td>
-        <div class="pb-table-title">${r.name}</div>
-      </td>
-      <td><span style="color:#475569;">${catOrKind || '-'}</span></td>
-      <td>
-        <span class="pb-chip ${isSuccessStatus ? 'active' : 'muted'}">
-          <span class="pb-chip-dot"></span>
-          ${r.status}
-        </span>
-      </td>
-      <td><span class="pb-code">${idOrSlug}</span></td>
-      <td>
-        <div class="pb-row-actions">
-          <button class="pb-icon-btn btn-edit" title="Edit">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 20h9"/>
-              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-            </svg>
-          </button>
-          <button class="pb-icon-btn btn-duplicate" title="Duplicate">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-            </svg>
-          </button>
-          <button class="pb-icon-btn btn-delete" title="Delete">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
-              <polyline points="3 6 5 6 21 6"/>
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-            </svg>
-          </button>
-        </div>
-      </td>
-    `;
+      });
+      cellsHtml += `<td>${renderRowActionButtons(r, idx)}</td>`;
+      tr.innerHTML = cellsHtml;
+    }
 
     // Row click opens editor
     tr.onclick = (e) => {
@@ -270,41 +458,77 @@ function renderTable() {
   });
 }
 
+function renderRowActionButtons(r, idx) {
+  return `
+    <div class="pb-row-actions">
+      <button class="pb-icon-btn btn-edit" title="Edit">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 20h9"/>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+      </button>
+      <button class="pb-icon-btn btn-duplicate" title="Duplicate">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
+      <button class="pb-icon-btn btn-delete" title="Delete">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+          <polyline points="3 6 5 6 21 6"/>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+        </svg>
+      </button>
+    </div>
+  `;
+}
+
 // Drawer: Open / Close / Form Building
 function openDrawer(record = null) {
-  const isProduct = state.collection === 'products';
+  const colDef = getActiveCollectionDef();
+  const colTitle = colDef?.title || colDef?.name || state.collection;
   state.isEditing = !!record;
   state.isDirty = false;
 
   if (record) {
     state.activeRecord = JSON.parse(JSON.stringify(record));
   } else {
-    state.activeRecord = isProduct
-      ? {
-          id: '',
-          name: '',
-          description: '',
-          image: '',
-          category: 'akuakultur',
-          categoryLabel: CATEGORIES['akuakultur'] || 'Akuakultur',
-          icon: 'fish',
-          status: 'riset'
-        }
-      : {
-          slug: '',
-          number: String(state.projects.length + 1).padStart(2, '0'),
-          name: '',
-          kind: 'Proyek lapangan',
-          status: 'berjalan',
-          description: '',
-          photoNote: '',
-          cover: null,
-          gallery: [],
-          partners: []
-        };
+    if (state.collection === 'products') {
+      state.activeRecord = {
+        id: '',
+        name: '',
+        description: '',
+        image: '',
+        category: 'akuakultur',
+        categoryLabel: CATEGORIES['akuakultur'] || 'Akuakultur',
+        icon: 'fish',
+        status: 'riset'
+      };
+    } else if (state.collection === 'projects') {
+      state.activeRecord = {
+        slug: '',
+        number: String(state.projects.length + 1).padStart(2, '0'),
+        name: '',
+        kind: 'Proyek lapangan',
+        status: 'berjalan',
+        description: '',
+        photoNote: '',
+        cover: null,
+        gallery: [],
+        partners: []
+      };
+    } else {
+      // Custom Collection default record
+      const def = {};
+      (colDef?.fields || []).forEach(f => {
+        def[f.name] = f.type === 'bool' ? false : (f.type === 'number' ? 0 : '');
+      });
+      state.activeRecord = def;
+    }
   }
 
-  drawerTitle.textContent = record ? `Edit ${isProduct ? 'Product' : 'Project'}: ${record.name}` : `New ${isProduct ? 'Product' : 'Project'}`;
+  const recName = record?.name || record?.title || record?.id || record?.slug || '';
+  drawerTitle.textContent = record ? `Edit ${colTitle}: ${recName}` : `New ${colTitle}`;
   drawerBtnDelete.style.display = record ? 'inline-flex' : 'none';
 
   buildDrawerForm();
@@ -323,10 +547,9 @@ function closeDrawer(force = false) {
 }
 
 function buildDrawerForm() {
-  const isProduct = state.collection === 'products';
   const r = state.activeRecord || {};
 
-  if (isProduct) {
+  if (state.collection === 'products') {
     drawerForm.innerHTML = `
       <div class="pb-form-group">
         <label for="f-name">Name *</label>
@@ -395,18 +618,12 @@ function buildDrawerForm() {
       </div>
     `;
 
-    // Bind auto-slug generator if new record
     if (!state.isEditing) {
-      let slugManuallyEdited = false;
       const nameInput = document.getElementById('f-name');
       const idInput = document.getElementById('f-id');
-      idInput.addEventListener('input', () => {
-        slugManuallyEdited = true;
-      });
       nameInput.addEventListener('input', () => {
-        if (!slugManuallyEdited) {
+        if (!state.isDirty) {
           idInput.value = slugify(nameInput.value);
-          idInput.classList.remove('pb-input-error');
         }
       });
     }
@@ -420,27 +637,20 @@ function buildDrawerForm() {
 
     const imageInput = document.getElementById('f-image');
     imageInput.addEventListener('input', () => {
-      const val = imageInput.value.trim();
-      if (state.activeRecord) state.activeRecord.image = val;
-      document.getElementById('product-image-preview').innerHTML = val ? renderImagePreview(val) : '';
-      imageInput.classList.remove('pb-input-error');
+      r.image = imageInput.value.trim();
+      document.getElementById('product-image-preview').innerHTML = r.image ? renderImagePreview(r.image) : '';
       state.isDirty = true;
     });
 
     setupDropzone('dropzone-product', 'file-product', 'products', (url) => {
-      if (state.activeRecord) state.activeRecord.image = url;
-      const imgInput = document.getElementById('f-image');
-      if (imgInput) {
-        imgInput.value = url;
-        imgInput.classList.remove('pb-input-error');
-      }
+      r.image = url;
+      imageInput.value = url;
       document.getElementById('product-image-preview').innerHTML = renderImagePreview(url);
       state.isDirty = true;
       showToast('Image uploaded successfully');
     });
 
-  } else {
-    // Projects Form
+  } else if (state.collection === 'projects') {
     r.gallery = r.gallery || [];
     drawerForm.innerHTML = `
       <div class="pb-form-group">
@@ -506,16 +716,11 @@ function buildDrawerForm() {
     `;
 
     if (!state.isEditing) {
-      let slugManuallyEdited = false;
       const nameInput = document.getElementById('f-name');
       const slugInput = document.getElementById('f-slug');
-      slugInput.addEventListener('input', () => {
-        slugManuallyEdited = true;
-      });
       nameInput.addEventListener('input', () => {
-        if (!slugManuallyEdited) {
+        if (!state.isDirty) {
           slugInput.value = slugify(nameInput.value);
-          slugInput.classList.remove('pb-input-error');
         }
       });
     }
@@ -523,53 +728,151 @@ function buildDrawerForm() {
     renderProjectGallery();
 
     setupDropzone('dropzone-project', 'file-project', 'projects', (url, filename) => {
-      if (!state.activeRecord) return;
       const newPhoto = {
         title: formatPhotoTitle(filename),
         image: url,
         alt: formatPhotoTitle(filename),
       };
-      if (!state.activeRecord.cover) {
-        state.activeRecord.cover = newPhoto;
+      if (!r.cover) {
+        r.cover = newPhoto;
       }
-      state.activeRecord.gallery = state.activeRecord.gallery || [];
-      state.activeRecord.gallery.push(newPhoto);
+      r.gallery.push(newPhoto);
       renderProjectGallery();
       state.isDirty = true;
       showToast('Photo added to gallery');
     });
+
+  } else {
+    // Custom Collection Dynamic Form
+    const colDef = getActiveCollectionDef();
+    let fieldsHtml = '';
+
+    (colDef?.fields || []).forEach(f => {
+      const val = r[f.name] ?? '';
+      const reqMark = f.required ? ' *' : '';
+
+      if (f.type === 'textarea') {
+        fieldsHtml += `
+          <div class="pb-form-group">
+            <label for="f-${f.name}">${f.label || f.name}${reqMark}</label>
+            <textarea id="f-${f.name}" class="pb-textarea" placeholder="${f.label || f.name}..." ${f.required ? 'required' : ''}>${val}</textarea>
+          </div>
+        `;
+      } else if (f.type === 'number') {
+        fieldsHtml += `
+          <div class="pb-form-group">
+            <label for="f-${f.name}">${f.label || f.name}${reqMark}</label>
+            <input type="number" id="f-${f.name}" class="pb-input mono" value="${val}" placeholder="0" ${f.required ? 'required' : ''}>
+          </div>
+        `;
+      } else if (f.type === 'select') {
+        const opts = Array.isArray(f.options) ? f.options : [];
+        fieldsHtml += `
+          <div class="pb-form-group">
+            <label for="f-${f.name}">${f.label || f.name}${reqMark}</label>
+            <select id="f-${f.name}" class="pb-select">
+              ${opts.map(o => `<option value="${o}" ${val === o ? 'selected' : ''}>${o}</option>`).join('')}
+            </select>
+          </div>
+        `;
+      } else if (f.type === 'bool') {
+        fieldsHtml += `
+          <div class="pb-form-group" style="flex-direction: row; align-items: center; gap: 8px;">
+            <input type="checkbox" id="f-${f.name}" ${val ? 'checked' : ''} style="width: 18px; height: 18px; cursor: pointer;">
+            <label for="f-${f.name}" style="margin: 0; cursor: pointer;">${f.label || f.name}${reqMark}</label>
+          </div>
+        `;
+      } else if (f.type === 'file') {
+        fieldsHtml += `
+          <div class="pb-form-group">
+            <label for="f-${f.name}">${f.label || f.name}${reqMark}</label>
+            <input type="text" id="f-${f.name}" class="pb-input mono" value="${val}" placeholder="/assets/${state.collection}/..." ${f.required ? 'required' : ''}>
+            <div class="pb-dropzone" id="dropzone-${f.name}" style="margin-top: 8px;">
+              <div class="pb-dropzone-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                </svg>
+                <div><strong>Choose a file</strong> or drag & drop</div>
+              </div>
+              <input type="file" id="file-${f.name}" accept="image/*" style="display:none;">
+            </div>
+            <div id="preview-${f.name}">
+              ${val ? renderImagePreview(val, f.name) : ''}
+            </div>
+          </div>
+        `;
+      } else {
+        // default text
+        fieldsHtml += `
+          <div class="pb-form-group">
+            <label for="f-${f.name}">${f.label || f.name}${reqMark}</label>
+            <input type="text" id="f-${f.name}" class="pb-input ${f.name === 'id' || f.name === 'slug' ? 'mono' : ''}" value="${val}" placeholder="${f.label || f.name}" ${f.required ? 'required' : ''}>
+          </div>
+        `;
+      }
+    });
+
+    drawerForm.innerHTML = fieldsHtml;
+
+    // Setup dynamic file dropzones
+    (colDef?.fields || []).forEach(f => {
+      if (f.type === 'file') {
+        const inputEl = document.getElementById(`f-${f.name}`);
+        if (inputEl) {
+          inputEl.addEventListener('input', () => {
+            const val = inputEl.value.trim();
+            r[f.name] = val;
+            const previewEl = document.getElementById(`preview-${f.name}`);
+            if (previewEl) previewEl.innerHTML = val ? renderImagePreview(val, f.name) : '';
+            state.isDirty = true;
+          });
+        }
+        setupDropzone(`dropzone-${f.name}`, `file-${f.name}`, state.collection, (url) => {
+          r[f.name] = url;
+          if (inputEl) inputEl.value = url;
+          const previewEl = document.getElementById(`preview-${f.name}`);
+          if (previewEl) previewEl.innerHTML = renderImagePreview(url, f.name);
+          state.isDirty = true;
+          showToast('File uploaded successfully');
+        });
+      }
+    });
   }
 
-  // Mark dirty and clear error highlights on user input
+  // Mark dirty on any user input
   drawerForm.querySelectorAll('input, select, textarea').forEach(el => {
-    el.addEventListener('input', () => {
-      el.classList.remove('pb-input-error');
-      state.isDirty = true;
-    });
-    el.addEventListener('change', () => {
-      el.classList.remove('pb-input-error');
-      state.isDirty = true;
-    });
+    el.addEventListener('input', () => { state.isDirty = true; });
+    el.addEventListener('change', () => { state.isDirty = true; });
   });
 }
 
-function renderImagePreview(url) {
+function renderImagePreview(url, fieldName = 'image') {
   return `
     <div class="pb-image-preview-box">
       <img src="${url}" class="pb-image-preview-thumb" alt="Preview">
       <div class="pb-image-preview-info">
         <div class="pb-image-preview-path">${url}</div>
       </div>
-      <button type="button" class="pb-btn pb-btn-danger" style="padding: 4px 8px; font-size:12px;" onclick="window.clearProductImage()">Clear</button>
+      <button type="button" class="pb-btn pb-btn-danger" style="padding: 4px 8px; font-size:12px;" onclick="window.clearCustomImage('${fieldName}')">Clear</button>
     </div>
   `;
 }
 
 window.clearProductImage = () => {
   if (state.activeRecord) state.activeRecord.image = '';
-  const imgInput = document.getElementById('f-image');
-  if (imgInput) imgInput.value = '';
-  document.getElementById('product-image-preview').innerHTML = '';
+  const input = document.getElementById('f-image');
+  if (input) input.value = '';
+  const preview = document.getElementById('product-image-preview');
+  if (preview) preview.innerHTML = '';
+  state.isDirty = true;
+};
+
+window.clearCustomImage = (fieldName) => {
+  if (state.activeRecord) state.activeRecord[fieldName] = '';
+  const input = document.getElementById(`f-${fieldName}`);
+  if (input) input.value = '';
+  const preview = document.getElementById(`preview-${fieldName}`) || document.getElementById('product-image-preview');
+  if (preview) preview.innerHTML = '';
   state.isDirty = true;
 };
 
@@ -578,7 +881,7 @@ function renderProjectGallery() {
   if (!container) return;
   const r = state.activeRecord;
   if (!r || !r.gallery || r.gallery.length === 0) {
-    container.innerHTML = '<div style="grid-column: 1/-1; padding: 12px; color: #64748b; font-size: 13px;">No photos in gallery yet.</div>';
+    container.innerHTML = '<div style="grid-column: 1/-1; padding: 12px; color: var(--pb-muted); font-size: 13px;">No photos in gallery yet.</div>';
     return;
   }
 
@@ -595,7 +898,7 @@ function renderProjectGallery() {
           <button type="button" class="pb-btn ${isCover ? 'pb-btn-primary' : 'pb-btn-secondary'}" style="padding:3px 8px; font-size:11px;" onclick="window.setAsCover(${idx})">
             ${isCover ? 'Cover photo' : 'Set as cover'}
           </button>
-          <button type="button" class="pb-icon-btn" style="color:#ef4444;" onclick="window.deleteGalleryPhoto(${idx})" title="Remove photo">&times;</button>
+          <button type="button" class="pb-icon-btn" style="color:var(--pb-danger);" onclick="window.deleteGalleryPhoto(${idx})" title="Remove photo">&times;</button>
         </div>
       </div>
     `;
@@ -696,14 +999,13 @@ function clearFieldErrors() {
 
 // Saving Record
 async function saveRecord() {
-  const isProduct = state.collection === 'products';
   clearFieldErrors();
   saveSpinner.style.display = 'inline-block';
   drawerBtnSave.disabled = true;
 
   try {
     let updatedPayload;
-    if (isProduct) {
+    if (state.collection === 'products') {
       const id = document.getElementById('f-id').value.trim();
       const name = document.getElementById('f-name').value.trim();
       const category = document.getElementById('f-category').value;
@@ -746,8 +1048,8 @@ async function saveRecord() {
       if (!res.ok) throw new Error(data.error || 'Failed to save product');
 
       state.products = updatedPayload;
-    } else {
-      // Projects
+      state.data.products = updatedPayload;
+    } else if (state.collection === 'projects') {
       const slug = document.getElementById('f-slug').value.trim();
       const number = document.getElementById('f-number').value.trim();
       const name = document.getElementById('f-name').value.trim();
@@ -794,6 +1096,62 @@ async function saveRecord() {
       if (!res.ok) throw new Error(data.error || 'Failed to save project');
 
       state.projects = updatedPayload;
+      state.data.projects = updatedPayload;
+    } else {
+      // Custom Collection Saving
+      const colDef = getActiveCollectionDef();
+      const recordObj = {};
+      const missing = [];
+
+      (colDef?.fields || []).forEach(f => {
+        const input = document.getElementById(`f-${f.name}`);
+        if (!input) return;
+
+        let val;
+        if (f.type === 'bool') {
+          val = input.checked;
+        } else if (f.type === 'number') {
+          val = input.value === '' ? null : Number(input.value);
+        } else {
+          val = input.value.trim();
+        }
+
+        if (f.required && (val === '' || val === null || val === undefined)) {
+          missing.push(f.label || f.name);
+          markFieldError(`f-${f.name}`);
+        }
+        recordObj[f.name] = val;
+      });
+
+      if (missing.length) {
+        throw new Error(`Please fill all required fields: ${missing.join(', ')}.`);
+      }
+
+      const currentList = [...(state.data[state.collection] || [])];
+      if (state.isEditing) {
+        const idx = currentList.indexOf(state.activeRecord);
+        if (idx !== -1) {
+          currentList[idx] = recordObj;
+        } else {
+          // match by id or slug if exists
+          const matchIdx = currentList.findIndex(item => (item.id && item.id === state.activeRecord.id) || (item.slug && item.slug === state.activeRecord.slug));
+          if (matchIdx !== -1) currentList[matchIdx] = recordObj;
+          else currentList.push(recordObj);
+        }
+      } else {
+        currentList.push(recordObj);
+      }
+
+      const res = await fetch(`/api/${state.collection}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(currentList),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to save record');
+
+      state.data[state.collection] = currentList;
+      setRecords(currentList);
     }
 
     updateCounts();
@@ -813,13 +1171,13 @@ async function deleteRecord(record = null) {
   const target = record || state.activeRecord;
   if (!target) return;
 
-  const isProduct = state.collection === 'products';
-  const name = target.name;
+  const colDef = getActiveCollectionDef();
+  const name = target.name || target.title || target.id || target.slug || 'record';
   if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
 
   try {
     let updatedPayload;
-    if (isProduct) {
+    if (state.collection === 'products') {
       updatedPayload = state.products.filter(p => p.id !== target.id);
       const res = await fetch('/api/products', {
         method: 'PUT',
@@ -829,7 +1187,8 @@ async function deleteRecord(record = null) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to delete');
       state.products = updatedPayload;
-    } else {
+      state.data.products = updatedPayload;
+    } else if (state.collection === 'projects') {
       updatedPayload = state.projects.filter(p => p.slug !== target.slug);
       const res = await fetch('/api/projects', {
         method: 'PUT',
@@ -839,6 +1198,19 @@ async function deleteRecord(record = null) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to delete');
       state.projects = updatedPayload;
+      state.data.projects = updatedPayload;
+    } else {
+      const currentList = state.data[state.collection] || [];
+      updatedPayload = currentList.filter(item => item !== target);
+      const res = await fetch(`/api/${state.collection}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedPayload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to delete');
+      state.data[state.collection] = updatedPayload;
+      setRecords(updatedPayload);
     }
 
     updateCounts();
@@ -853,19 +1225,145 @@ async function deleteRecord(record = null) {
 // Duplicate Record
 function duplicateRecord(record) {
   const copy = JSON.parse(JSON.stringify(record));
-  const isProduct = state.collection === 'products';
-  if (isProduct) {
+  if (state.collection === 'products') {
     copy.id = `${copy.id}-copy`;
     copy.name = `${copy.name} (Copy)`;
-  } else {
+  } else if (state.collection === 'projects') {
     copy.slug = `${copy.slug}-copy`;
     copy.name = `${copy.name} (Copy)`;
     copy.number = `${parseInt(copy.number || '0', 10) + 1}`.padStart(2, '0');
+  } else {
+    if (copy.name) copy.name = `${copy.name} (Copy)`;
+    if (copy.title) copy.title = `${copy.title} (Copy)`;
+    if (copy.id) copy.id = `${copy.id}-copy`;
+    if (copy.slug) copy.slug = `${copy.slug}-copy`;
   }
   openDrawer(copy);
   state.isEditing = false;
   state.isDirty = true;
 }
+
+// Collection Builder Modal Handling
+function openCollectionModal() {
+  colTitleInput.value = '';
+  colNameInput.value = '';
+  fieldsBuilderList.innerHTML = '';
+
+  // Add default fields: name & description
+  addFieldRow('name', 'Name', 'text', true);
+  addFieldRow('description', 'Description', 'textarea', true);
+
+  modalCollection.showModal();
+}
+
+function closeCollectionModal() {
+  modalCollection.close();
+}
+
+function addFieldRow(name = '', label = '', type = 'text', required = false) {
+  const row = document.createElement('div');
+  row.className = 'pb-field-row';
+  row.innerHTML = `
+    <input type="text" class="pb-input f-name" placeholder="Field name (id)" value="${name}" required>
+    <input type="text" class="pb-input f-label" placeholder="Display label" value="${label}" required>
+    <select class="pb-select f-type">
+      <option value="text" ${type === 'text' ? 'selected' : ''}>Text</option>
+      <option value="textarea" ${type === 'textarea' ? 'selected' : ''}>Textarea</option>
+      <option value="number" ${type === 'number' ? 'selected' : ''}>Number</option>
+      <option value="file" ${type === 'file' ? 'selected' : ''}>File / Image</option>
+      <option value="bool" ${type === 'bool' ? 'selected' : ''}>Boolean</option>
+    </select>
+    <label style="display:flex;align-items:center;gap:4px;font-size:11px;cursor:pointer;">
+      <input type="checkbox" class="f-req" ${required ? 'checked' : ''}> Req
+    </label>
+    <button type="button" class="pb-icon-btn f-remove" style="color:var(--pb-danger);" title="Remove field">&times;</button>
+  `;
+
+  row.querySelector('.f-remove').onclick = () => row.remove();
+  fieldsBuilderList.appendChild(row);
+}
+
+colTitleInput.addEventListener('input', () => {
+  colNameInput.value = slugify(colTitleInput.value);
+});
+
+btnBuilderAddField.onclick = () => addFieldRow();
+
+btnSubmitCollection.onclick = async () => {
+  const title = colTitleInput.value.trim();
+  const name = colNameInput.value.trim();
+
+  if (!title || !name) {
+    showToast('Collection display name and ID are required', 'error');
+    return;
+  }
+
+  const fields = [];
+  const rows = fieldsBuilderList.querySelectorAll('.pb-field-row');
+  for (const row of rows) {
+    const fName = row.querySelector('.f-name').value.trim();
+    const fLabel = row.querySelector('.f-label').value.trim();
+    const fType = row.querySelector('.f-type').value;
+    const fReq = row.querySelector('.f-req').checked;
+
+    if (!fName) {
+      showToast('All fields must have a valid field name', 'error');
+      return;
+    }
+    fields.push({
+      name: slugify(fName),
+      label: fLabel || fName,
+      type: fType,
+      required: fReq,
+    });
+  }
+
+  try {
+    const res = await fetch('/api/collections', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, title, fields }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to create collection');
+
+    closeCollectionModal();
+    showToast(`Collection "${title}" created successfully`);
+    await loadData();
+    await switchCollection(name);
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+};
+
+// Delete Collection
+if (btnDeleteCollection) {
+  btnDeleteCollection.onclick = async () => {
+    const colDef = getActiveCollectionDef();
+    if (!colDef || colDef.system) return;
+
+    if (!confirm(`Are you sure you want to delete collection "${colDef.title || colDef.name}" and all its records? This cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/collections/${colDef.name}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to delete collection');
+
+      showToast(`Collection "${colDef.title || colDef.name}" deleted`);
+      state.collection = 'products';
+      await loadData();
+    } catch (err) {
+      showToast(err.message, 'error');
+    }
+  };
+}
+
+// Modal listeners
+if (btnAddCollection) btnAddCollection.onclick = openCollectionModal;
+if (modalCollectionClose) modalCollectionClose.onclick = closeCollectionModal;
+if (btnCancelCollection) btnCancelCollection.onclick = closeCollectionModal;
 
 // Helper: Slugify
 function slugify(text) {
@@ -884,30 +1382,13 @@ function formatPhotoTitle(filename) {
   return base.replace(/[-_]+/g, ' ').replace(/^\w/, c => c.toUpperCase());
 }
 
-// Event Listeners
-navProducts.onclick = () => switchCollection('products');
-navProjects.onclick = () => switchCollection('projects');
-
+// Global Event Listeners
 btnNewRecord.onclick = () => openDrawer(null);
 drawerClose.onclick = () => closeDrawer();
 drawerBtnCancel.onclick = () => closeDrawer();
 drawerBackdrop.onclick = () => closeDrawer();
 drawerBtnSave.onclick = saveRecord;
 drawerBtnDelete.onclick = () => deleteRecord();
-
-// Table Sorting
-document.querySelectorAll('th.sortable').forEach(th => {
-  th.onclick = () => {
-    const field = th.dataset.sort;
-    if (state.sortField === field) {
-      state.sortAsc = !state.sortAsc;
-    } else {
-      state.sortField = field;
-      state.sortAsc = true;
-    }
-    renderTable();
-  };
-});
 
 // Search and Status Filters
 searchInput.oninput = (e) => {
@@ -966,10 +1447,12 @@ btnRunBuild.onclick = async () => {
   }
 };
 
-// Keyboard Shortcuts (Esc closes drawers)
+// Keyboard Shortcuts (Esc closes drawers and modals)
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
-    if (logsDrawer.classList.contains('open')) {
+    if (modalCollection.hasAttribute('open')) {
+      closeCollectionModal();
+    } else if (logsDrawer.classList.contains('open')) {
       logsClose.click();
     } else if (recordDrawer.classList.contains('open')) {
       closeDrawer();
@@ -977,6 +1460,7 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
+// Theme handling
 function updateThemeUI(theme) {
   const isDark = theme === 'dark';
   const moonIcon = btnToggleTheme?.querySelector('.theme-icon-moon');
