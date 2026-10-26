@@ -177,6 +177,17 @@ export function createCmsServer() {
         return;
       }
 
+      // Protected API Gateway: check session for all other /api/* routes
+      if (pathname.startsWith("/api/")) {
+        const token = extractTokenFromRequest(req);
+        const session = verifySessionToken(token);
+        if (!session) {
+          res.writeHead(401, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "Unauthorized. Please sign in to access the CMS." }));
+          return;
+        }
+      }
+
       // API: GET /api/collections
       if (pathname === "/api/collections" && method === "GET") {
         const schema = await loadSchema();
