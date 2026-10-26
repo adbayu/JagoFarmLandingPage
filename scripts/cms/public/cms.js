@@ -270,11 +270,38 @@ function renderTable() {
 
 // Drawer: Open / Close / Form Building
 function openDrawer(record = null) {
-  state.activeRecord = record ? JSON.parse(JSON.stringify(record)) : null;
+  const isProduct = state.collection === 'products';
   state.isEditing = !!record;
   state.isDirty = false;
 
-  const isProduct = state.collection === 'products';
+  if (record) {
+    state.activeRecord = JSON.parse(JSON.stringify(record));
+  } else {
+    state.activeRecord = isProduct
+      ? {
+          id: '',
+          name: '',
+          description: '',
+          image: '',
+          category: 'akuakultur',
+          categoryLabel: CATEGORIES['akuakultur'] || 'Akuakultur',
+          icon: 'fish',
+          status: 'riset'
+        }
+      : {
+          slug: '',
+          number: String(state.projects.length + 1).padStart(2, '0'),
+          name: '',
+          kind: 'Proyek lapangan',
+          status: 'berjalan',
+          description: '',
+          photoNote: '',
+          cover: null,
+          gallery: [],
+          partners: []
+        };
+  }
+
   drawerTitle.textContent = record ? `Edit ${isProduct ? 'Product' : 'Project'}: ${record.name}` : `New ${isProduct ? 'Product' : 'Project'}`;
   drawerBtnDelete.style.display = record ? 'inline-flex' : 'none';
 
@@ -347,8 +374,10 @@ function buildDrawerForm() {
       </div>
 
       <div class="pb-form-group">
-        <label>Product Image *</label>
-        <div class="pb-dropzone" id="dropzone-product">
+        <label for="f-image">Product Image URL / Path *</label>
+        <input type="text" id="f-image" class="pb-input mono" value="${r.image || ''}" placeholder="/assets/products/example.webp" required>
+        <div class="pb-help">Enter static asset path or upload a new file below.</div>
+        <div class="pb-dropzone" id="dropzone-product" style="margin-top: 8px;">
           <div class="pb-dropzone-inner">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
@@ -366,11 +395,16 @@ function buildDrawerForm() {
 
     // Bind auto-slug generator if new record
     if (!state.isEditing) {
+      let slugManuallyEdited = false;
       const nameInput = document.getElementById('f-name');
       const idInput = document.getElementById('f-id');
+      idInput.addEventListener('input', () => {
+        slugManuallyEdited = true;
+      });
       nameInput.addEventListener('input', () => {
-        if (!state.isDirty) {
+        if (!slugManuallyEdited) {
           idInput.value = slugify(nameInput.value);
+          idInput.classList.remove('pb-input-error');
         }
       });
     }
@@ -382,8 +416,22 @@ function buildDrawerForm() {
       state.isDirty = true;
     });
 
+    const imageInput = document.getElementById('f-image');
+    imageInput.addEventListener('input', () => {
+      const val = imageInput.value.trim();
+      if (state.activeRecord) state.activeRecord.image = val;
+      document.getElementById('product-image-preview').innerHTML = val ? renderImagePreview(val) : '';
+      imageInput.classList.remove('pb-input-error');
+      state.isDirty = true;
+    });
+
     setupDropzone('dropzone-product', 'file-product', 'products', (url) => {
-      r.image = url;
+      if (state.activeRecord) state.activeRecord.image = url;
+      const imgInput = document.getElementById('f-image');
+      if (imgInput) {
+        imgInput.value = url;
+        imgInput.classList.remove('pb-input-error');
+      }
       document.getElementById('product-image-preview').innerHTML = renderImagePreview(url);
       state.isDirty = true;
       showToast('Image uploaded successfully');
@@ -456,11 +504,16 @@ function buildDrawerForm() {
     `;
 
     if (!state.isEditing) {
+      let slugManuallyEdited = false;
       const nameInput = document.getElementById('f-name');
       const slugInput = document.getElementById('f-slug');
+      slugInput.addEventListener('input', () => {
+        slugManuallyEdited = true;
+      });
       nameInput.addEventListener('input', () => {
-        if (!state.isDirty) {
+        if (!slugManuallyEdited) {
           slugInput.value = slugify(nameInput.value);
+          slugInput.classList.remove('pb-input-error');
         }
       });
     }
@@ -468,25 +521,33 @@ function buildDrawerForm() {
     renderProjectGallery();
 
     setupDropzone('dropzone-project', 'file-project', 'projects', (url, filename) => {
+      if (!state.activeRecord) return;
       const newPhoto = {
         title: formatPhotoTitle(filename),
         image: url,
         alt: formatPhotoTitle(filename),
       };
-      if (!r.cover) {
-        r.cover = newPhoto;
+      if (!state.activeRecord.cover) {
+        state.activeRecord.cover = newPhoto;
       }
-      r.gallery.push(newPhoto);
+      state.activeRecord.gallery = state.activeRecord.gallery || [];
+      state.activeRecord.gallery.push(newPhoto);
       renderProjectGallery();
       state.isDirty = true;
       showToast('Photo added to gallery');
     });
   }
 
-  // Mark dirty on any user input
+  // Mark dirty and clear error highlights on user input
   drawerForm.querySelectorAll('input, select, textarea').forEach(el => {
-    el.addEventListener('input', () => { state.isDirty = true; });
-    el.addEventListener('change', () => { state.isDirty = true; });
+    el.addEventListener('input', () => {
+      el.classList.remove('pb-input-error');
+      state.isDirty = true;
+    });
+    el.addEventListener('change', () => {
+      el.classList.remove('pb-input-error');
+      state.isDirty = true;
+    });
   });
 }
 
@@ -504,6 +565,8 @@ function renderImagePreview(url) {
 
 window.clearProductImage = () => {
   if (state.activeRecord) state.activeRecord.image = '';
+  const imgInput = document.getElementById('f-image');
+  if (imgInput) imgInput.value = '';
   document.getElementById('product-image-preview').innerHTML = '';
   state.isDirty = true;
 };
@@ -620,9 +683,19 @@ async function uploadFiles(files, folder, onUploadSuccess) {
   }
 }
 
+function markFieldError(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.add('pb-input-error');
+}
+
+function clearFieldErrors() {
+  drawerForm.querySelectorAll('.pb-input-error').forEach(el => el.classList.remove('pb-input-error'));
+}
+
 // Saving Record
 async function saveRecord() {
   const isProduct = state.collection === 'products';
+  clearFieldErrors();
   saveSpinner.style.display = 'inline-block';
   drawerBtnSave.disabled = true;
 
@@ -636,10 +709,16 @@ async function saveRecord() {
       const status = document.getElementById('f-status').value;
       const icon = document.getElementById('f-icon').value;
       const description = document.getElementById('f-description').value.trim();
-      const image = (state.activeRecord && state.activeRecord.image) || '';
+      const image = (document.getElementById('f-image')?.value.trim()) || (state.activeRecord && state.activeRecord.image) || '';
 
-      if (!id || !name || !description || !image) {
-        throw new Error('Please fill all required fields and upload an image.');
+      const missing = [];
+      if (!name) { missing.push('Name'); markFieldError('f-name'); }
+      if (!id) { missing.push('ID / Slug'); markFieldError('f-id'); }
+      if (!description) { missing.push('Description'); markFieldError('f-description'); }
+      if (!image) { missing.push('Product Image'); markFieldError('f-image'); }
+
+      if (missing.length) {
+        throw new Error(`Please fill all required fields: ${missing.join(', ')}.`);
       }
 
       const productObj = { id, name, description, image, category, categoryLabel, icon, status };
@@ -678,8 +757,15 @@ async function saveRecord() {
       const cover = (state.activeRecord && state.activeRecord.cover) || (gallery[0] || null);
       const partners = (state.activeRecord && state.activeRecord.partners) || undefined;
 
-      if (!slug || !number || !name || !description) {
-        throw new Error('Please fill all required fields (slug, number, name, description).');
+      const missing = [];
+      if (!name) { missing.push('Project Name'); markFieldError('f-name'); }
+      if (!slug) { missing.push('Slug'); markFieldError('f-slug'); }
+      if (!number) { missing.push('Number'); markFieldError('f-number'); }
+      if (!kind) { missing.push('Kind'); markFieldError('f-kind'); }
+      if (!description) { missing.push('Description'); markFieldError('f-description'); }
+
+      if (missing.length) {
+        throw new Error(`Please fill all required fields: ${missing.join(', ')}.`);
       }
 
       const projectObj = { slug, number, status, kind, name, description, cover, gallery, photoNote };

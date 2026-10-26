@@ -596,6 +596,11 @@ body {
   border-color: var(--pb-border-focus);
 }
 
+.pb-input.pb-input-error, .pb-textarea.pb-input-error, .pb-drawer select.pb-input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
 .pb-input.mono {
   font-family: var(--pb-font-mono);
   font-size: 13px;
