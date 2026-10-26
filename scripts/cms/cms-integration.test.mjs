@@ -87,6 +87,23 @@ async function runTest() {
     assert.equal(diskJson.length, initialCount + 1, "Disk JSON must contain added item");
     assert.equal(diskJson[diskJson.length - 1].id, "integration-test-product");
 
+    // 7. Verify theme assets & toggle markup
+    const resIndex = await fetch(`http://localhost:${PORT}/index.html`);
+    assert.equal(resIndex.status, 200, "GET /index.html status must be 200");
+    const indexHtml = await resIndex.text();
+    assert(indexHtml.includes("dataset.theme"), "index.html must contain dataset.theme early script");
+    assert(indexHtml.includes('id="btn-toggle-theme"'), 'index.html must contain id="btn-toggle-theme"');
+
+    const resCss = await fetch(`http://localhost:${PORT}/cms.css`);
+    assert.equal(resCss.status, 200, "GET /cms.css status must be 200");
+    const cssText = await resCss.text();
+    assert(cssText.includes('html[data-theme="dark"]'), 'cms.css must contain html[data-theme="dark"]');
+
+    const resJs = await fetch(`http://localhost:${PORT}/cms.js`);
+    assert.equal(resJs.status, 200, "GET /cms.js status must be 200");
+    const jsText = await resJs.text();
+    assert(jsText.includes("jagofarm-cms-theme"), "cms.js must contain jagofarm-cms-theme");
+
     console.log("CMS integration test passed all assertions!");
   } finally {
     // 7. Cleanup
