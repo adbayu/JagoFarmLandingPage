@@ -24,23 +24,82 @@ async function runTest() {
   try {
     // 1. Backup original products.json
     originalProductsContent = await fs.readFile(PRODUCTS_JSON, "utf8");
-    const originalProjectsContent = await fs.readFile(PROJECTS_JSON, "utf8");
 
-    // 2. GET /api/products
-    const resGetProducts = await fetch(`http://localhost:${PORT}/api/products`);
+    // 2. Auth Gate Assertions - Unauthenticated access returns 401
+    const resUnauthCols = await fetch(`http://localhost:${PORT}/api/collections`);
+    assert.equal(resUnauthCols.status, 401, "GET /api/collections unauthenticated must return 401");
+
+    const resUnauthProducts = await fetch(`http://localhost:${PORT}/api/products`);
+    assert.equal(resUnauthProducts.status, 401, "GET /api/products unauthenticated must return 401");
+
+    const resUnauthMe = await fetch(`http://localhost:${PORT}/api/auth/me`);
+    assert.equal(resUnauthMe.status, 401, "GET /api/auth/me unauthenticated must return 401");
+
+    // 3. Auth Gate Assertions - Invalid credentials return 401
+    const resInvalidLogin = await fetch(`http://localhost:${PORT}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "admin@jagofarm.dev", password: "wrongpassword!" }),
+    });
+    assert.equal(resInvalidLogin.status, 401, "POST /api/auth/login with wrong password must return 401");
+    const invalidJson = await resInvalidLogin.json();
+    assert(invalidJson.error, "Error message must be returned on invalid credentials");
+
+    // 4. Valid Login
+    const resValidLogin = await fetch(`http://localhost:${PORT}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "admin@jagofarm.dev", password: "jagofarm2026!" }),
+    });
+    assert.equal(resValidLogin.status, 200, "POST /api/auth/login with valid credentials must return 200");
+    const loginData = await resValidLogin.json();
+    assert.equal(loginData.success, true);
+    assert.equal(loginData.email, "admin@jagofarm.dev");
+    assert(loginData.token, "Login must return session token");
+
+    // Extract cookie from Set-Cookie header
+    const setCookieHeader = resValidLogin.headers.get("set-cookie") || "";
+    const cookieMatch = setCookieHeader.match(/jagofarm_cms_token=([^;]+)/);
+    assert(cookieMatch, "Set-Cookie header must include jagofarm_cms_token");
+    const sessionCookie = `jagofarm_cms_token=${cookieMatch[1]}`;
+    const authHeaders = {
+      Cookie: sessionCookie,
+    };
+
+    // 5. Assert authenticated access: GET /api/auth/me
+    const resAuthMe = await fetch(`http://localhost:${PORT}/api/auth/me`, {
+      headers: authHeaders,
+    });
+    assert.equal(resAuthMe.status, 200, "GET /api/auth/me authenticated must return 200");
+    const meData = await resAuthMe.json();
+    assert.equal(meData.authenticated, true);
+    assert.equal(meData.email, "admin@jagofarm.dev");
+
+    // Test Bearer token on GET /api/auth/me
+    const resBearerMe = await fetch(`http://localhost:${PORT}/api/auth/me`, {
+      headers: { Authorization: `Bearer ${loginData.token}` },
+    });
+    assert.equal(resBearerMe.status, 200, "GET /api/auth/me with Bearer token must return 200");
+
+    // 6. GET /api/products (authenticated)
+    const resGetProducts = await fetch(`http://localhost:${PORT}/api/products`, {
+      headers: authHeaders,
+    });
     assert.equal(resGetProducts.status, 200, "GET /api/products status must be 200");
     const products = await resGetProducts.json();
     assert(Array.isArray(products), "Products must be an array");
     const initialCount = products.length;
 
-    // 3. GET /api/projects
-    const resGetProjects = await fetch(`http://localhost:${PORT}/api/projects`);
+    // 7. GET /api/projects (authenticated)
+    const resGetProjects = await fetch(`http://localhost:${PORT}/api/projects`, {
+      headers: authHeaders,
+    });
     assert.equal(resGetProjects.status, 200, "GET /api/projects status must be 200");
     const projects = await resGetProjects.json();
     assert(Array.isArray(projects), "Projects must be an array");
     assert(projects.length >= 5, "Projects must have at least 5 entries");
 
-    // 4. POST /api/upload (mock 1x1 transparent PNG)
+    // 8. POST /api/upload (mock 1x1 transparent PNG)
     const mockPngBuffer = Buffer.from(
       "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
       "base64"
@@ -49,7 +108,10 @@ async function runTest() {
       `http://localhost:${PORT}/api/upload?folder=products&filename=integration-test-img.png`,
       {
         method: "POST",
-        headers: { "Content-Type": "image/png" },
+        headers: {
+          "Content-Type": "image/png",
+          ...authHeaders,
+        },
         body: mockPngBuffer,
       }
     );
@@ -62,7 +124,7 @@ async function runTest() {
     const fileStat = await fs.stat(uploadedFilePath);
     assert(fileStat.isFile(), "Uploaded image must exist on disk");
 
-    // 5. Append test product and PUT /api/products
+    // 9. Append test product and PUT /api/products
     const testProduct = {
       id: "integration-test-product",
       name: "Integration Test Product",
@@ -77,52 +139,62 @@ async function runTest() {
     const updatedProducts = [...products, testProduct];
     const resPut = await fetch(`http://localhost:${PORT}/api/products`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeaders,
+      },
       body: JSON.stringify(updatedProducts),
     });
     assert.equal(resPut.status, 200, "PUT /api/products status must be 200");
     const putJson = await resPut.json();
     assert.equal(putJson.count, initialCount + 1, "PUT response count must reflect added item");
 
-    // 6. Verify products.json on disk
+    // 10. Verify products.json on disk
     const diskContent = await fs.readFile(PRODUCTS_JSON, "utf8");
     const diskJson = JSON.parse(diskContent);
     assert.equal(diskJson.length, initialCount + 1, "Disk JSON must contain added item");
     assert.equal(diskJson[diskJson.length - 1].id, "integration-test-product");
 
-    // 7. Verify theme assets & toggle markup
+    // 11. Verify theme assets & toggle markup
     const resIndex = await fetch(`http://localhost:${PORT}/index.html`);
     assert.equal(resIndex.status, 200, "GET /index.html status must be 200");
     const indexHtml = await resIndex.text();
     assert(indexHtml.includes("dataset.theme"), "index.html must contain dataset.theme early script");
     assert(indexHtml.includes('id="btn-toggle-theme"'), 'index.html must contain id="btn-toggle-theme"');
+    assert(indexHtml.includes('id="pb-login"'), 'index.html must contain id="pb-login"');
+    assert(indexHtml.includes('id="pb-app"'), 'index.html must contain id="pb-app"');
 
     const resCss = await fetch(`http://localhost:${PORT}/cms.css`);
     assert.equal(resCss.status, 200, "GET /cms.css status must be 200");
     const cssText = await resCss.text();
     assert(cssText.includes('html[data-theme="dark"]'), 'cms.css must contain html[data-theme="dark"]');
+    assert(cssText.includes(".pb-login-card"), "cms.css must contain .pb-login-card");
 
     const resJs = await fetch(`http://localhost:${PORT}/cms.js`);
     assert.equal(resJs.status, 200, "GET /cms.js status must be 200");
     const jsText = await resJs.text();
     assert(jsText.includes("jagofarm-cms-theme"), "cms.js must contain jagofarm-cms-theme");
+    assert(jsText.includes("checkAuth"), "cms.js must contain checkAuth");
 
-    // 8. Test Dynamic Collections Builder
-    // 8a. GET /api/collections
-    const resGetCols = await fetch(`http://localhost:${PORT}/api/collections`);
+    // 12. Test Dynamic Collections Builder
+    // 12a. GET /api/collections
+    const resGetCols = await fetch(`http://localhost:${PORT}/api/collections`, {
+      headers: authHeaders,
+    });
     assert.equal(resGetCols.status, 200, "GET /api/collections status must be 200");
     const cols = await resGetCols.json();
     assert(Array.isArray(cols), "Collections must be an array");
     assert(cols.some(c => c.name === "products"), "Collections must contain products");
     assert(cols.some(c => c.name === "projects"), "Collections must contain projects");
 
-    // 8b. Reject deletion of system collection
+    // 12b. Reject deletion of system collection
     const resDelSystem = await fetch(`http://localhost:${PORT}/api/collections/products`, {
       method: "DELETE",
+      headers: authHeaders,
     });
     assert.equal(resDelSystem.status, 400, "DELETE system collection must return 400");
 
-    // 8c. POST /api/collections (create test-testimonials)
+    // 12c. POST /api/collections (create test-testimonials)
     const testColPayload = {
       name: "test-testimonials",
       title: "Test Testimonials",
@@ -134,14 +206,17 @@ async function runTest() {
     };
     const resPostCol = await fetch(`http://localhost:${PORT}/api/collections`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeaders,
+      },
       body: JSON.stringify(testColPayload),
     });
     assert.equal(resPostCol.status, 200, "POST /api/collections must return 200");
     const colFileStat = await fs.stat(testColFile);
     assert(colFileStat.isFile(), "test-testimonials.json must exist on disk");
 
-    // 8d. PUT /api/test-testimonials
+    // 12d. PUT /api/test-testimonials
     const testRecord = {
       author: "Jane Doe",
       content: "Great sustainable agritech platform!",
@@ -149,26 +224,34 @@ async function runTest() {
     };
     const resPutCol = await fetch(`http://localhost:${PORT}/api/test-testimonials`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeaders,
+      },
       body: JSON.stringify([testRecord]),
     });
     assert.equal(resPutCol.status, 200, "PUT /api/test-testimonials must return 200");
 
-    // 8e. GET /api/test-testimonials
-    const resGetColData = await fetch(`http://localhost:${PORT}/api/test-testimonials`);
+    // 12e. GET /api/test-testimonials
+    const resGetColData = await fetch(`http://localhost:${PORT}/api/test-testimonials`, {
+      headers: authHeaders,
+    });
     assert.equal(resGetColData.status, 200, "GET /api/test-testimonials must return 200");
     const colData = await resGetColData.json();
     assert.equal(colData.length, 1);
     assert.equal(colData[0].author, "Jane Doe");
 
-    // 8f. DELETE /api/collections/test-testimonials
+    // 12f. DELETE /api/collections/test-testimonials
     const resDelCol = await fetch(`http://localhost:${PORT}/api/collections/test-testimonials`, {
       method: "DELETE",
+      headers: authHeaders,
     });
     assert.equal(resDelCol.status, 200, "DELETE /api/collections/test-testimonials must return 200");
 
     // Verify deleted from schema and file removed
-    const resGetColsAfter = await fetch(`http://localhost:${PORT}/api/collections`);
+    const resGetColsAfter = await fetch(`http://localhost:${PORT}/api/collections`, {
+      headers: authHeaders,
+    });
     const colsAfter = await resGetColsAfter.json();
     assert(!colsAfter.some(c => c.name === "test-testimonials"), "test-testimonials must be removed from schema");
 
@@ -179,6 +262,21 @@ async function runTest() {
       fileExists = false;
     }
     assert(!fileExists, "test-testimonials.json must be removed from disk");
+
+    // 13. Logout Assertions
+    const resLogout = await fetch(`http://localhost:${PORT}/api/auth/logout`, {
+      method: "POST",
+      headers: authHeaders,
+    });
+    assert.equal(resLogout.status, 200, "POST /api/auth/logout must return 200");
+    const logoutCookie = resLogout.headers.get("set-cookie") || "";
+    assert(logoutCookie.includes("Max-Age=0"), "Logout must set Max-Age=0 to clear session cookie");
+
+    // Verify session revoked / 401 after logout
+    const resMeAfterLogout = await fetch(`http://localhost:${PORT}/api/auth/me`, {
+      headers: { Cookie: "jagofarm_cms_token=" },
+    });
+    assert.equal(resMeAfterLogout.status, 401, "GET /api/auth/me after logout must return 401");
 
     console.log("CMS integration test passed all assertions!");
   } finally {

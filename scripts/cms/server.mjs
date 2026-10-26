@@ -47,13 +47,18 @@ function createSessionToken(email) {
 
 function verifySessionToken(token) {
   if (!token || typeof token !== "string") return null;
-  const parts = token.split(".");
-  if (parts.length !== 3) return null;
-  const [email, expiresAtStr, signature] = parts;
+  const lastDot = token.lastIndexOf(".");
+  if (lastDot === -1) return null;
+  const signature = token.slice(lastDot + 1);
+  const payload = token.slice(0, lastDot);
+  const secondLastDot = payload.lastIndexOf(".");
+  if (secondLastDot === -1) return null;
+  const expiresAtStr = payload.slice(secondLastDot + 1);
+  const email = payload.slice(0, secondLastDot);
+
   const expiresAt = parseInt(expiresAtStr, 10);
   if (isNaN(expiresAt) || Date.now() > expiresAt) return null;
 
-  const payload = `${email}.${expiresAtStr}`;
   const expectedHmac = crypto.createHmac("sha256", SESSION_SECRET).update(payload).digest("hex");
 
   // Constant time comparison to prevent timing attacks
