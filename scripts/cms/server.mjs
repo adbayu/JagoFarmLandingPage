@@ -39,17 +39,16 @@ if (existsSync(ENV_PATH)) {
   } catch {}
 }
 
-const DEFAULT_SECRET = crypto.randomBytes(32).toString("hex");
-
-function getSessionSecret() {
-  return process.env.CMS_SESSION_SECRET || DEFAULT_SECRET;
-}
-
 function getAdminCredentials() {
   return {
     email: process.env.CMS_ADMIN_EMAIL,
     password: process.env.CMS_ADMIN_PASSWORD,
   };
+}
+
+function getSessionSecret() {
+  const { email, password } = getAdminCredentials();
+  return crypto.createHash("sha256").update(`${email || ""}:${password || ""}:jagofarm-session-salt`).digest("hex");
 }
 
 const TOKEN_COOKIE_NAME = "jagofarm_cms_token";
