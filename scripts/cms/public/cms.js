@@ -12,6 +12,7 @@ const state = {
   activeRecord: null,
   isEditing: false,
   isDirty: false,
+  user: null,
 };
 
 const CATEGORIES = {
@@ -64,6 +65,34 @@ const colTitleInput = document.getElementById('col-title');
 const colNameInput = document.getElementById('col-name');
 const fieldsBuilderList = document.getElementById('fields-builder-list');
 const btnBuilderAddField = document.getElementById('btn-builder-add-field');
+
+// Auth Elements
+const pbApp = document.getElementById("pb-app");
+const pbLogin = document.getElementById("pb-login");
+const formLogin = document.getElementById("form-login");
+const loginError = document.getElementById("login-error");
+const inputEmail = document.getElementById("input-email");
+const inputPassword = document.getElementById("input-password");
+const btnTogglePw = document.getElementById("btn-toggle-pw");
+const btnSubmitLogin = document.getElementById("btn-submit-login");
+const loginBtnText = document.getElementById("login-btn-text");
+const loginSpinner = document.getElementById("login-spinner");
+const userDisplayEmail = document.getElementById("user-display-email");
+const btnLogout = document.getElementById("btn-logout");
+
+// Global Fetch Interceptor for 401 session expiry
+const _originalFetch = window.fetch;
+window.fetch = async function(...args) {
+  const res = await _originalFetch.apply(this, args);
+  const url = typeof args[0] === "string" ? args[0] : (args[0]?.url || "");
+  if (res.status === 401 && !url.includes("/api/auth/login") && !url.includes("/api/auth/me")) {
+    if (state.user) {
+      showLoginScreen();
+      showToast("Session expired. Please sign in again.", "error");
+    }
+  }
+  return res;
+};
 
 // Toast notifications
 export function showToast(message, type = 'success', duration = 3500) {
@@ -1488,5 +1517,101 @@ if (btnToggleTheme) {
   updateThemeUI(document.documentElement.dataset.theme || 'light');
 }
 
+function showLoginScreen() {
+  state.user = null;
+  if (pbApp) pbApp.style.display = "none";
+  if (pbLogin) pbLogin.style.display = "grid";
+  if (loginError) loginError.style.display = "none";
+}
+
+function showAppScreen(email) {
+  state.user = email;
+  if (userDisplayEmail) userDisplayEmail.textContent = email;
+  const avatar = document.querySelector(".pb-user-avatar");
+  if (avatar && email) {
+    avatar.textContent = email.charAt(0).toUpperCase();
+  }
+  if (pbLogin) pbLogin.style.display = "none";
+  if (pbApp) pbApp.style.display = "flex";
+}
+
+async function checkAuth() {
+  try {
+    const res = await fetch("/api/auth/me");
+    if (res.ok) {
+      const data = await res.json();
+      if (data.authenticated) {
+        showAppScreen(data.email);
+        await loadData();
+        return;
+      }
+    }
+    showLoginScreen();
+  } catch {
+    showLoginScreen();
+  }
+}
+
+// Auth Event Listeners
+if (formLogin) {
+  formLogin.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = inputEmail.value.trim();
+    const password = inputPassword.value;
+
+    if (loginError) loginError.style.display = "none";
+    if (loginSpinner) loginSpinner.style.display = "inline-block";
+    if (btnSubmitLogin) btnSubmitLogin.disabled = true;
+    if (loginBtnText) loginBtnText.textContent = "Signing In...";
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        inputPassword.value = "";
+        showAppScreen(data.email);
+        await loadData();
+        showToast("Signed in as " + data.email, "success");
+      } else {
+        if (loginError) {
+          loginError.textContent = data.error || "Invalid email or password";
+          loginError.style.display = "block";
+        }
+      }
+    } catch (err) {
+      if (loginError) {
+        loginError.textContent = "Network error: " + err.message;
+        loginError.style.display = "block";
+      }
+    } finally {
+      if (loginSpinner) loginSpinner.style.display = "none";
+      if (btnSubmitLogin) btnSubmitLogin.disabled = false;
+      if (loginBtnText) loginBtnText.textContent = "Sign In";
+    }
+  });
+}
+
+if (btnLogout) {
+  btnLogout.addEventListener("click", async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {}
+    showLoginScreen();
+    showToast("Signed out successfully", "info");
+  });
+}
+
+if (btnTogglePw && inputPassword) {
+  btnTogglePw.addEventListener("click", () => {
+    const isPw = inputPassword.type === "password";
+    inputPassword.type = isPw ? "text" : "password";
+    btnTogglePw.textContent = isPw ? "🙈" : "👁";
+  });
+}
+
 // Init
-loadData();
+checkAuth();
