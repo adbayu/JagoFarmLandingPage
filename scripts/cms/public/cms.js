@@ -80,13 +80,28 @@ const loginSpinner = document.getElementById("login-spinner");
 const userDisplayEmail = document.getElementById("user-display-email");
 const btnLogout = document.getElementById("btn-logout");
 
-// Global Fetch Interceptor for 401 session expiry
+let authToken = null;
+try {
+  authToken = sessionStorage.getItem("jagofarm_cms_token");
+} catch {}
+
+// Global Fetch Interceptor for auth header & 401 session expiry
 const _originalFetch = window.fetch;
-window.fetch = async function(...args) {
-  const res = await _originalFetch.apply(this, args);
-  const url = typeof args[0] === "string" ? args[0] : (args[0]?.url || "");
+window.fetch = async function(resource, init = {}) {
+  const options = { ...init };
+  const headers = new Headers(options.headers || {});
+  if (authToken && !headers.has("Authorization")) {
+    headers.set("Authorization", `Bearer ${authToken}`);
+  }
+  options.headers = headers;
+  options.credentials = options.credentials || "include";
+
+  const res = await _originalFetch.call(this, resource, options);
+  const url = typeof resource === "string" ? resource : (resource?.url || "");
   if (res.status === 401 && !url.includes("/api/auth/login") && !url.includes("/api/auth/me")) {
     if (state.user) {
+      authToken = null;
+      try { sessionStorage.removeItem("jagofarm_cms_token"); } catch {}
       showLoginScreen();
       showToast("Session expired. Please sign in again.", "error");
     }
@@ -1572,6 +1587,10 @@ if (formLogin) {
       });
       const data = await res.json();
       if (res.ok && data.success) {
+        if (data.token) {
+          authToken = data.token;
+          try { sessionStorage.setItem("jagofarm_cms_token", data.token); } catch {}
+        }
         inputPassword.value = "";
         showAppScreen(data.email);
         await loadData();
@@ -1600,6 +1619,8 @@ if (btnLogout) {
     try {
       await fetch("/api/auth/logout", { method: "POST" });
     } catch {}
+    authToken = null;
+    try { sessionStorage.removeItem("jagofarm_cms_token"); } catch {}
     showLoginScreen();
     showToast("Signed out successfully", "info");
   });

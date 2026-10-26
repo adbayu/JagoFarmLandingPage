@@ -71,7 +71,7 @@ function verifySessionToken(token) {
 }
 
 function extractTokenFromRequest(req) {
-  // 1. Check Authorization: Bearer ***
+  // 1. Check Authorization: Bearer <token>
   const authHeader = req.headers.authorization;
   if (authHeader && authHeader.startsWith("Bearer ")) {
     return authHeader.slice(7).trim();
@@ -79,8 +79,13 @@ function extractTokenFromRequest(req) {
   // 2. Check Cookie: jagofarm_cms_token=<token>
   const cookieHeader = req.headers.cookie;
   if (cookieHeader) {
-    const match = cookieHeader.match(new RegExp(`(?:^|;\s*)${TOKEN_COOKIE_NAME}=([^;]+)`));
-    if (match) return decodeURIComponent(match[1]);
+    const cookies = cookieHeader.split(";");
+    for (const cookie of cookies) {
+      const parts = cookie.trim().split("=");
+      if (parts[0] === TOKEN_COOKIE_NAME) {
+        return decodeURIComponent(parts.slice(1).join("="));
+      }
+    }
   }
   return null;
 }
@@ -112,7 +117,13 @@ export function createCmsServer() {
     const pathname = parsedUrl.pathname;
     const method = req.method;
 
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    const origin = req.headers.origin;
+    if (origin) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+    } else {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    }
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
