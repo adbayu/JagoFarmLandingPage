@@ -1,3 +1,6 @@
+// This script overwrites src/data/products.json and src/data/projects.json
+// with fresh data from Supabase. The JSON files remain in git as fallback
+// for offline development and to preserve the SSG build without Supabase.
 import { writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
