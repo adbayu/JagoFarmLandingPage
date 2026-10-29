@@ -11,6 +11,10 @@ src/data/products.json
 src/data/projects.json
 src/data/_schema.json
 
+# Development artifacts
+plans/
+supabase/
+
 # Source maps (may expose code structure)
 *.map
 
