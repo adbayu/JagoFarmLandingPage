@@ -444,6 +444,47 @@ export function createCmsServer() {
             }
           }
 
+          if (supabase) {
+            if (colName === "products") {
+              // Delete all existing and re-insert (full replace, same as file overwrite)
+              const { error: delErr } = await supabase.from("products").delete().neq("id", "___impossible___");
+              if (delErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: delErr.message })); return; }
+              if (items.length > 0) {
+                const rows = items.map((p, i) => ({
+                  id: p.id, name: p.name, description: p.description, image: p.image,
+                  category: p.category, category_label: p.categoryLabel || null,
+                  icon: p.icon || null, status: p.status, sort_order: i,
+                }));
+                const { error: insErr } = await supabase.from("products").insert(rows);
+                if (insErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: insErr.message })); return; }
+              }
+            } else if (colName === "projects") {
+              const { error: delErr } = await supabase.from("projects").delete().neq("slug", "___impossible___");
+              if (delErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: delErr.message })); return; }
+              if (items.length > 0) {
+                const rows = items.map((p, i) => ({
+                  slug: p.slug, number: p.number, status: p.status, kind: p.kind, name: p.name,
+                  description: p.description, cover: p.cover || null, gallery: p.gallery || [],
+                  photo_note: p.photoNote || null, partners: p.partners || null, sort_order: i,
+                }));
+                const { error: insErr } = await supabase.from("projects").insert(rows);
+                if (insErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: insErr.message })); return; }
+              }
+            } else {
+              // Custom collection: delete and re-insert records
+              const { error: delErr } = await supabase.from("cms_records").delete().eq("collection_name", colName);
+              if (delErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: delErr.message })); return; }
+              if (items.length > 0) {
+                const rows = items.map(data => ({ collection_name: colName, data }));
+                const { error: insErr } = await supabase.from("cms_records").insert(rows);
+                if (insErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: insErr.message })); return; }
+              }
+            }
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: true, count: items.length }));
+            return;
+          }
+          // Flat-file fallback (original behavior)
           await fs.writeFile(targetFile, JSON.stringify(items, null, 2) + "\n", "utf8");
           res.writeHead(200, { "Content-Type": "application/json" });
           res.end(JSON.stringify({ success: true, count: items.length }));
