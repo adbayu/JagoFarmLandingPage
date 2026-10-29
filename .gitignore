@@ -10,3 +10,21 @@ dist
 src/data/products.json
 src/data/projects.json
 src/data/_schema.json
+
+# Source maps (may expose code structure)
+*.map
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Optional: Development plans (remove if they contain sensitive info)
+# plans/

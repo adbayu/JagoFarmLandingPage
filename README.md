@@ -17,15 +17,28 @@ npm run dev
 
 CMS lokal untuk mengelola produk dan proyek (berjalan di `http://localhost:3333`):
 
-1. Salin file template environment dan sesuaikan kredensial:
+1. Buat proyek Supabase di https://supabase.com
+2. Jalankan migrasi SQL dari `supabase/migrations/001_initial_schema.sql` di SQL Editor
+3. Salin file template environment dan isi dengan kredensial Supabase:
    ```sh
    cp .env.example .env
    ```
-2. Jalankan server CMS:
+   Dapatkan kredensial dari: Supabase Dashboard > Project Settings > API
+4. Seed database (hanya sekali):
+   ```sh
+   node scripts/seed-supabase.mjs
+   ```
+5. Jalankan server CMS:
    ```sh
    npm run cms
    ```
-3. Buka `http://localhost:3333` di browser dan masuk menggunakan kredensial yang telah dikonfigurasi di `.env`.
+6. Buka `http://localhost:3333` di browser dan masuk menggunakan kredensial yang telah dikonfigurasi di `.env`.
+
+**Catatan Keamanan:**
+- `.env` tidak boleh di-commit ke Git (sudah ada di `.gitignore`)
+- `SUPABASE_SERVICE_KEY` memiliki akses penuh - jangan expose ke browser
+- `VITE_SUPABASE_ANON_KEY` aman di-expose - dilindungi oleh RLS policies
+- Untuk production, gunakan environment variables dari hosting platform (Azure, Vercel, dll)
 
 ## Deployment
 
