@@ -116,15 +116,21 @@ function extractTokenFromRequest(req) {
 }
 
 async function loadSchema() {
-  if (!existsSync(SCHEMA_JSON)) return [];
-  try {
-    return JSON.parse(await fs.readFile(SCHEMA_JSON, "utf8"));
-  } catch {
-    return [];
+  if (supabase) {
+    const { data, error } = await supabase.from("cms_collections").select("*").order("created_at");
+    if (error) throw new Error(error.message);
+    return data.map(c => ({ name: c.name, title: c.title, system: c.system, fields: c.fields }));
   }
+  // Flat-file fallback
+  if (!existsSync(SCHEMA_JSON)) return [];
+  try { return JSON.parse(await fs.readFile(SCHEMA_JSON, "utf8")); } catch { return []; }
 }
 
 async function saveSchema(schema) {
+  if (supabase) {
+    // Schema is saved per-item elsewhere (POST/DELETE endpoints handle individual inserts/deletes)
+    // This function is only called as fallback for flat-file mode
+  }
   await fs.writeFile(SCHEMA_JSON, (JSON.stringify(schema, null, 2) + "\n").replace(/\r?\n/g, "\r\n"), "utf8");
 }
 
@@ -278,13 +284,17 @@ export function createCmsServer() {
           fields: Array.isArray(fields) ? fields : []
         };
 
-        const targetFile = path.join(DATA_DIR, `${name}.json`);
-        if (!existsSync(targetFile)) {
-          await fs.writeFile(targetFile, "[]\n", "utf8");
+        if (supabase) {
+          const { error } = await supabase.from("cms_collections").insert({
+            name: newCol.name, title: newCol.title, system: false, fields: newCol.fields,
+          });
+          if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
+        } else {
+          schema.push(newCol);
+          await saveSchema(schema);
+          const targetFile = path.join(DATA_DIR, `${name}.json`);
+          if (!existsSync(targetFile)) await fs.writeFile(targetFile, "[]\n", "utf8");
         }
-
-        schema.push(newCol);
-        await saveSchema(schema);
 
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ success: true, collection: newCol }));
@@ -310,14 +320,15 @@ export function createCmsServer() {
           return;
         }
 
-        schema.splice(existingIdx, 1);
-        await saveSchema(schema);
-
-        const targetFile = path.join(DATA_DIR, `${targetName}.json`);
-        if (existsSync(targetFile)) {
-          try {
-            await fs.unlink(targetFile);
-          } catch {}
+        if (supabase) {
+          const { error } = await supabase.from("cms_collections").delete().eq("name", targetName);
+          if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
+          // cms_records cascade-delete automatically
+        } else {
+          schema.splice(existingIdx, 1);
+          await saveSchema(schema);
+          const targetFile = path.join(DATA_DIR, `${targetName}.json`);
+          if (existsSync(targetFile)) { try { await fs.unlink(targetFile); } catch {} }
         }
 
         res.writeHead(200, { "Content-Type": "application/json" });
