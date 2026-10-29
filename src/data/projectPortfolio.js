@@ -1,6 +1,11 @@
 // Re-export hook for runtime data fetching from Supabase
 export { useProjects } from "./useSupabaseData.js";
 
-// Legacy export for prerender script (still needs the data at build time)
-// This will be replaced with fetch at build time in prerender.mjs
-export const projectPortfolio = [];
+// Static data for build-time use (routing, metadata, prerender)
+// This is populated by fetch-data.mjs before build
+import projectsData from "./projects.json" with { type: "json" };
+
+export const projectPortfolio = projectsData.map((project) => ({
+  ...project,
+  photoNote: project.photoNote ?? "Belum ada foto untuk proyek ini.",
+}));

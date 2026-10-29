@@ -22,8 +22,13 @@ export const routes = [
   ["/tentang", "Tentang"],
 ];
 
-// Re-export hooks for runtime data fetching from Supabase
+// Re-export hook for runtime data fetching from Supabase
 export { useProducts } from "./useSupabaseData.js";
+
+// Static data for build-time use (tests, SSR)
+// This is populated by fetch-data.mjs before build
+import productsData from "./products.json" with { type: "json" };
+export const products = productsData;
 
 export function isAgriculturalProduct(product) {
   return Boolean(product && product.category !== "teknologi");
