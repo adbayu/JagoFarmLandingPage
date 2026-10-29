@@ -338,6 +338,40 @@ export function createCmsServer() {
         const targetFile = path.join(DATA_DIR, `${colName}.json`);
 
         if (method === "GET") {
+          if (supabase) {
+            // System collections: query their dedicated table
+            if (colName === "products") {
+              const { data, error } = await supabase.from("products").select("*").order("sort_order");
+              if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
+              const mapped = data.map(p => ({
+                id: p.id, name: p.name, description: p.description, image: p.image,
+                category: p.category, categoryLabel: p.category_label, icon: p.icon, status: p.status,
+              }));
+              res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+              res.end(JSON.stringify(mapped, null, 2));
+              return;
+            }
+            if (colName === "projects") {
+              const { data, error } = await supabase.from("projects").select("*").order("sort_order");
+              if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
+              const mapped = data.map(p => ({
+                slug: p.slug, number: p.number, status: p.status, kind: p.kind, name: p.name,
+                description: p.description, cover: p.cover, gallery: p.gallery || [],
+                photoNote: p.photo_note,
+                ...(p.partners ? { partners: p.partners } : {}),
+              }));
+              res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+              res.end(JSON.stringify(mapped, null, 2));
+              return;
+            }
+            // Custom collections: query cms_records
+            const { data, error } = await supabase.from("cms_records").select("data").eq("collection_name", colName).order("created_at");
+            if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
+            res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+            res.end(JSON.stringify(data.map(r => r.data), null, 2));
+            return;
+          }
+          // Flat-file fallback (original behavior)
           if (!existsSync(targetFile)) {
             res.writeHead(404, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ error: `Collection "${colName}" does not exist` }));
