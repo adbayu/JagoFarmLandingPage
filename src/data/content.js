@@ -22,8 +22,8 @@ export const routes = [
   ["/tentang", "Tentang"],
 ];
 
-import productsData from "./products.json" with { type: "json" };
-export const products = productsData;
+// Re-export hooks for runtime data fetching from Supabase
+export { useProducts } from "./useSupabaseData.js";
 
 export function isAgriculturalProduct(product) {
   return Boolean(product && product.category !== "teknologi");

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "../components/navigation.jsx";
-import { projectPortfolio } from "../data/projectPortfolio.js";
+import { useProjects } from "../data/projectPortfolio.js";
 import "./ProjectsPortfolioPage.css";
 
 import { useLanguage } from "../i18n.jsx";
 
 export default function ProjectsPortfolioPage() {
   const { language, t } = useLanguage();
+  const { projects: projectPortfolio, loading, error } = useProjects();
   const [statusFilter, setStatusFilter] = useState("semua");
   const filteredProjects = statusFilter === "semua"
     ? projectPortfolio
@@ -16,6 +17,30 @@ export default function ProjectsPortfolioPage() {
     { value: "berjalan", label: "Berjalan", count: projectPortfolio.filter((project) => project.status === "berjalan").length },
     { value: "selesai", label: "Selesai", count: projectPortfolio.filter((project) => project.status === "selesai").length },
   ];
+
+  if (loading) {
+    return (
+      <>
+        <section className="projects-hero section">
+          <div className="container">
+            <p>Loading projects...</p>
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <section className="projects-hero section">
+          <div className="container">
+            <p>Error loading projects: {error}</p>
+          </div>
+        </section>
+      </>
+    );
+  }
 
   return (
     <>

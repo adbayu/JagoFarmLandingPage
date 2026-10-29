@@ -1,6 +1,6 @@
-import projectsData from "./projects.json" with { type: "json" };
+// Re-export hook for runtime data fetching from Supabase
+export { useProjects } from "./useSupabaseData.js";
 
-export const projectPortfolio = projectsData.map((project) => ({
-  ...project,
-  photoNote: project.photoNote ?? "Belum ada foto untuk proyek ini.",
-}));
+// Legacy export for prerender script (still needs the data at build time)
+// This will be replaced with fetch at build time in prerender.mjs
+export const projectPortfolio = [];
