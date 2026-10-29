@@ -1,6 +1,6 @@
-// This script overwrites src/data/products.json and src/data/projects.json
-// with fresh data from Supabase. The JSON files remain in git as fallback
-// for offline development and to preserve the SSG build without Supabase.
+// This script overwrites src/data/products.json, projects.json, and _schema.json
+// with fresh data from Supabase. These files are generated at build time and
+// gitignored — Supabase is the source of truth.
 import { writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -64,4 +64,24 @@ await writeFile(
   "utf8"
 );
 console.log(`Fetched ${projectsJson.length} projects.`);
+
+// Fetch collection schemas
+const { data: schemas, error: schemaErr } = await supabase
+  .from("cms_collections")
+  .select("*")
+  .order("created_at", { ascending: true });
+if (schemaErr) { console.error("Failed to fetch schemas:", schemaErr); process.exit(1); }
+
+const schemasJson = schemas.map(s => ({
+  name: s.name,
+  title: s.title,
+  system: s.system,
+  fields: s.fields || [],
+}));
+await writeFile(
+  path.join(ROOT, "src/data/_schema.json"),
+  JSON.stringify(schemasJson, null, 2) + "\n",
+  "utf8"
+);
+console.log(`Fetched ${schemasJson.length} collection schemas.`);
 console.log("Data files updated.");

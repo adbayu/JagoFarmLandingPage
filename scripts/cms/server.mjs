@@ -43,9 +43,11 @@ if (existsSync(ENV_PATH)) {
 let supabase;
 try {
   supabase = createSupabaseClient({ serviceRole: true });
+  console.log("✓ [CMS] Supabase connected");
 } catch (err) {
-  console.warn("⚠️  [CMS] Supabase not configured:", err.message);
-  console.warn("⚠️  [CMS] Falling back to flat-file mode.");
+  console.error("✗ [CMS] Supabase connection failed:", err.message);
+  console.error("✗ [CMS] Set SUPABASE_URL and SUPABASE_SERVICE_KEY in .env");
+  process.exit(1);
 }
 
 function getAdminCredentials() {
@@ -116,22 +118,9 @@ function extractTokenFromRequest(req) {
 }
 
 async function loadSchema() {
-  if (supabase) {
-    const { data, error } = await supabase.from("cms_collections").select("*").order("created_at");
-    if (error) throw new Error(error.message);
-    return data.map(c => ({ name: c.name, title: c.title, system: c.system, fields: c.fields }));
-  }
-  // Flat-file fallback
-  if (!existsSync(SCHEMA_JSON)) return [];
-  try { return JSON.parse(await fs.readFile(SCHEMA_JSON, "utf8")); } catch { return []; }
-}
-
-async function saveSchema(schema) {
-  if (supabase) {
-    // Schema is saved per-item elsewhere (POST/DELETE endpoints handle individual inserts/deletes)
-    // This function is only called as fallback for flat-file mode
-  }
-  await fs.writeFile(SCHEMA_JSON, (JSON.stringify(schema, null, 2) + "\n").replace(/\r?\n/g, "\r\n"), "utf8");
+  const { data, error } = await supabase.from("cms_collections").select("*").order("created_at");
+  if (error) throw new Error(error.message);
+  return data.map(c => ({ name: c.name, title: c.title, system: c.system, fields: c.fields }));
 }
 
 async function readBody(req) {
@@ -284,17 +273,10 @@ export function createCmsServer() {
           fields: Array.isArray(fields) ? fields : []
         };
 
-        if (supabase) {
-          const { error } = await supabase.from("cms_collections").insert({
-            name: newCol.name, title: newCol.title, system: false, fields: newCol.fields,
-          });
-          if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
-        } else {
-          schema.push(newCol);
-          await saveSchema(schema);
-          const targetFile = path.join(DATA_DIR, `${name}.json`);
-          if (!existsSync(targetFile)) await fs.writeFile(targetFile, "[]\n", "utf8");
-        }
+        const { error } = await supabase.from("cms_collections").insert({
+          name: newCol.name, title: newCol.title, system: false, fields: newCol.fields,
+        });
+        if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
 
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ success: true, collection: newCol }));
@@ -320,16 +302,9 @@ export function createCmsServer() {
           return;
         }
 
-        if (supabase) {
-          const { error } = await supabase.from("cms_collections").delete().eq("name", targetName);
-          if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
-          // cms_records cascade-delete automatically
-        } else {
-          schema.splice(existingIdx, 1);
-          await saveSchema(schema);
-          const targetFile = path.join(DATA_DIR, `${targetName}.json`);
-          if (existsSync(targetFile)) { try { await fs.unlink(targetFile); } catch {} }
-        }
+        const { error } = await supabase.from("cms_collections").delete().eq("name", targetName);
+        if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
+        // cms_records cascade-delete automatically
 
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ success: true }));
@@ -349,48 +324,36 @@ export function createCmsServer() {
         const targetFile = path.join(DATA_DIR, `${colName}.json`);
 
         if (method === "GET") {
-          if (supabase) {
-            // System collections: query their dedicated table
-            if (colName === "products") {
-              const { data, error } = await supabase.from("products").select("*").order("sort_order");
-              if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
-              const mapped = data.map(p => ({
-                id: p.id, name: p.name, description: p.description, image: p.image,
-                category: p.category, categoryLabel: p.category_label, icon: p.icon, status: p.status,
-              }));
-              res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-              res.end(JSON.stringify(mapped, null, 2));
-              return;
-            }
-            if (colName === "projects") {
-              const { data, error } = await supabase.from("projects").select("*").order("sort_order");
-              if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
-              const mapped = data.map(p => ({
-                slug: p.slug, number: p.number, status: p.status, kind: p.kind, name: p.name,
-                description: p.description, cover: p.cover, gallery: p.gallery || [],
-                photoNote: p.photo_note,
-                ...(p.partners ? { partners: p.partners } : {}),
-              }));
-              res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-              res.end(JSON.stringify(mapped, null, 2));
-              return;
-            }
-            // Custom collections: query cms_records
-            const { data, error } = await supabase.from("cms_records").select("data").eq("collection_name", colName).order("created_at");
+          // System collections: query their dedicated table
+          if (colName === "products") {
+            const { data, error } = await supabase.from("products").select("*").order("sort_order");
             if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
+            const mapped = data.map(p => ({
+              id: p.id, name: p.name, description: p.description, image: p.image,
+              category: p.category, categoryLabel: p.category_label, icon: p.icon, status: p.status,
+            }));
             res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-            res.end(JSON.stringify(data.map(r => r.data), null, 2));
+            res.end(JSON.stringify(mapped, null, 2));
             return;
           }
-          // Flat-file fallback (original behavior)
-          if (!existsSync(targetFile)) {
-            res.writeHead(404, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ error: `Collection "${colName}" does not exist` }));
+          if (colName === "projects") {
+            const { data, error } = await supabase.from("projects").select("*").order("sort_order");
+            if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
+            const mapped = data.map(p => ({
+              slug: p.slug, number: p.number, status: p.status, kind: p.kind, name: p.name,
+              description: p.description, cover: p.cover, gallery: p.gallery || [],
+              photoNote: p.photo_note,
+              ...(p.partners ? { partners: p.partners } : {}),
+            }));
+            res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+            res.end(JSON.stringify(mapped, null, 2));
             return;
           }
-          const data = await fs.readFile(targetFile, "utf8");
+          // Custom collections: query cms_records
+          const { data, error } = await supabase.from("cms_records").select("data").eq("collection_name", colName).order("created_at");
+          if (error) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: error.message })); return; }
           res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-          res.end(data);
+          res.end(JSON.stringify(data.map(r => r.data), null, 2));
           return;
         }
 
@@ -455,48 +418,41 @@ export function createCmsServer() {
             }
           }
 
-          if (supabase) {
-            if (colName === "products") {
-              // Delete all existing and re-insert (full replace, same as file overwrite)
-              const { error: delErr } = await supabase.from("products").delete().neq("id", "___impossible___");
-              if (delErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: delErr.message })); return; }
-              if (items.length > 0) {
-                const rows = items.map((p, i) => ({
-                  id: p.id, name: p.name, description: p.description, image: p.image,
-                  category: p.category, category_label: p.categoryLabel || null,
-                  icon: p.icon || null, status: p.status, sort_order: i,
-                }));
-                const { error: insErr } = await supabase.from("products").insert(rows);
-                if (insErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: insErr.message })); return; }
-              }
-            } else if (colName === "projects") {
-              const { error: delErr } = await supabase.from("projects").delete().neq("slug", "___impossible___");
-              if (delErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: delErr.message })); return; }
-              if (items.length > 0) {
-                const rows = items.map((p, i) => ({
-                  slug: p.slug, number: p.number, status: p.status, kind: p.kind, name: p.name,
-                  description: p.description, cover: p.cover || null, gallery: p.gallery || [],
-                  photo_note: p.photoNote || null, partners: p.partners || null, sort_order: i,
-                }));
-                const { error: insErr } = await supabase.from("projects").insert(rows);
-                if (insErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: insErr.message })); return; }
-              }
-            } else {
-              // Custom collection: delete and re-insert records
-              const { error: delErr } = await supabase.from("cms_records").delete().eq("collection_name", colName);
-              if (delErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: delErr.message })); return; }
-              if (items.length > 0) {
-                const rows = items.map(data => ({ collection_name: colName, data }));
-                const { error: insErr } = await supabase.from("cms_records").insert(rows);
-                if (insErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: insErr.message })); return; }
-              }
+          if (colName === "products") {
+            // Delete all existing and re-insert (full replace, same as file overwrite)
+            const { error: delErr } = await supabase.from("products").delete().neq("id", "___impossible___");
+            if (delErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: delErr.message })); return; }
+            if (items.length > 0) {
+              const rows = items.map((p, i) => ({
+                id: p.id, name: p.name, description: p.description, image: p.image,
+                category: p.category, category_label: p.categoryLabel || null,
+                icon: p.icon || null, status: p.status, sort_order: i,
+              }));
+              const { error: insErr } = await supabase.from("products").insert(rows);
+              if (insErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: insErr.message })); return; }
             }
-            res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ success: true, count: items.length }));
-            return;
+          } else if (colName === "projects") {
+            const { error: delErr } = await supabase.from("projects").delete().neq("slug", "___impossible___");
+            if (delErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: delErr.message })); return; }
+            if (items.length > 0) {
+              const rows = items.map((p, i) => ({
+                slug: p.slug, number: p.number, status: p.status, kind: p.kind, name: p.name,
+                description: p.description, cover: p.cover || null, gallery: p.gallery || [],
+                photo_note: p.photoNote || null, partners: p.partners || null, sort_order: i,
+              }));
+              const { error: insErr } = await supabase.from("projects").insert(rows);
+              if (insErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: insErr.message })); return; }
+            }
+          } else {
+            // Custom collection: delete and re-insert records
+            const { error: delErr } = await supabase.from("cms_records").delete().eq("collection_name", colName);
+            if (delErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: delErr.message })); return; }
+            if (items.length > 0) {
+              const rows = items.map(data => ({ collection_name: colName, data }));
+              const { error: insErr } = await supabase.from("cms_records").insert(rows);
+              if (insErr) { res.writeHead(500, { "Content-Type": "application/json" }); res.end(JSON.stringify({ error: insErr.message })); return; }
+            }
           }
-          // Flat-file fallback (original behavior)
-          await fs.writeFile(targetFile, JSON.stringify(items, null, 2) + "\n", "utf8");
           res.writeHead(200, { "Content-Type": "application/json" });
           res.end(JSON.stringify({ success: true, count: items.length }));
           return;

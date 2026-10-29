@@ -5,3 +5,8 @@ dist
 .env
 .env.*
 !.env.example
+
+# Generated at build time by scripts/fetch-data.mjs from Supabase
+src/data/products.json
+src/data/projects.json
+src/data/_schema.json
