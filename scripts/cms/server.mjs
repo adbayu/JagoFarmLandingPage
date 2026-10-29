@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
 import { validateProduct, validateProject } from "../../src/data/cmsValidation.js";
+import { createSupabaseClient } from "../../src/data/supabase.js";
 
 const execAsync = promisify(exec);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -37,6 +38,14 @@ if (existsSync(ENV_PATH)) {
   try {
     process.loadEnvFile(ENV_PATH);
   } catch {}
+}
+
+let supabase;
+try {
+  supabase = createSupabaseClient({ serviceRole: true });
+} catch (err) {
+  console.warn("⚠️  [CMS] Supabase not configured:", err.message);
+  console.warn("⚠️  [CMS] Falling back to flat-file mode.");
 }
 
 function getAdminCredentials() {
