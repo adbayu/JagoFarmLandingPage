@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import { createSupabaseClient } from "./supabase.js";
-
-// Lazy client creation - only in browser when hooks are called
-let supabase = null;
-function getClient() {
-  if (!supabase) supabase = createSupabaseClient();
-  return supabase;
-}
+import { getBrowserClient } from "./supabase.js";
 
 // Fetch products from Supabase (client-side)
 export function useProducts() {
@@ -19,7 +12,7 @@ export function useProducts() {
     
     async function fetchProducts() {
       try {
-        const { data, error: fetchError } = await getClient()
+        const { data, error: fetchError } = await getBrowserClient()
           .from("products")
           .select("*")
           .order("sort_order", { ascending: true });
@@ -68,7 +61,7 @@ export function useProjects() {
     
     async function fetchProjects() {
       try {
-        const { data, error: fetchError } = await getClient()
+        const { data, error: fetchError } = await getBrowserClient()
           .from("projects")
           .select("*")
           .order("sort_order", { ascending: true });

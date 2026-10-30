@@ -16,6 +16,7 @@ export default function ProductsPage() {
   const hasTechnologyProduct = filteredProducts.some((product) => !isAgriculturalProduct(product));
 
   useEffect(() => {
+    if (!dialogRef.current) return;
     if (selectedProduct) dialogRef.current.showModal();
     else dialogRef.current.close();
   }, [selectedProduct]);
