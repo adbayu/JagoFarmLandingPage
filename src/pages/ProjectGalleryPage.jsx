@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "../components/navigation.jsx";
-import { useProjects } from "../data/projectPortfolio.js";
+import { projectPortfolio } from "../data/projectPortfolio.js";
 import "./ProjectsPortfolioPage.css";
 import "./ProjectGalleryPage.css";
 
@@ -9,11 +9,10 @@ import { useLanguage } from "../i18n.jsx";
 export default function ProjectGalleryPage({ albumSlug }) {
   const { t } = useLanguage();
   const slug = albumSlug;
-  const { projects: projectPortfolio, loading } = useProjects();
-  const project = loading ? null : (projectPortfolio.find((item) => item.slug === slug) ?? projectPortfolio[0]);
+  const project = projectPortfolio.find((item) => item.slug === slug) ?? projectPortfolio[0];
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(null);
   const lightboxRef = useRef(null);
-  const selectedPhoto = selectedPhotoIndex === null ? null : project?.gallery[selectedPhotoIndex];
+  const selectedPhoto = selectedPhotoIndex === null ? null : project.gallery[selectedPhotoIndex];
 
   useEffect(() => setSelectedPhotoIndex(null), [slug]);
   useEffect(() => {
@@ -23,18 +22,6 @@ export default function ProjectGalleryPage({ albumSlug }) {
 
   function movePhoto(direction) {
     setSelectedPhotoIndex((index) => index === null ? null : (index + direction + project.gallery.length) % project.gallery.length);
-  }
-
-  if (loading || !project) {
-    return (
-      <>
-        <section className="project-gallery-hero section">
-          <div className="container">
-            <p>Loading project...</p>
-          </div>
-        </section>
-      </>
-    );
   }
 
   return (
