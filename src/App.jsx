@@ -61,7 +61,7 @@ export default function App({ initialPath = "/" } = {}) {
     const setup = () => {
       teardown();
       if (!desktop.matches) return;
-      lenis = new Lenis({ autoRaf: true, duration: 1.8, easing: (time) => 1 - Math.pow(1 - time, 4), wheelMultiplier: 1, smoothWheel: true, syncTouch: false, respectReducedMotion: false, stopInertiaOnNavigate: true });
+      lenis = new Lenis({ autoRaf: true, duration: 0.7, easing: (time) => 1 - Math.pow(1 - time, 3), wheelMultiplier: 1, smoothWheel: true, syncTouch: false, respectReducedMotion: false, stopInertiaOnNavigate: true });
       lenisRef.current = lenis;
     };
     setup();
