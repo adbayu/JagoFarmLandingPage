@@ -2,42 +2,12 @@ import { createServer } from "vite";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { existsSync } from "node:fs";
+import { projectPortfolio } from "../src/data/projectPortfolio.js";
 import { localizedHref, parseRoute } from "../src/routing.js";
 import { getRouteMetadata, renderMetadataHead } from "../src/metadata.js";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distDirectory = path.join(projectRoot, "dist");
-
-// Load env for Supabase access at build time
-const envPath = path.join(projectRoot, ".env");
-if (existsSync(envPath)) process.loadEnvFile(envPath);
-
-// Fetch projects from Supabase for prerendering routes
-const { createSupabaseClient } = await import("../src/data/supabase.js");
-const supabase = createSupabaseClient();
-const { data: projectsData, error: projErr } = await supabase
-  .from("projects")
-  .select("*")
-  .order("sort_order", { ascending: true });
-
-if (projErr) {
-  console.error("Failed to fetch projects for prerendering:", projErr);
-  process.exit(1);
-}
-
-const projectPortfolio = projectsData.map(p => ({
-  slug: p.slug,
-  number: p.number,
-  status: p.status,
-  kind: p.kind,
-  name: p.name,
-  description: p.description,
-  cover: p.cover,
-  gallery: p.gallery || [],
-  photoNote: p.photo_note ?? "Belum ada foto untuk proyek ini.",
-  ...(p.partners ? { partners: p.partners } : {}),
-}));
 
 const routePaths = [
   "/",
