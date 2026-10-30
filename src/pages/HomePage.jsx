@@ -5,14 +5,11 @@ import DecisionPlatformSection from "../components/DecisionPlatformSection.jsx";
 import EcosystemStory from "../components/EcosystemStory.jsx";
 import { StageIcon } from "../components/media.jsx";
 import { Arrow, ButtonLink, Link } from "../components/navigation.jsx";
-import { isAgriculturalProduct, useProducts } from "../data/content.js";
+import { isAgriculturalProduct, products } from "../data/content.js";
 
 export default function HomePage() {
   const { t } = useLanguage();
-  const { products, loading } = useProducts();
-  
-  // Filter for featured products (first 3 agricultural products)
-  const featuredProducts = loading ? [] : products.filter(isAgriculturalProduct).slice(0, 3);
+  const featuredProducts = products.filter(isAgriculturalProduct).slice(0, 3);
 
   return (
     <>
