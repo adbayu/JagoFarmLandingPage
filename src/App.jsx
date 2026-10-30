@@ -94,7 +94,7 @@ export default function App({ initialPath = "/" } = {}) {
     document.querySelector(".mobile-menu")?.removeAttribute("open");
     const elements = [...document.querySelectorAll("main .section:not(.hero):not(.product-hero):not(.projects-hero):not(.project-gallery-hero):not(.page-intro):not(.ecosystem-story), main .value-rail")];
     elements.forEach((element) => element.classList.add("reveal-ready"));
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); } }), { threshold: 0.08, rootMargin: "0px 0px -8%" });
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); } }), { threshold: 0.02, rootMargin: "50px 0px 50px 0px" });
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, [route]);
