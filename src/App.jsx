@@ -15,7 +15,7 @@ import { applyRouteMetadata } from "./metadata.js";
 
 const projectGalleryPages = Object.fromEntries(projectPortfolio.map(({ slug }) => [`/proyek/${slug}`, ProjectGalleryPage]));
 const pages = { "/": HomePage, "/tentang": AboutPage, "/produk": ProductsPage, "/proyek": ProjectsPortfolioPage, ...projectGalleryPages };
-const HERO_THEME_DURATION_MS = 2400;
+const HERO_THEME_DURATION_MS = 400;
 
 function routeUsesOverlayHeader(path) {
   return path === "/" || path === "/produk" || path === "/proyek" || path.startsWith("/proyek/") || path === "/tentang";

@@ -16,8 +16,8 @@
   --muted: #63726a;
   --line: rgba(18, 63, 45, .18);
   --max: 1240px;
-  --theme-duration: .9s;
-  --hero-theme-duration: 2.4s;
+  --theme-duration: .25s;
+  --hero-theme-duration: .4s;
   --theme-ease: cubic-bezier(.22, 1, .36, 1);
   --hero-theme-ease: cubic-bezier(.4, 0, .2, 1);
 }
