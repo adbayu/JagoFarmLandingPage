@@ -14,15 +14,3 @@ export function createSupabaseClient({ serviceRole = false } = {}) {
   }
   return createClient(url, key);
 }
-
-// Browser-only client - initialized from config in main.jsx
-let browserClient = null;
-export function setBrowserClient(client) {
-  browserClient = client;
-}
-export function getBrowserClient() {
-  if (!browserClient) {
-    throw new Error("Browser Supabase client not initialized. Call setBrowserClient() in main.jsx");
-  }
-  return browserClient;
-}
