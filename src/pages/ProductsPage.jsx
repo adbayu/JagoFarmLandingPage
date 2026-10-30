@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import ProductCard from "../components/ProductCard.jsx";
 import ProductFilters from "../components/ProductFilters.jsx";
-import { isAgriculturalProduct, productCategories, useProducts, productStatusLabels } from "../data/content.js";
+import { isAgriculturalProduct, productCategories, products, productStatusLabels } from "../data/content.js";
 import { useLanguage } from "../i18n.jsx";
 import "./ProductsPage.css";
 
 export default function ProductsPage() {
   const { t } = useLanguage();
-  const { products, loading, error } = useProducts();
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const dialogRef = useRef(null);
@@ -20,30 +19,6 @@ export default function ProductsPage() {
     if (selectedProduct) dialogRef.current.showModal();
     else dialogRef.current.close();
   }, [selectedProduct]);
-
-  if (loading) {
-    return (
-      <div className="products-page">
-        <section className="product-hero section">
-          <div className="container">
-            <p>Loading products...</p>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="products-page">
-        <section className="product-hero section">
-          <div className="container">
-            <p>Error loading products: {error}</p>
-          </div>
-        </section>
-      </div>
-    );
-  }
 
   return (
     <div className="products-page">
