@@ -34,11 +34,6 @@ CMS lokal untuk mengelola produk dan proyek (berjalan di `http://localhost:3333`
    ```
 6. Buka `http://localhost:3333` di browser dan masuk menggunakan kredensial yang telah dikonfigurasi di `.env`.
 
-**Catatan Keamanan:**
-- `.env` tidak boleh di-commit ke Git (sudah ada di `.gitignore`)
-- `SUPABASE_SERVICE_KEY` memiliki akses penuh - jangan expose ke browser
-- `VITE_SUPABASE_ANON_KEY` aman di-expose - dilindungi oleh RLS policies
-- Untuk production, gunakan environment variables dari hosting platform (Azure, Vercel, dll)
 
 ## Deployment
 
